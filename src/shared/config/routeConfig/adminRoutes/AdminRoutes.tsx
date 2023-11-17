@@ -4,12 +4,14 @@ import { RouteProps } from "react-router-dom"
 
 export enum AdminRoutes {
     MAIN = "main",
-    ABOUT = "about",
+    CARS = "cars",
+    DRIVERS = "drivers"
 }
 
 export const AdminRoutePath: Record<AdminRoutes, string> = {
     [AdminRoutes.MAIN]: "/",
-    [AdminRoutes.ABOUT]: "/about"
+    [AdminRoutes.CARS]: "/cars",
+    [AdminRoutes.DRIVERS]: "/drivers",
 }
 
 export const AdminRouteConfig: Record<AdminRoutes, RouteProps> = {
@@ -17,8 +19,12 @@ export const AdminRouteConfig: Record<AdminRoutes, RouteProps> = {
         path: AdminRoutePath.main,
         element: <MainPage />
     },
-    [AdminRoutes.ABOUT]: {
-        path: AdminRoutePath.about,
+    [AdminRoutes.CARS]: {
+        path: AdminRoutePath.cars,
         element: <AboutPage />
-    }
+    },
+    [AdminRoutes.DRIVERS]: {
+        path: AdminRoutePath.drivers,
+        element: <AboutPage />
+    },
 }

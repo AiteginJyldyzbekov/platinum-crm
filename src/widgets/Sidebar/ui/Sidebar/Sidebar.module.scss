@@ -1,0 +1,30 @@
+.Sidebar {
+    height: 100vh;
+    // width: var(--sidebar-width);
+    width: 300px;
+    background-color: red;
+
+    position: relative;
+    transition: width 0.3s;
+}
+
+.collapsed {
+    // width: var(--sidebar-width-collapsed);
+    width: 80px;
+}
+
+.switchers {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    svg {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+.lang {
+    margin-left: 20px;
+}

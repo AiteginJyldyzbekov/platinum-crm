@@ -13,7 +13,11 @@ const Page: React.FC<PageProps> = ({ routes }) => {
                 {Object.values(routes).map(({ element, path }) => (
                     <Route
                         key={path}
-                        element={element}
+                        element={(
+                            <div className="page-wrapper">
+                                {element}
+                            </div>
+                        )}
                         path={path}
                     />
                 ))}

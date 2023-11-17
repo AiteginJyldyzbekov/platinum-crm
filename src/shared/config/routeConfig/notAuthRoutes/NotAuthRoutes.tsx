@@ -1,18 +1,17 @@
-import { AboutPage } from "pages/AboutPage"
-import { MainPage } from "pages/MainPage"
-import { RouteProps } from "react-router-dom"
+import { MainPage } from 'pages/MainPage'
+import { type RouteProps } from 'react-router-dom'
 
 export enum NotAuthRoutes {
-    LOGIN = "login"
+  LOGIN = 'login'
 }
 
 export const NotAuthRoutePath: Record<NotAuthRoutes, string> = {
-    [NotAuthRoutes.LOGIN]: "/login",
+  [NotAuthRoutes.LOGIN]: '/login'
 }
 
 export const NotAuthRouteConfig: Record<NotAuthRoutes, RouteProps> = {
-    [NotAuthRoutes.LOGIN]: {
-        path: NotAuthRoutePath.login,
-        element: <MainPage />
-    },
+  [NotAuthRoutes.LOGIN]: {
+    path: NotAuthRoutePath.login,
+    element: <MainPage />
+  }
 }

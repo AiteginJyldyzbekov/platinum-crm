@@ -1,22 +1,20 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import { AdminRouteConfig } from "shared/config/routeConfig/adminRoutes/AdminRoutes";
-import Page from "./Page";
-import { UserRole } from "../types";
-import { NotAuthRouteConfig } from "shared/config/routeConfig/notAuthRoutes/NotAuthRoutes";
-import { DriverRouteConfig } from "shared/config/routeConfig/driverRoutes/DriverRoutes";
+import { AdminRouteConfig } from 'shared/config/routeConfig/adminRoutes/AdminRoutes'
+import Page from './Page'
+import { UserRole } from '../types'
+import { NotAuthRouteConfig } from 'shared/config/routeConfig/notAuthRoutes/NotAuthRoutes'
+import { DriverRouteConfig } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
 
 const AppRouter = () => {
-    const role: string = "driver" // admin | driver
-    const isAuth = true
+  const role: string = 'driver' // admin | driver
+  const isAuth = true
 
-    if (!isAuth) return <Page routes={NotAuthRouteConfig} />
-    if (role) {
-        if (role === UserRole.admin) return <Page routes={AdminRouteConfig} />
-        if (role === UserRole.driver) return <Page routes={DriverRouteConfig} />
-    }
+  if (!isAuth) return <Page routes={NotAuthRouteConfig} />
+  if (role) {
+    if (role === UserRole.admin) return <Page routes={AdminRouteConfig} />
+    if (role === UserRole.driver) return <Page routes={DriverRouteConfig} />
+  }
 
-    return <Page routes={NotAuthRouteConfig} />
+  return <Page routes={NotAuthRouteConfig} />
 }
 
-export default AppRouter;
+export default AppRouter

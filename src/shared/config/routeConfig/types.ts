@@ -1,3 +1,3 @@
-import { RouteProps } from "react-router-dom"
+import { type RouteProps } from 'react-router-dom'
 
-export type RouteConfigType = Record<string, RouteProps>;
+export type RouteConfigType = Record<string, RouteProps>

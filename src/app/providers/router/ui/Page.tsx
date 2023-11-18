@@ -1,13 +1,13 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import { RouteConfigType } from "shared/config/routeConfig/types";
+import { Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { type RouteConfigType } from 'shared/config/routeConfig/types'
 
 export interface PageProps {
-    routes: RouteConfigType;
+  routes: RouteConfigType
 }
 
 const Page: React.FC<PageProps> = ({ routes }) => {
-    return (
+  return (
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 {Object.values(routes).map(({ element, path }) => (
@@ -24,7 +24,7 @@ const Page: React.FC<PageProps> = ({ routes }) => {
                 <Route path="*" element={<div>Not found Page</div>} />
             </Routes>
         </Suspense>
-    )
+  )
 }
 
-export default Page;
+export default Page

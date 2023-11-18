@@ -20,7 +20,6 @@ const LangSwitcher: React.FC<LangSwitcherProps> = ({ className }) => {
                 theme={ThemeButton.ClEAR}
                 onClick={toggle}>
                 {t('language')}
-                {t('Aitegin')}
             </Button>
   )
 }

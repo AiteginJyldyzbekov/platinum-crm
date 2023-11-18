@@ -1,5 +1,6 @@
 {
     "test": "Test example",
     "translate": "translate",
-    "language": "English"
+    "language": "English",
+    "notFound": "Not found page"
 }

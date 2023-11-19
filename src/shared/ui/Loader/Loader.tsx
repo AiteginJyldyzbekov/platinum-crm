@@ -2,12 +2,11 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import styles from './Loader.module.scss'
 
 interface LoaderProps {
-    className?: string
+  className?: string
 }
 
 export const Loader: React.FC<LoaderProps> = ({ className }) => {
-
-    return (
+  return (
         <div className={classNames(styles.loader, {}, [className])}></div>
-    )
+  )
 }

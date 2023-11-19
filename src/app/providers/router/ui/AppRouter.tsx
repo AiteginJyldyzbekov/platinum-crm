@@ -1,8 +1,14 @@
-import { AdminRouteConfig } from 'shared/config/routeConfig/adminRoutes/AdminRoutes'
+import {
+  AdminRouteConfig
+} from 'shared/config/routeConfig/adminRoutes/AdminRoutes'
 import Page from './Page'
 import { UserRole } from '../types'
-import { NotAuthRouteConfig } from 'shared/config/routeConfig/notAuthRoutes/NotAuthRoutes'
-import { DriverRouteConfig } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
+import {
+  NotAuthRouteConfig
+} from 'shared/config/routeConfig/notAuthRoutes/NotAuthRoutes'
+import {
+  DriverRouteConfig
+} from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
 
 const AppRouter = () => {
   const role: string = 'driver' // admin | driver

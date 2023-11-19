@@ -2,5 +2,7 @@
     "test": "Test example",
     "translate": "translate",
     "language": "English",
-    "notFound": "Not found page"
+    "notFound": "Not found page",
+    "toggle": "switch mode",
+    "aboutPage": "About Page"
 }

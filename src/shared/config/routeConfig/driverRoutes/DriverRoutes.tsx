@@ -11,7 +11,7 @@ export enum DriverRoutes {
 export const DriverRoutePath: Record<DriverRoutes, string> = {
   [DriverRoutes.PROFILE]: '/',
   [DriverRoutes.CAR]: '/car',
-  [DriverRoutes.NOT_FOUND]: '*',
+  [DriverRoutes.NOT_FOUND]: '*'
 }
 
 export const DriverRouteConfig: Record<DriverRoutes, RouteProps> = {

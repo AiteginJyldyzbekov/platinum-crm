@@ -14,7 +14,7 @@ export const AdminRoutePath: Record<AdminRoutes, string> = {
   [AdminRoutes.MAIN]: '/',
   [AdminRoutes.CARS]: '/cars',
   [AdminRoutes.DRIVERS]: '/drivers',
-  [AdminRoutes.NOT_FOUND]: '*',
+  [AdminRoutes.NOT_FOUND]: '*'
 }
 
 export const AdminRouteConfig: Record<AdminRoutes, RouteProps> = {

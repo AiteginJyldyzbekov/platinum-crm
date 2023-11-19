@@ -1,14 +1,15 @@
+import { NotFoundPage } from 'pages/NotFoundPage'
 import { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { type RouteConfigType } from 'shared/config/routeConfig/types'
 import { PageLoader } from 'widgets/PageLoader/ui/PageLoader'
 
 export interface PageProps {
-    routes: RouteConfigType
+  routes: RouteConfigType
 }
 
 const Page: React.FC<PageProps> = ({ routes }) => {
-    return (
+  return (
         <Suspense fallback={<PageLoader />}>
             <Routes>
                 {Object.values(routes).map(({ element, path }) => (
@@ -22,10 +23,10 @@ const Page: React.FC<PageProps> = ({ routes }) => {
                         path={path}
                     />
                 ))}
-                <Route path="*" element={<div>Not found Page</div>} />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Suspense>
-    )
+  )
 }
 
 export default Page

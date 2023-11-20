@@ -23,6 +23,7 @@
     "@types/jest": "^29.5.8",
     "@types/node": "^20.9.0",
     "@types/webpack": "^5.28.5",
+    "@types/webpack-bundle-analyzer": "^4.6.3",
     "babel-loader": "^8.2.3",
     "babel-plugin-i18next-extract": "^0.9.2",
     "css-loader": "^6.8.1",
@@ -61,6 +62,7 @@
     "ts-loader": "9.2.6",
     "typescript": "*",
     "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-dev-server": "^4.15.1"
   }
 }

@@ -1,6 +1,13 @@
 {
+  "": "",
   "Aitegin": "Aitegin",
+  "aboutPage": "aboutPage",
+  "error": "error",
   "language": "language",
   "notFound": "notFound",
-  "test": "test"
+  "reload": "reload",
+  "test": "test",
+  "through": "through",
+  "through_error": "through_error",
+  "toggle": "toggle"
 }

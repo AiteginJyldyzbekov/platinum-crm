@@ -4,5 +4,8 @@
     "language": "English",
     "notFound": "Not found page",
     "toggle": "switch mode",
-    "aboutPage": "About Page"
+    "aboutPage": "About Page",
+    "error": "Something went wrong",
+    "reload": "Reload this page",
+    "through_error": "Through error"
 }

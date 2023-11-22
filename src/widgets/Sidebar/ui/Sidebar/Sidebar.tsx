@@ -20,11 +20,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 
   return (
     <div data-testid="sidebar" className={
-                                       classNames(
-                                         styles.Sidebar,
-                                         { [styles.collapsed]: collapsed },
-                                         [className]
-                                       )}>
+      classNames(
+        styles.Sidebar,
+        { [styles.collapsed]: collapsed },
+        [className]
+      )}>
       <Button
         data-testid="sidebar-toggle"
         onClick={onToggle}>

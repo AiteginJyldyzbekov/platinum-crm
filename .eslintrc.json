@@ -7,7 +7,8 @@
   "extends": [
     "standard-with-typescript",
     "plugin:react/recommended",
-    "plugin:i18next/recommended"
+    "plugin:i18next/recommended",
+    "plugin:storybook/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -34,6 +35,13 @@
     "no-use-before-define": 0,
     "no-underscore-dangle": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/consistent-type-assertions": [
+      "error",
+      {
+        "assertionStyle": "as"
+      }
+    ],
     "max-len": [
       "error",
       {

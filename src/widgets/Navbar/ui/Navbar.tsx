@@ -1,11 +1,10 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
 
 export const Navbar = () => {
+  const { t } = useTranslation()
   return (
-        <div>
-            <ThemeSwitcher />
-        </div>
+    <div>
+      <p>{t('Navbar')}</p>
+    </div>
   )
 }

@@ -44,7 +44,10 @@
     "i18next/no-literal-string": [
       "error",
       {
-        "markupONnly": true
+        "markupONnly": true,
+        "ignoreAttribute": [
+          "data-testid"
+        ]
       }
     ],
     "@typescript-eslint/naming-convention": "off",
@@ -79,5 +82,15 @@
         "devDependencies": true
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/src/**/*.test.{ts,tsx}"
+      ],
+      "rules": {
+        "i18next/no-literal-string": "off"
+      }
+    }
+  ]
 }

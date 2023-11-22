@@ -19,17 +19,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   }
 
   return (
-        <div className={
-            classNames(
-              styles.Sidebar,
-              { [styles.collapsed]: collapsed },
-              [className]
-            )}>
-            <Button onClick={onToggle}>{t('toggle')}</Button>
-            <div className={styles.switchers}>
-                <ThemeSwitcher />
-                <LangSwitcher className={styles.lang} />
-            </div>
-        </div>
+    <div data-testid="sidebar" className={
+                                       classNames(
+                                         styles.Sidebar,
+                                         { [styles.collapsed]: collapsed },
+                                         [className]
+                                       )}>
+      <Button
+        data-testid="sidebar-toggle"
+        onClick={onToggle}>
+        {t('toggle')}
+      </Button>
+      <div className={styles.switchers}>
+        <ThemeSwitcher />
+        <LangSwitcher className={styles.lang} />
+      </div>
+    </div>
   )
 }

@@ -14,13 +14,12 @@ export default ({ config }: { config: webpack.Configuration }) => {
   config.resolve.modules.push(paths.src)
   config.resolve.extensions.push('.ts', '.tsx')
 
-  config.module.rules = config.module.rules.map((rule: RuleSetRule) => {
-    if (typeof rule.test === 'string' && rule.test.includes('svg')) {
-        return { ...rule, exclude: /\.svg/i }
-      }
+  config.module.rules = config.module.rules.map((rule: RuleSetRule) =>
+    (rule.test as RegExp)?.test(".svg")
+      ? { ...rule, exclude: /assets.+\.svg$/ }
+      : rule
+  );
 
-    return rule
-  })
 
   config.module.rules.push({
     test: /\.svg$/,

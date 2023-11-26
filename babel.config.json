@@ -10,6 +10,6 @@
         ]
     ],
     "plugins": [
-        "i18next-extract"
+        "i18next-extract"   
     ]
 }

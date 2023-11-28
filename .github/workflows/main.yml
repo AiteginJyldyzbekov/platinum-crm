@@ -27,7 +27,7 @@ jobs:
         run: yarn lint
       - name: build storybook
         run: yarn storybook:build
-      - name: screenshot testing
-        run: yarn test:ui:ci
       - name: screenshot testing approve
         run: yarn test:ui:approve
+      - name: screenshot testing
+        run: yarn test:ui:ci

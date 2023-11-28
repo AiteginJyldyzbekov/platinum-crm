@@ -1,8 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import styles from './ThemeSwitcher.module.scss'
 import { useTheme, Theme } from 'app/providers/ThemeProvider'
-import LightIcon from '../../../shared/assets/icons/ThemeSwitcher/light.svg';
-import DarkIcon from '../../../shared/assets/icons/ThemeSwitcher/dark.svg';
+import LightIcon from '../../../shared/assets/icons/ThemeSwitcher/light.svg'
+import DarkIcon from '../../../shared/assets/icons/ThemeSwitcher/dark.svg'
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 

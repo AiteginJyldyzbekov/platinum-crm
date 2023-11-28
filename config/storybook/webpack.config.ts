@@ -15,11 +15,10 @@ export default ({ config }: { config: webpack.Configuration }) => {
   config.resolve.extensions.push('.ts', '.tsx')
 
   config.module.rules = config.module.rules.map((rule: RuleSetRule) =>
-    (rule.test as RegExp)?.test(".svg")
+    (rule.test as RegExp)?.test('.svg')
       ? { ...rule, exclude: /assets.+\.svg$/ }
       : rule
-  );
-
+  )
 
   config.module.rules.push({
     test: /\.svg$/,

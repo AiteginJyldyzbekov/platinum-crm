@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.9.0]
+        node-version: [15.x]
     steps:
       - uses: actions/checkout@v2
       - name: Staring Node.js ${{ matrix.node-version }}
@@ -27,7 +27,5 @@ jobs:
         run: yarn lint
       - name: build storybook
         run: yarn storybook:build
-      - name: screenshot testing approve
-        run: yarn test:ui:approve
       - name: screenshot testing
         run: yarn test:ui:ci

@@ -4,5 +4,6 @@
 .idea
 .vscode
 /coverage
+/storybook-static
 
 yarn-error.log

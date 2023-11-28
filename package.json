@@ -13,7 +13,8 @@
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "storybook:build": "storybook build -c ./config/storybook",
     "test:ui": "npx loki test",
-    "test:ui:approve": "npx loki approve"
+    "test:ui:approve": "npx loki approve",
+    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static"
   },
   "keywords": [],
   "author": "",
@@ -49,6 +50,7 @@
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-private-property-in-object": "^7.14.5",
     "@storybook/addon-essentials": "7.5.3",
     "@storybook/addon-interactions": "7.5.3",
     "@storybook/addon-links": "7.5.3",

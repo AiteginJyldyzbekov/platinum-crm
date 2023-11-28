@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from 'shared/ui/Button/Button'
 
 // Компонент для тестирования ErrorBoundary
+//test CI
 export const BugButton = () => {
   const [error, setError] = useState(false)
   const { t } = useTranslation()

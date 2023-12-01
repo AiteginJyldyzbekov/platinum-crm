@@ -20,12 +20,12 @@ jobs:
       - name: install modules
         run: yarn install
       - name: build production project
-        run: yarn build:prod
+        run: yarn run build:prod
       - name: unit testing
-        run: yarn test:unit
+        run: yarn run test:unit
       - name: lint testing
-        run: yarn lint
+        run: yarn run lint
       - name: build storybook
-        run: yarn storybook:build
+        run: yarn run storybook:build
       - name: screenshot testing
-        run: yarn test:ui:ci
+        run: yarn run test:ui:ci

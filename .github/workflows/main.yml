@@ -29,3 +29,9 @@ jobs:
         run: yarn run storybook:build
       - name: screenshot testing
         run: yarn run test:ui:ci
+      - name: Archive screenshots
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: design-system
+          path: .loki

@@ -51,13 +51,13 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-private-property-in-object": "^7.14.5",
-    "@storybook/addon-essentials": "7.5.3",
-    "@storybook/addon-interactions": "7.5.3",
-    "@storybook/addon-links": "7.5.3",
+    "@storybook/addon-essentials": "7.6.2",
+    "@storybook/addon-interactions": "7.6.2",
+    "@storybook/addon-links": "7.6.2",
     "@storybook/addon-onboarding": "1.0.8",
-    "@storybook/blocks": "7.5.3",
-    "@storybook/react": "7.5.3",
-    "@storybook/react-webpack5": "7.5.3",
+    "@storybook/blocks": "7.6.2",
+    "@storybook/react": "7.6.2",
+    "@storybook/react-webpack5": "7.6.2",
     "@storybook/testing-library": "0.2.2",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2",
@@ -80,7 +80,7 @@
     "loki": "^0.33.1",
     "mini-css-extract-plugin": "^2.7.6",
     "regenerator-runtime": "^0.14.0",
-    "storybook": "7.5.3",
+    "storybook": "7.6.2",
     "ts-loader": "9.2.6",
     "typescript": "*",
     "webpack": "^5.89.0",
@@ -92,7 +92,9 @@
       "chrome.laptop": {
         "target": "chrome.app",
         "width": 1366,
-        "height": 768
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
       },
       "chrome.iphone7": {
         "target": "chrome.app",

@@ -13,6 +13,7 @@ const App = () => {
         <div className={classNames('app', {}, [theme])}>
             <Suspense fallback="">
                 <Navbar />
+                {/* For github CI */}
                 <div className="content-page">
                     <Sidebar />
                     <AppRouter />

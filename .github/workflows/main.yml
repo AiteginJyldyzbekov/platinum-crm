@@ -29,3 +29,5 @@ jobs:
         run: yarn run storybook:build
       - name: screenshot testing
         run: yarn run test:ui:ci
+      - name: screenshot testing approve
+        run: yarn run test:ui:ci:approve

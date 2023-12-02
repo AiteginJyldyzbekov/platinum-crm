@@ -13,7 +13,7 @@ i18n
       escapeValue: false // not needed for react!!
     },
 
-    resources: { en: { translationsNS: {} } }
+    resources: { ru: { translationsNS: {} } }
   })
 
 export default i18n

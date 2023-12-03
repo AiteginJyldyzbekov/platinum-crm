@@ -6,12 +6,13 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 i18n
   .use(Backend)
-  // .use(LanguageDetector)
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
     lng: 'en',
-    debug: __IS_DEV__,
+    // debug: __IS_DEV__,
+    debug: true,
 
     interpolation: {
       escapeValue: false
@@ -19,7 +20,8 @@ i18n
 
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json'
-    }
+    },
+    keySeparator: false,
   })
 
 export default i18n

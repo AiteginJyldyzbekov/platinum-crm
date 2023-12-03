@@ -1,4 +1,5 @@
 import { type StorybookConfig } from '@storybook/react-webpack5'
+import "../../src/shared/config/i18n/i18n"
 
 const config: StorybookConfig = {
   stories: ['../../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -14,6 +15,7 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag'
-  }
+  },
+  staticDirs: ['../../public'],
 }
 export default config

@@ -3,6 +3,7 @@ import { ThemeDecorator } from '../../src/shared/config/storybook/ThemeDecorator
 import { Theme } from '../../src/app/providers/ThemeProvider'
 import { RouteDecorator } from '../../src/shared/config/storybook/RouteDecorator/RouteDecorator'
 import { type Preview } from '@storybook/react'
+import "../../src/shared/config/i18n/i18n"
 
 const preview: Preview = {
   parameters: {

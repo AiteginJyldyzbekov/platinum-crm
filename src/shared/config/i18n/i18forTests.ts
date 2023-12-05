@@ -4,8 +4,8 @@ import { initReactI18next } from 'react-i18next'
 i18n
   .use(initReactI18next)
   .init({
-    lng: 'en',
-    fallbackLng: 'en',
+    lng: 'ru',
+    fallbackLng: 'ru',
 
     debug: false,
 
@@ -13,7 +13,7 @@ i18n
       escapeValue: false
     },
 
-    resources: { en: { translationsNS: {} } }
+    resources: { ru: { translationsNS: {} } }
   })
 
 export default i18n

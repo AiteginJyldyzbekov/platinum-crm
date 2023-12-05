@@ -1,14 +1,12 @@
 {
-  "": "",
-  "Aitegin": "Aitegin",
-  "Navbar": "",
-  "aboutPage": "aboutPage",
-  "error": "error",
-  "language": "language",
-  "notFound": "notFound",
-  "reload": "reload",
-  "test": "test",
-  "through": "through",
-  "through_error": "through_error",
-  "toggle": "toggle"
+  "test": "Test example",
+  "translate": "translate",
+  "language": "English",
+  "notFound": "Not found page",
+  "toggle": "switch mode",
+  "aboutPage": "About Page",
+  "error": "Something went wrong",
+  "reload": "Reload this page",
+  "through_error": "Through error",
+  "Navbar": "Navbar"
 }

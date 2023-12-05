@@ -17,6 +17,18 @@
     "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
     "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\""
   },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

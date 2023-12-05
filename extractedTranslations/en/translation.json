@@ -1,12 +1,12 @@
 {
-  "test": "Test example",
-  "translate": "translate",
-  "language": "English",
-  "notFound": "Not found page",
-  "toggle": "switch mode",
+  "Navbar": "Navbar",
   "aboutPage": "About Page",
   "error": "Something went wrong",
+  "language": "English",
+  "notFound": "Not found page",
   "reload": "Reload this page",
+  "test": "Test example",
   "through_error": "Through error",
-  "Navbar": "Navbar"
+  "toggle": "switch mode",
+  "translate": "translate"
 }

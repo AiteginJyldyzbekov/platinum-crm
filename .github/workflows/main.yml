@@ -28,4 +28,4 @@ jobs:
       - name: build storybook
         run: yarn run storybook:build
       - name: screenshot testing
-        run: yarn run test_ui_ci
+        run: yarn run test:ui:ci

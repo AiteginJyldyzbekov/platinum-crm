@@ -3,6 +3,7 @@ import { ThemeDecorator } from '../../src/shared/config/storybook/ThemeDecorator
 import { Theme } from '../../src/app/providers/ThemeProvider'
 import { RouteDecorator } from '../../src/shared/config/storybook/RouteDecorator/RouteDecorator'
 import '../../src/shared/config/i18n/i18n'
+import { LokiDecorator } from '../../src/shared/config/storybook/LokiDecorator/LokiDecorator'
 
 const preview = {
   parameters: {
@@ -18,6 +19,7 @@ const preview = {
 
 export const decorators = [
   StyleDecorator,
+  LokiDecorator,
   ThemeDecorator(Theme.LIGHT),
   RouteDecorator()
 ]

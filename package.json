@@ -64,8 +64,6 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-private-property-in-object": "^7.14.5",
-    "@loki/create-async-callback": "^0.33.0",
-    "@loki/is-loki-running": "^0.33.0",
     "@storybook/addon-essentials": "7.6.2",
     "@storybook/addon-interactions": "7.6.2",
     "@storybook/addon-links": "7.6.2",

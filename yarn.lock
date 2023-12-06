@@ -1664,13 +1664,6 @@
     mime-types "^2.1.35"
     shelljs "^0.8.3"
 
-"@loki/create-async-callback@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@loki/create-async-callback/-/create-async-callback-0.33.0.tgz#1c0226f7f3ffe57d18755e3d4af518792bcef85c"
-  integrity sha512-80MzNkbuw9RYjg+N5ynaXnY3p2tG60Q6x6oyuzk2PvLQnJXTwEFg7NWwFhoeKOc7O4hYFe/uss4KOskeNNiGRg==
-  dependencies:
-    "@loki/integration-react-native" "^0.33.0"
-
 "@loki/diff-graphics-magick@^0.33.0":
   version "0.33.0"
   resolved "https://registry.yarnpkg.com/@loki/diff-graphics-magick/-/diff-graphics-magick-0.33.0.tgz#7d391fcc916c0b4d03e571c6242c53571d9fbf9c"
@@ -1722,11 +1715,6 @@
   integrity sha512-5iY34xO//T9m+YQCozF9GDDGoUhl1JMAH6tPyZOmf0ny9gLxlxxexL65VFrAZlcLYuxtAJh6kVl5aZv9IdA+1g==
   dependencies:
     "@loki/browser" "^0.33.0"
-
-"@loki/is-loki-running@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@loki/is-loki-running/-/is-loki-running-0.33.0.tgz#60572fdf92dfe5465552dd03e2557491a09ecca2"
-  integrity sha512-roFL5CHbgKe4383cQl9e3z8qtpkP09RCZ6bXdj5ym1bb/2LmcJOn12+K6qAiDJ8s3pJkB23mEsAj57e2RV3IsA==
 
 "@loki/runner@^0.33.1":
   version "0.33.1"

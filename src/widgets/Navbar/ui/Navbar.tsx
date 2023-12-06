@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next'
+import styles from './Navbar.module.scss'
+import test from 'shared/assets/icons/ThemeSwitcher/test.png'
 
 export const Navbar = () => {
-  const { t } = useTranslation()
   return (
-    <div>
-      <p>{t('Navbar')}</p>
+    <div className={styles.wrapper}>
+      <img src={test} alt='test' />
     </div>
   )
 }

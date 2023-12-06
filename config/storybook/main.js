@@ -1,6 +1,5 @@
-import { type StorybookConfig } from '@storybook/react-webpack5'
 
-const config: StorybookConfig = {
+const config = {
   stories: ['../../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -14,6 +13,10 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag'
+  },
+  staticDirs: ['../../public'],
+  core: {
+    builder: "webpack5"
   }
 }
 export default config

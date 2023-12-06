@@ -14,7 +14,20 @@
     "storybook:build": "storybook build -c ./config/storybook",
     "test:ui": "npx loki test",
     "test:ui:approve": "npx loki approve",
-    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static"
+    "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
+    "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\""
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -67,6 +80,7 @@
     "@types/webpack-dev-server": "4.7.2",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "babel-plugin-inline-react-svg": "^2.0.2",
+    "concurrently": "^8.2.2",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^39.1.1",
     "eslint-plugin-import": "^2.25.2",
@@ -94,11 +108,13 @@
         "width": 1366,
         "height": 768,
         "deviceScaleFactor": 1,
-        "mobile": false
+        "mobile": false,
+        "language": "ru"
       },
       "chrome.iphone7": {
         "target": "chrome.app",
-        "preset": "iPhone 7"
+        "preset": "iPhone 7",
+        "language": "ru"
       }
     }
   }

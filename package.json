@@ -15,7 +15,8 @@
     "test:ui": "npx loki test",
     "test:ui:approve": "npx loki approve",
     "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
-    "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\""
+    "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\"",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -101,7 +102,8 @@
     "typescript": "*",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "husky": "^8.0.0"
   },
   "loki": {
     "configurations": {

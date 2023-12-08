@@ -8,5 +8,7 @@
     "error": "Something went wrong",
     "reload": "Reload this page",
     "through_error": "Through error",
-    "Navbar": "Navbar"
+    "Navbar": "Navbar",
+    "decrement": "decrement",
+    "increment": "increment"
 }

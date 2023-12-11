@@ -11,7 +11,7 @@ import {
 } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
 
 const AppRouter = () => {
-  const role: string = 'driver' // admin | driver
+  const role: string = '' // admin | driver
   const isAuth = true
 
   if (!isAuth) return <Page routes={NotAuthRouteConfig} />

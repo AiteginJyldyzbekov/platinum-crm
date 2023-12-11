@@ -1,3 +1,4 @@
+import { LoginPage } from 'pages/LoginPage'
 import { MainPage } from 'pages/MainPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { type RouteProps } from 'react-router-dom'
@@ -15,7 +16,7 @@ export const NotAuthRoutePath: Record<NotAuthRoutes, string> = {
 export const NotAuthRouteConfig: Record<NotAuthRoutes, RouteProps> = {
   [NotAuthRoutes.LOGIN]: {
     path: NotAuthRoutePath.login,
-    element: <MainPage />
+    element: <LoginPage />
   },
   [NotAuthRoutes.NOT_FOUND]: {
     path: NotAuthRoutePath.not_found,

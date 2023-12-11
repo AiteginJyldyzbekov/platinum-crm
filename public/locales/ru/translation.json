@@ -10,5 +10,6 @@
     "through_error": "Получить ошибку",
     "Navbar": "Навбар",
     "decrement": "Декремент",
-    "increment": "Инкремент"
+    "increment": "Инкремент",
+    "login": "Логин"
 }

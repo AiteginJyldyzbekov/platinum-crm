@@ -1,7 +1,10 @@
 {
   "aboutPage": "aboutPage",
+  "decrement": "decrement",
   "error": "error",
+  "increment": "increment",
   "language": "language",
+  "login": "login",
   "notFound": "notFound",
   "reload": "reload",
   "test": "test",

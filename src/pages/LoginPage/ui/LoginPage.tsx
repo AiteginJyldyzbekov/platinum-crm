@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import styles from './LoginPage.module.scss'
-import { LoginForm } from 'features/AuthByUsername'
+import { LoginForm } from 'features/AuthByEmail'
 
 const LoginPage = () => {
   const { t } = useTranslation()

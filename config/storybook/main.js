@@ -17,6 +17,6 @@ const config = {
   staticDirs: ['../../public'],
   core: {
     builder: "webpack5"
-  }
+  },
 }
 export default config

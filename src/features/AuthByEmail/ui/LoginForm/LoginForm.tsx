@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LoginForm.module.scss'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
@@ -7,17 +7,17 @@ import { loginActions } from '../../model/slice/LoginSlice'
 import { Input } from 'shared/ui/Input/Input'
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState'
 import {
-  loginByUsername
-} from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername'
+  loginByEmail
+} from 'features/AuthByEmail/model/services/loginByEmail/loginByEmail'
 
 const LoginForm = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const { username, password } = useSelector(getLoginState)
+  const { email, password } = useSelector(getLoginState)
 
-  const onChangeUsername = useCallback((value: string) => {
-    dispatch(loginActions.setUsername(value))
+  const onChangeEmail = useCallback((value: string) => {
+    dispatch(loginActions.setEmail(value))
   }, [dispatch])
 
   const onChangePassword = useCallback((value: string) => {
@@ -25,17 +25,17 @@ const LoginForm = memo(() => {
   }, [dispatch])
 
   const onLoginClick = useCallback(() => {
-    dispatch<any>(loginByUsername({ username, password }))
-  }, [dispatch, username, password])
+    dispatch<any>(loginByEmail({ email, password }))
+  }, [dispatch, email, password])
 
   return (
         <div className={styles.wrapper}>
             <div className={styles.inputs__container}>
                 <Input
                     type='text'
-                    placeholder='username'
-                    value={username}
-                    onChange={onChangeUsername}
+                    placeholder='email'
+                    value={email}
+                    onChange={onChangeEmail}
                 />
                 <Input
                     type='text'

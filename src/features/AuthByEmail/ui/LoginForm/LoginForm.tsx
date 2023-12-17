@@ -9,12 +9,14 @@ import { getLoginState } from '../../model/selectors/getLoginState/getLoginState
 import {
   loginByEmail
 } from 'features/AuthByEmail/model/services/loginByEmail/loginByEmail'
+import { useNavigate } from 'react-router-dom'
 
-const LoginForm = memo(() => {
+export const LoginForm = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { email, password } = useSelector(getLoginState)
+  const { email, password, isLoading } = useSelector(getLoginState)
 
   const onChangeEmail = useCallback((value: string) => {
     dispatch(loginActions.setEmail(value))
@@ -26,32 +28,35 @@ const LoginForm = memo(() => {
 
   const onLoginClick = useCallback(() => {
     dispatch<any>(loginByEmail({ email, password }))
+      .then(() => {
+        if (!isLoading) {
+          navigate('/')
+        }
+      })
   }, [dispatch, email, password])
 
   return (
-        <div className={styles.wrapper}>
-            <div className={styles.inputs__container}>
-                <Input
-                    type='text'
-                    placeholder='email'
-                    value={email}
-                    onChange={onChangeEmail}
-                />
-                <Input
-                    type='text'
-                    placeholder='password'
-                    value={password}
-                    onChange={onChangePassword}
-                />
-            </div>
-            <Button
-                theme={ThemeButton.OUTLINE}
-                onClick={onLoginClick}
-            >
-                {t('login')}
-            </Button>
-        </div>
+    <div className={styles.wrapper}>
+      <div className={styles.inputs__container}>
+        <Input
+          type='text'
+          placeholder='email'
+          value={email}
+          onChange={onChangeEmail}
+        />
+        <Input
+          type='text'
+          placeholder='password'
+          value={password}
+          onChange={onChangePassword}
+        />
+      </div>
+      <Button
+        theme={ThemeButton.OUTLINE}
+        onClick={onLoginClick}
+      >
+        {t('login')}
+      </Button>
+    </div>
   )
 })
-
-export default LoginForm

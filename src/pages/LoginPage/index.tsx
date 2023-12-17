@@ -1,4 +1,4 @@
-import LoginPage from './ui/LoginPage'
+import { LoginPage } from './ui/LoginPage'
 
 export {
   LoginPage

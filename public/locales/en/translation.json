@@ -11,5 +11,6 @@
     "Navbar": "Navbar",
     "decrement": "decrement",
     "increment": "increment",
-    "login": "login"
+    "login": "login",
+    "logout": "logout"
 }

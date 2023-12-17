@@ -11,5 +11,6 @@
     "Navbar": "Навбар",
     "decrement": "Декремент",
     "increment": "Инкремент",
-    "login": "Логин"
+    "login": "Логин",
+    "logout": "Выйти"
 }

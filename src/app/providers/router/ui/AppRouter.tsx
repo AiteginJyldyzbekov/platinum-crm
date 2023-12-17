@@ -11,10 +11,12 @@ import {
 } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
 import { useSelector } from 'react-redux'
 import { getUserAuthData } from 'entities/User'
+import { useEffect, useState } from 'react'
+import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
 
 const AppRouter = () => {
-  const { role } = useSelector(getUserAuthData)
-  const isAuth = true
+  const { authData, isAuth } = useSelector(getUserAuthData)
+  const role = authData?.role
 
   if (!isAuth) return <Page routes={NotAuthRouteConfig} />
   if (role) {

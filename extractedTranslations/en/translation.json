@@ -5,6 +5,7 @@
   "increment": "increment",
   "language": "language",
   "login": "login",
+  "logout": "logout",
   "notFound": "notFound",
   "reload": "reload",
   "test": "test",

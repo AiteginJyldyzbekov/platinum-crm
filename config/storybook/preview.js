@@ -3,6 +3,7 @@ import { ThemeDecorator } from '../../src/shared/config/storybook/ThemeDecorator
 import { Theme } from '../../src/app/providers/ThemeProvider'
 import { RouteDecorator } from '../../src/shared/config/storybook/RouteDecorator/RouteDecorator'
 import '../../src/shared/config/i18n/i18n'
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator'
 
 const preview = {
   parameters: {
@@ -19,7 +20,19 @@ const preview = {
 export const decorators = [
   StyleDecorator,
   ThemeDecorator(Theme.LIGHT),
-  RouteDecorator()
+  RouteDecorator(),
+  StoreDecorator({
+    loginForm: { email: '123', password: 'asd' },
+    user: {
+      authData: {
+        id: "id",
+        email: "email@gmail.com",
+        role: "admin",
+        uid: "uid"
+      },
+      isAuth: true
+    }
+  })
 ]
 
 export default preview

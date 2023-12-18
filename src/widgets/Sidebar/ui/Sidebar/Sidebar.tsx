@@ -6,7 +6,7 @@ import { LangSwitcher } from 'widgets/LangSwitcher'
 import { Button } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserAuthData, userActions } from 'entities/User'
+import { userActions } from 'entities/User'
 import { useNavigate } from 'react-router-dom'
 
 interface SidebarProps {

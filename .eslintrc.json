@@ -27,6 +27,7 @@
     "import/prefer-default-export": "off",
     "class-methods-use-this": "off",
     "no-param-reassign": 0,
+    "import/no-unused-modules": "error",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
@@ -36,6 +37,7 @@
     "no-underscore-dangle": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "react/display-name": "off",
+    // "quotes": ["error", "double"],
     "@typescript-eslint/consistent-type-assertions": [
       "error",
       {
@@ -49,7 +51,6 @@
         "code": 100
       }
     ],
-    "no-param-reassign": "off",
     "i18next/no-literal-string": [
       "error",
       {

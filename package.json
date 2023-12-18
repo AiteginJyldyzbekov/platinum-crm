@@ -15,7 +15,6 @@
     "test:ui": "npx loki test",
     "test:ui:approve": "npx loki approve",
     "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
-    "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\"",
     "prepare": "husky install"
   },
   "browserslist": {

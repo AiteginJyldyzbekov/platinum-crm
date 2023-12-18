@@ -5,7 +5,7 @@ import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
 import { LangSwitcher } from 'widgets/LangSwitcher'
 import { Button } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { userActions } from 'entities/User'
 import { useNavigate } from 'react-router-dom'
 

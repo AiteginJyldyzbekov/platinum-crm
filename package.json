@@ -95,6 +95,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "html-webpack-plugin": "5.5.0",
     "husky": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",

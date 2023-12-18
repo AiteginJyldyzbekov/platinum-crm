@@ -39,14 +39,14 @@ export const LoginForm = memo(() => {
     <div className={styles.wrapper}>
       <div className={styles.inputs__container}>
         <Input
-          type='text'
-          placeholder='email'
+          type="text"
+          placeholder="email"
           value={email}
           onChange={onChangeEmail}
         />
         <Input
-          type='text'
-          placeholder='password'
+          type="text"
+          placeholder="password"
           value={password}
           onChange={onChangePassword}
         />

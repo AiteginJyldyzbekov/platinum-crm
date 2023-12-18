@@ -11,8 +11,6 @@ import {
 } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
 import { useSelector } from 'react-redux'
 import { getUserAuthData } from 'entities/User'
-import { useEffect, useState } from 'react'
-import { USER_LOCALSTORAGE_KEY } from 'shared/const/localStorage'
 
 const AppRouter = () => {
   const { authData, isAuth } = useSelector(getUserAuthData)

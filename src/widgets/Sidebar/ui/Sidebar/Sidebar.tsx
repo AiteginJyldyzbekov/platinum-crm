@@ -25,7 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 
   const onLogout = () => {
     dispatch(userActions.logout())
-    navigate('/login')
+    navigate('/')
   }
 
   return (

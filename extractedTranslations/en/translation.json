@@ -9,6 +9,7 @@
   "logout": "logout",
   "notFound": "notFound",
   "reload": "reload",
+  "rememberMe": "rememberMe",
   "test": "test",
   "through_error": "through_error",
   "toggle": "toggle"

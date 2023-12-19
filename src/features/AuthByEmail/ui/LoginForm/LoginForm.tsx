@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LoginForm.module.scss'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
@@ -15,6 +15,7 @@ export const LoginForm = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [isRemember, setIsRemember] = useState(false)
 
   const { email, password, isLoading } = useSelector(getLoginState)
 
@@ -27,16 +28,17 @@ export const LoginForm = memo(() => {
   }, [dispatch])
 
   const onLoginClick = useCallback(() => {
-    dispatch<any>(loginByEmail({ email, password }))
+    dispatch<any>(loginByEmail({ email, password, isRemember }))
       .then(() => {
         if (!isLoading) {
           navigate('/')
         }
       })
-  }, [dispatch, email, password])
+  }, [dispatch, email, password, isRemember])
 
   return (
     <div className={styles.wrapper}>
+      <p>{t('login')}</p>
       <div className={styles.inputs__container}>
         <Input
           type="text"
@@ -50,13 +52,28 @@ export const LoginForm = memo(() => {
           value={password}
           onChange={onChangePassword}
         />
+        <div className={styles.checkbox__container}>
+          <input
+            type="checkbox"
+            id="remember-me"
+            className={styles.checkbox}
+            checked={isRemember}
+            onClick={() => { setIsRemember(!isRemember) }}
+          />
+          <label
+            htmlFor="remember-me"
+            className={styles.checkbox__label}
+          >
+            {t('rememberMe')}
+          </label>
+        </div>
+        <Button
+          theme={ThemeButton.OUTLINE}
+          onClick={onLoginClick}
+        >
+          {t('login')}
+        </Button>
       </div>
-      <Button
-        theme={ThemeButton.OUTLINE}
-        onClick={onLoginClick}
-      >
-        {t('login')}
-      </Button>
     </div>
   )
 })

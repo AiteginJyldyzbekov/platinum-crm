@@ -12,5 +12,6 @@
     "decrement": "Декремент",
     "increment": "Инкремент",
     "login": "Логин",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "rememberMe": "Запомнить меня"
 }

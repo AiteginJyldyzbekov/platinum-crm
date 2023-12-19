@@ -1,13 +1,7 @@
-.wrapper {
+.wrapper{
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .inputs__container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
 }

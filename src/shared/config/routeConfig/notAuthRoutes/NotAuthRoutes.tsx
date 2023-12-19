@@ -8,7 +8,7 @@ export enum NotAuthRoutes {
 }
 
 export const NotAuthRoutePath: Record<NotAuthRoutes, string> = {
-  [NotAuthRoutes.LOGIN]: '/login',
+  [NotAuthRoutes.LOGIN]: '/',
   [NotAuthRoutes.NOT_FOUND]: '*'
 }
 

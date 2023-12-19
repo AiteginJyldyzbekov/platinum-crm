@@ -1,4 +1,5 @@
 {
+  "Navbar": "Navbar",
   "aboutPage": "aboutPage",
   "decrement": "decrement",
   "error": "error",
@@ -8,6 +9,7 @@
   "logout": "logout",
   "notFound": "notFound",
   "reload": "reload",
+  "rememberMe": "rememberMe",
   "test": "test",
   "through_error": "through_error",
   "toggle": "toggle"

@@ -12,5 +12,6 @@
     "decrement": "decrement",
     "increment": "increment",
     "login": "login",
-    "logout": "logout"
+    "logout": "logout",
+    "rememberMe": "Remember me"
 }

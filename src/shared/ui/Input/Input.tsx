@@ -24,12 +24,13 @@ export const Input = memo((props: InputProps) => {
   }
 
   return (
-        <div className={classNames(styles.Input, {}, [className])}>
-            <input
-                type={type}
-                value={value}
-                onChange={onChageHandler}
-            />
-        </div>
+    <div className={classNames(styles.Input, {}, [className])}>
+      <input
+        type={type}
+        value={value}
+        onChange={onChageHandler}
+        {...otherProps}
+      />
+    </div>
   )
 })

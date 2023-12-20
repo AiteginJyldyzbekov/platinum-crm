@@ -13,5 +13,17 @@
     "increment": "increment",
     "login": "login",
     "logout": "logout",
-    "rememberMe": "Remember me"
+    "rememberMe": "Remember me",
+    "drivers": "drivers",
+    "cars": "Cars",
+    "profile": "Profile",
+    "createDriver": "createDriver",
+    "create": "Create",
+    "name": "Name",
+    "lastname": "Lastname",
+    "surname": "Surname",
+    "phoneNumber": "Phone number",
+    "action": "Action",
+    "delete": "Delete",
+    "add": "Add"
 }

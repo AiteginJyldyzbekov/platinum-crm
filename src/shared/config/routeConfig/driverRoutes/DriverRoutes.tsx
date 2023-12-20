@@ -1,4 +1,4 @@
-import { MainPage } from 'pages/MainPage'
+import { MainPage } from 'pages/ADMIN/MainPage'
 import { NotFoundPage } from 'pages/NotFoundPage'
 import { type RouteProps } from 'react-router-dom'
 

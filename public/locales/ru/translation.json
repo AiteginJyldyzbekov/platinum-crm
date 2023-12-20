@@ -13,5 +13,17 @@
     "increment": "Инкремент",
     "login": "Логин",
     "logout": "Выйти",
-    "rememberMe": "Запомнить меня"
+    "rememberMe": "Запомнить меня",
+    "drivers": "Водители",
+    "cars": "Машины",
+    "profile": "Профиль",
+    "createDriver": "Создание водителя",
+    "create": "Создать",
+    "name": "Имя",
+    "lastname": "Фамилие",
+    "surname": "Отчество",
+    "phoneNumber": "Номер телефона",
+    "action": "Действие",
+    "delete": "удалить",
+    "add": "Добавить"
 }

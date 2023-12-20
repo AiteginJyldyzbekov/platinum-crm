@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 
-const AboutPage = () => {
+const CarsPage = () => {
   const { t } = useTranslation()
   return (
-    <div>{t('aboutPage')}</div>
+    <div>{t('CarsPage')}</div>
   )
 }
 
-export default AboutPage
+export default CarsPage

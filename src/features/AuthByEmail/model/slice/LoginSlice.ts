@@ -5,8 +5,8 @@ import { loginByEmail } from '../services/loginByEmail/loginByEmail'
 const initialState: LoginSchema = {
   isLoading: false,
   email: '',
-  password: ''
-
+  password: '',
+  error: ''
 }
 
 export const loginSlice = createSlice({

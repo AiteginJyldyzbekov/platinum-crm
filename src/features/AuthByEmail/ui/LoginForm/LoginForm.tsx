@@ -10,6 +10,13 @@ import {
   loginByEmail
 } from 'features/AuthByEmail/model/services/loginByEmail/loginByEmail'
 import { useNavigate } from 'react-router-dom'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import { Text, TextTheme } from 'shared/ui/Text/Text'
+
+interface LoginFormInputs {
+  email: string
+  password: string
+}
 
 export const LoginForm = memo(() => {
   const { t } = useTranslation()
@@ -17,40 +24,46 @@ export const LoginForm = memo(() => {
   const navigate = useNavigate()
   const [isRemember, setIsRemember] = useState(false)
 
-  const { email, password, isLoading } = useSelector(getLoginState)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginFormInputs>()
 
-  const onChangeEmail = useCallback((value: string) => {
-    dispatch(loginActions.setEmail(value))
-  }, [dispatch])
+  const { email, password, isLoading, error } = useSelector(getLoginState)
 
-  const onChangePassword = useCallback((value: string) => {
-    dispatch(loginActions.setPassword(value))
-  }, [dispatch])
+  /* eslint-disable @typescript-eslint/no-misused-promises */
+  const onSubmit: SubmitHandler<LoginFormInputs> = useCallback(async (data) => {
+    const { password, email } = data
 
-  const onLoginClick = useCallback(() => {
     dispatch<any>(loginByEmail({ email, password, isRemember }))
       .then(() => {
         if (!isLoading) {
           navigate('/')
         }
       })
+    dispatch(loginActions.setPassword(password))
+    dispatch(loginActions.setEmail(email))
   }, [dispatch, email, password, isRemember])
 
   return (
     <div className={styles.wrapper}>
       <p>{t('login')}</p>
-      <div className={styles.inputs__container}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.inputs__container}>
         <Input
           type="text"
           placeholder="email"
-          value={email}
-          onChange={onChangeEmail}
+          label="email"
+          register={register}
+          required
         />
+        {errors.email && <p role="alert">{errors.email.message}</p>}
         <Input
           type="text"
           placeholder="password"
-          value={password}
-          onChange={onChangePassword}
+          label="password"
+          register={register}
+          required
         />
         <div className={styles.checkbox__container}>
           <input
@@ -69,11 +82,12 @@ export const LoginForm = memo(() => {
         </div>
         <Button
           theme={ThemeButton.OUTLINE}
-          onClick={onLoginClick}
+          type='submit'
         >
           {t('login')}
         </Button>
-      </div>
+        {error && <Text text={error} theme={TextTheme.ERROR} />}
+      </form>
     </div>
   )
 })

@@ -1,12 +1,15 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import styles from './Input.module.scss'
 import { type InputHTMLAttributes, memo } from 'react'
+import { type UseFormRegister } from 'react-hook-form'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
 
 interface InputProps extends HTMLInputProps {
   className?: string
   value?: string
+  register?: UseFormRegister<any>
+  label?: string
   onChange?: (value: string) => void
 }
 
@@ -16,6 +19,9 @@ export const Input = memo((props: InputProps) => {
     value,
     onChange,
     type = 'text',
+    label,
+    register,
+    required,
     ...otherProps
   } = props
 
@@ -30,6 +36,7 @@ export const Input = memo((props: InputProps) => {
         value={value}
         onChange={onChageHandler}
         {...otherProps}
+        {...register(label, { required })}
       />
     </div>
   )

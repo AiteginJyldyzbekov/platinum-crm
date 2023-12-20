@@ -10,14 +10,14 @@ interface SidebarCardProps {
 export const SidebarCard: React.FC<SidebarCardProps> = ({ roleData }) => {
   const { t } = useTranslation()
   return (
-        <div className={styles.card__wrapper}>
-            {
-                roleData.map((el) => (
-                    <Link to={el.path} className={styles.card}>
-                        <p>{t(el.title)}</p>
-                    </Link>
-                ))
-            }
-        </div>
+    <div className={styles.card__wrapper}>
+      {
+        roleData.map((el) => (
+          <Link to={el.path} className={styles.card} key={`${el.title}_${el.path}`}>
+            <p>{t(el.title)}</p>
+          </Link>
+        ))
+      }
+    </div>
   )
 }

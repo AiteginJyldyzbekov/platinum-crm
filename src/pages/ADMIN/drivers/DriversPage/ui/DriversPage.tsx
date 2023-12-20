@@ -4,8 +4,8 @@ import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { Link } from 'react-router-dom'
 
 const DriversPage = () => {
-    const { t } = useTranslation()
-    return (
+  const { t } = useTranslation()
+  return (
         <div className={styles.wrapper}>
             <div className={styles.page__header}>
                 <p>{t('DriversPage')}</p>
@@ -35,7 +35,7 @@ const DriversPage = () => {
                 </div>
             </div>
         </div>
-    )
+  )
 }
 
 export default DriversPage

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import AboutPage from './AboutPage'
+import { CreateDriverForm } from './CreateDriverForm'
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator'
 import { Theme } from 'app/providers/ThemeProvider'
 
 const meta = {
-  title: 'pages/AboutPage',
-  component: AboutPage,
+  title: 'features/CreateDriverForm',
+  component: CreateDriverForm,
   parameters: {
     layout: 'centered'
   },
@@ -13,7 +13,7 @@ const meta = {
   argTypes: {
     backgroundColor: { control: 'color' }
   }
-} as Meta<typeof AboutPage>
+} as Meta<typeof CreateDriverForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

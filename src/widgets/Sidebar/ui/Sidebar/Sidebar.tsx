@@ -5,9 +5,13 @@ import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
 import { LangSwitcher } from 'widgets/LangSwitcher'
 import { Button } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
-import { userActions } from 'entities/User'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserAuthData, userActions } from 'entities/User'
 import { useNavigate } from 'react-router-dom'
+
+import { SidebarCard } from '../SidebarCard/SidebarCard'
+import { UserRole } from 'app/providers/router/types'
+import { admin, driver } from 'widgets/Sidebar/constants'
 
 interface SidebarProps {
   className?: string
@@ -15,6 +19,8 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const [collapsed, setCollapsed] = useState(false)
+  const { authData } = useSelector(getUserAuthData)
+  const roleData = authData?.role === UserRole.admin ? admin : driver
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -40,6 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         onClick={onToggle}>
         {t('toggle')}
       </Button>
+      <SidebarCard roleData={roleData} />
       <div className={styles.switchers}>
         <ThemeSwitcher />
         <LangSwitcher className={styles.lang} />

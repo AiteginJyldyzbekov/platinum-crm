@@ -16,17 +16,24 @@
   },
   "plugins": [
     "react",
-    "i18next"
+    "i18next",
+    "unused-imports"
   ],
   "rules": {
+    "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{ "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+		],
     "@typescript-eslint/no-unused-vars": "off",
-    "no-unused-vars": "off",
     "react/jsx-props-no-spreading": "off",
     "no-shadow": "off",
     "react/require-default-props": "off",
     "import/prefer-default-export": "off",
     "class-methods-use-this": "off",
     "no-param-reassign": 0,
+    "import/no-unused-modules": "error",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
@@ -49,7 +56,6 @@
         "code": 100
       }
     ],
-    "no-param-reassign": "off",
     "i18next/no-literal-string": [
       "error",
       {

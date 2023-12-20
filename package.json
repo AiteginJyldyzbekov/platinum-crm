@@ -15,7 +15,6 @@
     "test:ui": "npx loki test",
     "test:ui:approve": "npx loki approve",
     "test:ui:ci": "npx loki --requireReference --reactUri file:./storybook-static",
-    "test_ui_ci": "concurrently -s first -k \"yarn storybook\" \"yarn test:ui\"",
     "prepare": "husky install"
   },
   "browserslist": {
@@ -29,6 +28,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "webpack": "^5"
   },
   "keywords": [],
   "author": "",
@@ -49,6 +51,7 @@
     "css-loader": "^6.8.1",
     "eslint-plugin-i18next": "^6.0.3",
     "file-loader": "^6.2.0",
+    "firebase": "^10.7.1",
     "i18next": "^23.7.6",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.1",
@@ -91,19 +94,21 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-storybook": "^0.6.15",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "html-webpack-plugin": "5.5.0",
+    "husky": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest-environment-jsdom": "^29.7.0",
     "loki": "^0.33.1",
     "mini-css-extract-plugin": "^2.7.6",
+    "react-hook-form": "^7.49.2",
     "regenerator-runtime": "^0.14.0",
     "storybook": "7.6.2",
     "ts-loader": "9.2.6",
     "typescript": "*",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.10.1",
-    "webpack-dev-server": "^4.15.1",
-    "husky": "^8.0.0"
+    "webpack-dev-server": "^4.15.1"
   },
   "loki": {
     "configurations": {

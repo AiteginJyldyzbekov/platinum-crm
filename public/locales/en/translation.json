@@ -10,5 +10,8 @@
     "through_error": "Through error",
     "Navbar": "Navbar",
     "decrement": "decrement",
-    "increment": "increment"
+    "increment": "increment",
+    "login": "login",
+    "logout": "logout",
+    "rememberMe": "Remember me"
 }

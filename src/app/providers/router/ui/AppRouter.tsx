@@ -9,10 +9,12 @@ import {
 import {
   DriverRouteConfig
 } from 'shared/config/routeConfig/driverRoutes/DriverRoutes'
+import { useSelector } from 'react-redux'
+import { getUserAuthData } from 'entities/User'
 
 const AppRouter = () => {
-  const role: string = 'driver' // admin | driver
-  const isAuth = true
+  const { authData, isAuth } = useSelector(getUserAuthData)
+  const role = authData?.role
 
   if (!isAuth) return <Page routes={NotAuthRouteConfig} />
   if (role) {

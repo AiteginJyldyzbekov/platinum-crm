@@ -10,8 +10,21 @@
 }
 
 .outline {
-    padding: 15px;
-    border: 1px solid red;
-    color: green;
-    background: none;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
 }
+
+  .outline:hover {
+    background-color: #0056b3; 
+    border-color: #0056b3; 
+  }
+  

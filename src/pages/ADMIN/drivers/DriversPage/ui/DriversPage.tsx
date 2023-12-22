@@ -21,12 +21,14 @@ const DriversPage = memo(() => {
   const onDelete = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     nameToDelete: string,
-    tid: string
+    tid: string,
+    email: string,
+    password: string
   ) => {
     e.stopPropagation()
     const res = window?.confirm(`Вы действительно хотите удалить водителя ${nameToDelete}?`)
     if (res) {
-      dispatch<any>(deleteDriver({ tid }))
+      dispatch<any>(deleteDriver({ tid, email, password }))
     }
   }
 
@@ -39,7 +41,7 @@ const DriversPage = memo(() => {
                 <p>{t('phoneNumber')}</p>
                 <Button
                     theme={ThemeButton.OUTLINE}
-                    onClick={(e) => { onDelete(e, el.name, el.tid) }}
+                    onClick={(e) => { onDelete(e, el.name, el.tid, el.email, el.password) }}
                 >
                     <p>{t('delete')}</p>
                 </Button>

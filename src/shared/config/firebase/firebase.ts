@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { collection, getFirestore } from 'firebase/firestore'
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyDV1uQeGYjOdAO8wvrjYLphowus0EhNdLY',
   authDomain: 'platinum-crm-a0fcf.firebaseapp.com',
   projectId: 'platinum-crm-a0fcf',

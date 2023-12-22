@@ -25,5 +25,6 @@
     "phoneNumber": "Phone number",
     "action": "Action",
     "delete": "Delete",
-    "add": "Add"
+    "add": "Add",
+    "isDeleteText": "Are you sure you want to delete"
 }

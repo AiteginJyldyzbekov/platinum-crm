@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import styles from './CreateDriverPage.module.scss'
-import { CreateDriverForm } from 'features/CreateDriver'
+import { CreateDriverForm } from 'entities/Driver'
 
 const CreateDriverPage = () => {
   const { t } = useTranslation()

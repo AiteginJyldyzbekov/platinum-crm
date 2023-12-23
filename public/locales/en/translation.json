@@ -26,5 +26,6 @@
     "action": "Action",
     "delete": "Delete",
     "add": "Add",
-    "isDeleteText": "Are you sure you want to delete"
+    "isDeleteText": "Are you sure you want to delete",
+    "save": "Save"
 }

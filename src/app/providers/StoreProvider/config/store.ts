@@ -8,7 +8,7 @@ export function createReduxStore (initialState?: StateSchema) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     user: userReducer,
     loginForm: loginReducer,
-    drivers: driverReducer
+    driver: driverReducer
   }
 
   return configureStore<StateSchema>({

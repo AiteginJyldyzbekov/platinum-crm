@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { type Driver } from '../../types/createDriverSchema'
+import { type Driver } from '../../types/driverSchema'
 import { usersRef } from 'shared/config/firebase/firebase'
 import { type QueryDocumentSnapshot, getDocs, query, where } from 'firebase/firestore'
-import { driverActions } from '../../slice/DriverSlice'
 
 export const getDrivers = createAsyncThunk<Driver[], undefined, { rejectValue: string }>(
   'get/drivers',
@@ -16,8 +15,7 @@ export const getDrivers = createAsyncThunk<Driver[], undefined, { rejectValue: s
       querySnapshot.forEach((doc: QueryDocumentSnapshot<Driver>) => {
         data.push({ tid: doc.id, ...doc.data() })
       })
-
-      thunkApi.dispatch(driverActions.setDrivers(data))
+      return data
     } catch (e) {
       console.error(e)
       return thunkApi.rejectWithValue('error')

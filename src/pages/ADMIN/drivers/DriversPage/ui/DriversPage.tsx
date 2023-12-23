@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { memo, useEffect, useMemo } from 'react'
 import { getDrivers } from 'entities/Driver/model/services/getDrivers/getDrivers'
-import { getDriverState } from 'entities/Driver/model/selectors/getDriverState'
+import { getDriversState } from 'entities/Driver/model/selectors/getDriversState'
 import { Loader } from 'shared/ui/Loader/Loader'
 import { deleteDriver } from 'entities/Driver/model/services/deleteDriver/deleteDriver'
 
 const DriversPage = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { isLoading, drivers } = useSelector(getDriverState)
+  const { result, isLoading } = useSelector(getDriversState)
 
   useEffect(() => {
     dispatch<any>(getDrivers())
@@ -33,21 +33,26 @@ const DriversPage = memo(() => {
   }
 
   const renderDrivers = useMemo(() => (
-    drivers?.map((el, index) => (
-            <div className={styles.table__row} key={`${el.name}_${index}`}>
-                <p>{el.name}</p>
-                <p>{el.lastname}</p>
-                <p>{el.surname}</p>
-                <p>{t('phoneNumber')}</p>
+    result?.map((el, index) => (
+            <div className={styles.row__container} key={`${el.name}_${index}`}>
+                <Link to={el.tid} className={styles.table__row}>
+                    <p>{el.name}</p>
+                    <p>{el.lastname}</p>
+                    <p>{el.surname}</p>
+                    <p>{t('phoneNumber')}</p>
+                </Link>
                 <Button
                     theme={ThemeButton.OUTLINE}
-                    onClick={(e) => { onDelete(e, el.name, el.tid, el.email, el.password) }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onDelete(e, el.name, el.tid, el.email, el.password)
+                    }}
                 >
                     <p>{t('delete')}</p>
                 </Button>
             </div>
     ))
-  ), [drivers])
+  ), [result])
   if (isLoading) return <Loader />
 
   return (

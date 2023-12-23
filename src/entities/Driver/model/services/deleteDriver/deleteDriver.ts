@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { type Driver } from '../../types/createDriverSchema'
+import { type Driver } from '../../types/driverSchema'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db, firebaseConfig } from 'shared/config/firebase/firebase'
 import { deleteApp, initializeApp } from 'firebase/app'

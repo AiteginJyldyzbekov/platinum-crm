@@ -32,7 +32,7 @@ const DriverDetailPage: React.FC<DriverDetailPageProps> = (props) => {
     setValue
   } = useForm<DriverDetailPageProps>()
 
-    /* eslint-disable @typescript-eslint/no-misused-promises */
+  /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<DriverDetailPageProps> = useCallback(async (data) => {
     const updatedUserData = {
       tid: id,

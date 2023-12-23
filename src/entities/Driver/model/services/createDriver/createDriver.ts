@@ -26,7 +26,7 @@ export const createDriver =
                 password: authData.password,
                 name: authData.name,
                 surname: authData.surname,
-                lastName: authData.lastname,
+                lastname: authData.lastname,
                 role: 'driver'
               }
 

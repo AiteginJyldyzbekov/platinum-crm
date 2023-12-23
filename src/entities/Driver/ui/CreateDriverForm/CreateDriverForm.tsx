@@ -4,9 +4,9 @@ import { Input } from 'shared/ui/Input/Input'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
-import { createDriver } from '../model/services/createDriver/createDriver'
+import { createDriver } from '../../model/services/createDriver/createDriver'
 import { useNavigate } from 'react-router-dom'
-import { getCreateDriverState } from '../model/selectors/getCreateDriverState'
+import { getDriversState } from '../../model/selectors/getDriversState'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 
 interface CreateDriverInputs {
@@ -26,7 +26,7 @@ export const CreateDriverForm = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isLoading } = useSelector(getCreateDriverState)
+  const { isLoading } = useSelector(getDriversState)
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<CreateDriverInputs> = useCallback(async (data) => {

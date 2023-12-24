@@ -15,18 +15,18 @@ interface CreateDriverProps {
 export const createDriver =
     createAsyncThunk<User, CreateDriverProps, { rejectValue: string }>(
       'create/driver',
-      async (authData, thunkApi) => {
+      async (data, thunkApi) => {
         try {
-          createUserWithEmailAndPassword(auth, authData.email, authData.password)
+          createUserWithEmailAndPassword(auth, data.email, data.password)
             .then(async (userCredential) => {
               const user = userCredential.user
               const newDriver = {
                 uid: user.uid,
-                email: authData.email,
-                password: authData.password,
-                name: authData.name,
-                surname: authData.surname,
-                lastname: authData.lastname,
+                email: data.email,
+                password: data.password,
+                name: data.name,
+                surname: data.surname,
+                lastname: data.lastname,
                 role: 'driver'
               }
 

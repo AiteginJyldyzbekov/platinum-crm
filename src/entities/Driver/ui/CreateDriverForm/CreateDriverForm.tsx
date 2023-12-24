@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
 import { createDriver } from '../../model/services/createDriver/createDriver'
 import { useNavigate } from 'react-router-dom'
-import { getDriversState } from '../../model/selectors/getDriversState'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
+import { getCreateDriverState } from 'entities/Driver/model/selectors/getCreateDriverState'
 
 interface CreateDriverInputs {
   email: string
@@ -26,7 +26,7 @@ export const CreateDriverForm = memo(() => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isLoading } = useSelector(getDriversState)
+  const { isLoading } = useSelector(getCreateDriverState)
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<CreateDriverInputs> = useCallback(async (data) => {
@@ -52,51 +52,51 @@ export const CreateDriverForm = memo(() => {
   }, [dispatch])
 
   return (
-        <div className={styles.wrapper}>
-            <p>{t('createDriver')}</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    type="text"
-                    placeholder="Name"
-                    label="name"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Lastname"
-                    label="lastname"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Surname"
-                    label="surname"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Email"
-                    label="email"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Password"
-                    label="password"
-                    register={register}
-                    required
-                />
-                <Button
-                    theme={ThemeButton.OUTLINE}
-                    type='submit'
-                >
-                    {t('add')}
-                </Button>
-            </form>
-        </div>
+    <div className={styles.wrapper}>
+      <p>{t('createDriver')}</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          type="text"
+          placeholder="Name"
+          label="name"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Lastname"
+          label="lastname"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Surname"
+          label="surname"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Email"
+          label="email"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Password"
+          label="password"
+          register={register}
+          required
+        />
+        <Button
+          theme={ThemeButton.OUTLINE}
+          type='submit'
+        >
+          {t('add')}
+        </Button>
+      </form>
+    </div>
   )
 })

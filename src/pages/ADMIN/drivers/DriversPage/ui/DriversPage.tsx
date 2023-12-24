@@ -4,10 +4,9 @@ import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { memo, useEffect, useMemo } from 'react'
-import { getDrivers } from 'entities/Driver/model/services/getDrivers/getDrivers'
-import { getDriversState } from 'entities/Driver/model/selectors/getDriversState'
+import { getDrivers, getDriversState, deleteDriver } from 'entities/Driver'
+
 import { Loader } from 'shared/ui/Loader/Loader'
-import { deleteDriver } from 'entities/Driver/model/services/deleteDriver/deleteDriver'
 
 const DriversPage = memo(() => {
   const { t } = useTranslation()

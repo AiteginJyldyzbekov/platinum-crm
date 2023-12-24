@@ -27,5 +27,10 @@
     "delete": "Delete",
     "add": "Add",
     "isDeleteText": "Are you sure you want to delete",
-    "save": "Save"
+    "save": "Save",
+    "createCar": "Create car",
+    "car": "Car",
+    "model": "Model",
+    "color": "Color",
+    "numberPlate": "Plate number"
 }

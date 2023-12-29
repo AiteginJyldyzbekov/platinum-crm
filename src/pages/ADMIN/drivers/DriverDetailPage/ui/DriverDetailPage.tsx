@@ -7,6 +7,10 @@ import { useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getDriverById, getDriverState, updateDriver } from 'entities/Driver'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
+import {
+  BalanceType,
+  changeBalance
+} from 'entities/Driver/model/services/changeBalance/changeBalance'
 
 interface DriverDetailPageProps {
   email: string
@@ -14,6 +18,7 @@ interface DriverDetailPageProps {
   name: string
   lastname: string
   surname: string
+  balance: number
 }
 
 const DriverDetailPage: React.FC = () => {
@@ -61,9 +66,35 @@ const DriverDetailPage: React.FC = () => {
     dispatch(getDriverById({ tid: id }))
   }, [id])
 
+  const balanceHandler = (type: BalanceType) => {
+    const sum = window?.prompt('Напишите сумму')
+    if (sum) {
+      dispatch(changeBalance({
+        tid: id,
+        type,
+        currentBalance: result.balance,
+        amount: Number(sum)
+      }))
+        .then(() => {
+          alert('Баланс успешно обновлен')
+        })
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <p>{t('createDriver')}</p>
+      <div className={styles.balance__block}>
+        <div
+          className={styles.balance__minus}
+          onClick={() => { balanceHandler(BalanceType.minus) }}
+        >-</div>
+        <p>{`${t('balance')}: ${result?.balance}`}</p>
+        <div
+          className={styles.balance__plus}
+          onClick={() => { balanceHandler(BalanceType.plus) }}
+        >+</div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"

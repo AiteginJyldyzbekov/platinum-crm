@@ -32,5 +32,6 @@
     "car": "Car",
     "model": "Модель",
     "color": "Цвет",
-    "numberPlate": "Номер машины"
+    "numberPlate": "Номер машины",
+    "balance": "Баланс"
 }

@@ -29,6 +29,7 @@ export const createDriver =
               surname: data.surname,
               lastname: data.lastname,
               phoneNumber: data.phoneNumber,
+              balance: 0,
               role: 'driver'
             }
 

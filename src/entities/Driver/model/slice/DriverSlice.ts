@@ -4,6 +4,7 @@ import { type DriversSchema } from '../types/driverSchema'
 import { getDrivers } from '../services/getDrivers/getDrivers'
 import { deleteDriver } from '../services/deleteDriver/deleteDriver'
 import { getDriverById } from '../services/getDriverById/getDriverById'
+import { changeBalance } from '../services/changeBalance/changeBalance'
 
 const initialState: DriversSchema = {
   drivers: {
@@ -28,7 +29,7 @@ export const driverSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    // Create driver
+      // Create driver
       .addCase(createDriver.pending, (state) => {
         state.createDriver.error = undefined
         state.createDriver.isLoading = true
@@ -88,6 +89,21 @@ export const driverSlice = createSlice({
         state.driverDetail.result = action.payload
       })
       .addCase(getDriverById.rejected, (state, action) => {
+        console.log('rejected')
+        state.driverDetail.isLoading = false
+        state.driverDetail.error = action.payload
+      })
+      // Change balance
+      .addCase(changeBalance.pending, (state) => {
+        state.driverDetail.error = undefined
+        state.driverDetail.isLoading = true
+        console.log('pending')
+      })
+      .addCase(changeBalance.fulfilled, (state) => {
+        console.log('fulfilled')
+        state.driverDetail.isLoading = false
+      })
+      .addCase(changeBalance.rejected, (state, action) => {
         console.log('rejected')
         state.driverDetail.isLoading = false
         state.driverDetail.error = action.payload

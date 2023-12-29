@@ -32,5 +32,6 @@
     "car": "Car",
     "model": "Model",
     "color": "Color",
-    "numberPlate": "Plate number"
+    "numberPlate": "Plate number",
+    "balance": "Balance"
 }

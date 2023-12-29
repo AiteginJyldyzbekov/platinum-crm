@@ -15,6 +15,7 @@ interface CreateDriverInputs {
   name: string
   lastname: string
   surname: string
+  phoneNumber: string
 }
 
 export const CreateDriverForm = memo(() => {
@@ -35,7 +36,8 @@ export const CreateDriverForm = memo(() => {
       password,
       name,
       surname,
-      lastname
+      lastname,
+      phoneNumber
     } = data
 
     dispatch(createDriver({
@@ -43,7 +45,8 @@ export const CreateDriverForm = memo(() => {
       password,
       name,
       surname,
-      lastname
+      lastname,
+      phoneNumber
     })).then(() => {
       if (!isLoading) {
         navigate('/drivers')
@@ -87,6 +90,12 @@ export const CreateDriverForm = memo(() => {
           type="text"
           placeholder="Password"
           label="password"
+          register={register}
+          required
+        /><Input
+          type="text"
+          placeholder="Phone numbe"
+          label="phoneNumber"
           register={register}
           required
         />

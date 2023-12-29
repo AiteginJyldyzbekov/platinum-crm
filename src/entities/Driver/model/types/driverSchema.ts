@@ -5,6 +5,7 @@ export interface Driver {
   name: string
   surname: string
   lastname: string
+  phoneNumber: string
 }
 
 export interface DriversSchema {

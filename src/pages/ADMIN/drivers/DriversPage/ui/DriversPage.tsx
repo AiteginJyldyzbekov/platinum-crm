@@ -37,7 +37,7 @@ const DriversPage = memo(() => {
           <p>{el.name}</p>
           <p>{el.lastname}</p>
           <p>{el.surname}</p>
-          <p>{t('phoneNumber')}</p>
+          <p>{el.phoneNumber}</p>
         </Link>
         <Button
           theme={ThemeButton.OUTLINE}

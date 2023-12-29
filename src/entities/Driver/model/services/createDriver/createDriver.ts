@@ -10,31 +10,33 @@ interface CreateDriverProps {
   name: string
   surname: string
   lastname: string
+  phoneNumber: string
 }
 
 export const createDriver =
-    createAsyncThunk<User, CreateDriverProps, { rejectValue: string }>(
-      'create/driver',
-      async (data, thunkApi) => {
-        try {
-          createUserWithEmailAndPassword(auth, data.email, data.password)
-            .then(async (userCredential) => {
-              const user = userCredential.user
-              const newDriver = {
-                uid: user.uid,
-                email: data.email,
-                password: data.password,
-                name: data.name,
-                surname: data.surname,
-                lastname: data.lastname,
-                role: 'driver'
-              }
+  createAsyncThunk<User, CreateDriverProps, { rejectValue: string }>(
+    'create/driver',
+    async (data, thunkApi) => {
+      try {
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+          .then(async (userCredential) => {
+            const user = userCredential.user
+            const newDriver = {
+              uid: user.uid,
+              email: data.email,
+              password: data.password,
+              name: data.name,
+              surname: data.surname,
+              lastname: data.lastname,
+              phoneNumber: data.phoneNumber,
+              role: 'driver'
+            }
 
-              await addDoc(usersRef, newDriver)
-            })
-        } catch (e) {
-          console.log(e)
-          return thunkApi.rejectWithValue('error')
-        }
+            await addDoc(usersRef, newDriver)
+          })
+      } catch (e) {
+        console.log(e)
+        return thunkApi.rejectWithValue('error')
       }
-    )
+    }
+  )

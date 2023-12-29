@@ -19,3 +19,8 @@ export function createReduxStore (initialState?: StateSchema) {
     preloadedState: initialState
   })
 }
+
+const store = createReduxStore()
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

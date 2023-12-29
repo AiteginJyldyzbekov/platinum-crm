@@ -3,20 +3,20 @@ import styles from './CarsPage.module.scss'
 import { Link } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { memo, useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { getCarsState } from 'entities/Car/model/selectors/getCarsState'
 import { Loader } from 'shared/ui/Loader/Loader'
 import { getCars } from 'entities/Car'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from 'shared/config/firebase/firebase'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 const CarsPage = memo(() => {
   const { t } = useTranslation()
-  const { isLoading, result } = useSelector(getCarsState)
-  const dispatch = useDispatch()
+  const { isLoading, result } = useAppSelector(getCarsState)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch<any>(getCars())
+    dispatch(getCars())
   }, [])
 
   const onDelete = (

@@ -2,7 +2,6 @@ import { memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LoginForm.module.scss'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
-import { useDispatch, useSelector } from 'react-redux'
 import { loginActions } from '../../model/slice/LoginSlice'
 import { Input } from 'shared/ui/Input/Input'
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState'
@@ -12,6 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { Text, TextTheme } from 'shared/ui/Text/Text'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 interface LoginFormInputs {
   email: string
@@ -20,7 +20,7 @@ interface LoginFormInputs {
 
 export const LoginForm = memo(() => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isRemember, setIsRemember] = useState(false)
 
@@ -30,13 +30,13 @@ export const LoginForm = memo(() => {
     formState: { errors }
   } = useForm<LoginFormInputs>()
 
-  const { email, password, isLoading, error } = useSelector(getLoginState)
+  const { email, password, isLoading, error } = useAppSelector(getLoginState)
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<LoginFormInputs> = useCallback(async (data) => {
     const { password, email } = data
 
-    dispatch<any>(loginByEmail({ email, password, isRemember }))
+    dispatch(loginByEmail({ email, password, isRemember }))
       .then(() => {
         if (!isLoading) {
           navigate('/')

@@ -2,19 +2,18 @@ import { useTranslation } from 'react-i18next'
 import styles from './DriversPage.module.scss'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { memo, useEffect, useMemo } from 'react'
 import { getDrivers, getDriversState, deleteDriver } from 'entities/Driver'
-
 import { Loader } from 'shared/ui/Loader/Loader'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 const DriversPage = memo(() => {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const { result, isLoading } = useSelector(getDriversState)
+  const dispatch = useAppDispatch()
+  const { result, isLoading } = useAppSelector(getDriversState)
 
   useEffect(() => {
-    dispatch<any>(getDrivers())
+    dispatch(getDrivers())
   }, [])
 
   const onDelete = (
@@ -27,7 +26,7 @@ const DriversPage = memo(() => {
     e.stopPropagation()
     const res = window?.confirm(`Вы действительно хотите удалить водителя ${nameToDelete}?`)
     if (res) {
-      dispatch<any>(deleteDriver({ tid, email, password }))
+      dispatch(deleteDriver({ tid, email, password }))
     }
   }
 

@@ -5,8 +5,8 @@ import { Input } from 'shared/ui/Input/Input'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { getCarById, getCarState, updateCar } from 'entities/Car'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 interface CarDetailPageProps {
   car: string
@@ -18,8 +18,8 @@ interface CarDetailPageProps {
 const CarDetailPage: React.FC = () => {
   const { t } = useTranslation()
   const { id } = useParams()
-  const dispatch = useDispatch()
-  const { isLoading, result } = useSelector(getCarState)
+  const dispatch = useAppDispatch()
+  const { isLoading, result } = useAppSelector(getCarState)
   const navigate = useNavigate()
 
   const {
@@ -39,7 +39,7 @@ const CarDetailPage: React.FC = () => {
       numberPlate: data.numberPlate
     }
 
-    dispatch<any>(updateCar(updatedCarData)).then(() => {
+    dispatch(updateCar(updatedCarData)).then(() => {
       navigate('/cars')
     })
   }, [])
@@ -55,7 +55,7 @@ const CarDetailPage: React.FC = () => {
   }, [isLoading, result, setValue])
 
   useEffect(() => {
-    dispatch<any>(getCarById({ tid: id }))
+    dispatch(getCarById({ tid: id }))
   }, [id])
 
   return (

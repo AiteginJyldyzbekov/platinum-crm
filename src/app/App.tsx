@@ -3,12 +3,12 @@ import { useTheme } from 'app/providers/ThemeProvider/lib/useTheme'
 import { classNames } from 'shared/lib/classNames/classNames'
 import { AppRouter } from './providers/router'
 import { Suspense, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { userActions } from 'entities/User'
+import { useAppDispatch } from 'shared/lib/reduxHooks'
 
 const App = () => {
   const { theme } = useTheme()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(userActions.initAuthData())

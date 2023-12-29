@@ -5,8 +5,8 @@ import { Input } from 'shared/ui/Input/Input'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { getDriverById, getDriverState, updateDriver } from 'entities/Driver'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 interface DriverDetailPageProps {
   email: string
@@ -19,8 +19,8 @@ interface DriverDetailPageProps {
 const DriverDetailPage: React.FC = () => {
   const { t } = useTranslation()
   const { id } = useParams()
-  const dispatch = useDispatch()
-  const { isLoading, result } = useSelector(getDriverState)
+  const dispatch = useAppDispatch()
+  const { isLoading, result } = useAppSelector(getDriverState)
   const navigate = useNavigate()
 
   const {
@@ -41,7 +41,7 @@ const DriverDetailPage: React.FC = () => {
       lastname: data.lastname
     }
 
-    dispatch<any>(updateDriver(updatedUserData)).then(() => {
+    dispatch(updateDriver(updatedUserData)).then(() => {
       navigate('/drivers')
     })
   }, [])
@@ -58,7 +58,7 @@ const DriverDetailPage: React.FC = () => {
   }, [isLoading, result, setValue])
 
   useEffect(() => {
-    dispatch<any>(getDriverById({ tid: id }))
+    dispatch(getDriverById({ tid: id }))
   }, [id])
 
   return (

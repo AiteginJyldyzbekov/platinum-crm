@@ -2,12 +2,12 @@ import { useTranslation } from 'react-i18next'
 import styles from './CreateCarForm.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { createCar } from 'entities/Car/model/services/createCar/createCar'
 import { getCreateCarState } from 'entities/Car/model/selectors/getCreateCarState'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 interface CreateCarInputs {
   car: string
@@ -23,10 +23,10 @@ export const CreateCarForm = memo(() => {
     formState: { errors }
   } = useForm<CreateCarInputs>()
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { isLoading } = useSelector(getCreateCarState)
+  const { isLoading } = useAppSelector(getCreateCarState)
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<CreateCarInputs> = useCallback(async (data) => {
@@ -37,7 +37,7 @@ export const CreateCarForm = memo(() => {
       numberPlate
     } = data
 
-    dispatch<any>(createCar({
+    dispatch(createCar({
       car,
       model,
       color,

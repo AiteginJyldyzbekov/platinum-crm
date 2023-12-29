@@ -2,12 +2,12 @@ import { useTranslation } from 'react-i18next'
 import styles from './CreateDriverForm.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
 import { memo, useCallback } from 'react'
 import { createDriver } from '../../model/services/createDriver/createDriver'
 import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { getCreateDriverState } from 'entities/Driver/model/selectors/getCreateDriverState'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 
 interface CreateDriverInputs {
   email: string
@@ -24,9 +24,9 @@ export const CreateDriverForm = memo(() => {
     formState: { errors }
   } = useForm<CreateDriverInputs>()
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { isLoading } = useSelector(getCreateDriverState)
+  const { isLoading } = useAppSelector(getCreateDriverState)
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<CreateDriverInputs> = useCallback(async (data) => {
@@ -38,7 +38,7 @@ export const CreateDriverForm = memo(() => {
       lastname
     } = data
 
-    dispatch<any>(createDriver({
+    dispatch(createDriver({
       email,
       password,
       name,

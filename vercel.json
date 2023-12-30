@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "./config/storybook/main.js",
+            "use": "@vercel/static-build"
+        }
+    ]
+}

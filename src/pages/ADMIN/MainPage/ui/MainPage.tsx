@@ -7,6 +7,7 @@ const MainPage = () => {
     <div>
       <BugButton />
       {t('test')}
+      {/* // */}
     </div>
   )
 }

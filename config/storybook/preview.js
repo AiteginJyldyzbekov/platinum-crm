@@ -21,18 +21,7 @@ export const decorators = [
   StyleDecorator,
   ThemeDecorator(Theme.LIGHT),
   RouteDecorator(),
-  StoreDecorator({
-    loginForm: { email: '123', password: 'asd' },
-    user: {
-      authData: {
-        id: "id",
-        email: "email@gmail.com",
-        role: "admin",
-        uid: "uid"
-      },
-      isAuth: true
-    }
-  })
+  StoreDecorator()
 ]
 
 export default preview

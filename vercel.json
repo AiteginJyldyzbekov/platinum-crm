@@ -1,4 +1,13 @@
 {
+    "routes": [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/.*",
+            "dest": "/index.html"
+        }
+    ],
     "crons": [
         {
             "path": "/api/cron",

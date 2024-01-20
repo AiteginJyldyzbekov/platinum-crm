@@ -9,6 +9,6 @@ export default function handler() {
         numberPlate: 'CRON'
       }
     addDoc(carsRef, newCar)
-
+      console.log("работает крон")
     return `Cron job was create a car`;
   }

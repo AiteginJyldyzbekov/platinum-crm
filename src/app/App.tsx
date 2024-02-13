@@ -15,13 +15,13 @@ const App = () => {
   }, [dispatch])
 
   return (
-        <div className={classNames('app', {}, [theme])}>
-            <Suspense fallback="">
-                <div className="content-page">
-                    <AppRouter />
-                </div>
-            </Suspense>
+    <div className={classNames('app', {}, [theme])}>
+      <Suspense fallback="">
+        <div className="content-page">
+          <AppRouter />
         </div>
+      </Suspense>
+    </div>
   )
 }
 

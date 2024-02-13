@@ -1,16 +1,14 @@
 import { classNames } from 'shared/lib/classNames/classNames'
 import styles from './Sidebar.module.scss'
 import { useState } from 'react'
-import { ThemeSwitcher } from 'widgets/ThemeSwitcher'
-import { LangSwitcher } from 'widgets/LangSwitcher'
-import { Button } from 'shared/ui/Button/Button'
 import { useTranslation } from 'react-i18next'
-import { getUserAuthData, userActions } from 'entities/User'
-import { useNavigate } from 'react-router-dom'
-import { SidebarCard } from '../SidebarCard/SidebarCard'
+import { getUserAuthData } from 'entities/User'
+import { SidebarCards } from '../SidebarCard/SidebarCards'
 import { UserRole } from 'app/providers/router/types'
 import { admin, driver } from 'widgets/Sidebar/constants'
-import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
+import { useAppSelector } from 'shared/lib/reduxHooks'
+import Logo from '../../images/logo.svg'
+import ArrowDown from '../../images/arrow_down.svg'
 
 interface SidebarProps {
   className?: string
@@ -19,37 +17,37 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const [collapsed, setCollapsed] = useState(false)
   const { authData } = useAppSelector(getUserAuthData)
+
   const roleData = authData?.role === UserRole.admin ? admin : driver
+
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
-  const onToggle = () => {
-    setCollapsed(prev => !prev)
-  }
-
-  const onLogout = () => {
-    dispatch(userActions.logout())
-    navigate('/')
-  }
 
   return (
     <div data-testid="sidebar" className={
       classNames(
         styles.Sidebar,
-        { [styles.collapsed]: collapsed },
+        { [styles.collapsed]: !collapsed },
         [className]
-      )}>
-      <Button
-        data-testid="sidebar-toggle"
-        onClick={onToggle}>
-        {t('toggle')}
-      </Button>
-      <SidebarCard roleData={roleData} />
-      <div className={styles.switchers}>
-        <ThemeSwitcher />
-        <LangSwitcher className={styles.lang} />
-        <Button onClick={onLogout}>{t('logout')}</Button>
+      )}
+      onMouseEnter={() => { setCollapsed(true) }}
+      onMouseLeave={() => { setCollapsed(false) }}
+    >
+      <div className={styles.sidebar__content_top}>
+        <div className={styles.logo}>
+          <Logo />
+          <p className={styles.logo__title}>{t('Sidebar.dashboard')}</p>
+        </div>
+        <SidebarCards roleData={roleData} collapsed={collapsed} />
+      </div>
+      <div className={styles.sidebar__content_bottom}>
+        <div className={styles.user__info}>
+          <div className={styles.avatar}></div>
+          <div className={styles.text}>
+            <p className={styles.name}>{t('Sidebar.name')}</p>
+            <p className={styles.email}>{t('Sidebar.email')}</p>
+          </div>
+        </div>
+        <ArrowDown />
       </div>
     </div>
   )

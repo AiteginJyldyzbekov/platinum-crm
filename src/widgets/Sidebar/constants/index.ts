@@ -16,24 +16,24 @@ export interface SideBarLink {
 
 export const admin: SideBarLink[] = [
   {
+    title: 'diagnostics',
+    icon: diagnosticIcon,
+    activeIcon: diagnosticsActiveIcon,
+    path: '/',
+    id: 0
+  },
+  {
     title: 'drivers',
     icon: driverIcon,
     activeIcon: driverActiveIcon,
     path: '/drivers',
-    id: 0
+    id: 1
   },
   {
     title: 'cars',
     icon: carIcon,
     activeIcon: carActiveIcon,
     path: '/cars',
-    id: 1
-  },
-  {
-    title: 'diagnostics',
-    icon: diagnosticIcon,
-    activeIcon: diagnosticsActiveIcon,
-    path: '/diagnostics',
     id: 2
   }
 ]

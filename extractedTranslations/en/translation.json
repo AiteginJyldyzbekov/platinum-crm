@@ -6,7 +6,9 @@
   "Sidebar": {
     "": "",
     "SIKE": "SIKE",
-    "dashboard": "dashboard"
+    "dashboard": "dashboard",
+    "email": "email",
+    "name": "name"
   },
   "aboutPage": "aboutPage",
   "action": "action",

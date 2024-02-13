@@ -4,9 +4,12 @@
     background-color: var(--sidebar-bg-color);
     transition: width 0.3s;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: space-between;
     padding: 30px 10px 30px 10px;
+    border-right: 1px dashed rgb(205 221 237);
+
 
     .sidebar__content_top {
         .logo {
@@ -61,9 +64,6 @@
 
 .collapsed {
     width: var(--sidebar-width-collapsed);
-    display: flex;
-    align-items: center;
-
 
     .logo__title {
         display: none;

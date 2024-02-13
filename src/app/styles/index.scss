@@ -2,7 +2,8 @@
 @import "variables/globals.scss";
 @import "themes/dark.scss";
 @import "themes/normal.scss";
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz@8..144&display=swap');
 .app {
     font-size: var(--font-m);
 

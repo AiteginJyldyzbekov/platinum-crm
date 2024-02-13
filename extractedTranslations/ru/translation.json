@@ -3,6 +3,13 @@
   "CarsPage": "CarsPage",
   "DriversPage": "DriversPage",
   "Navbar": "Navbar",
+  "Sidebar": {
+    "": "",
+    "SIKE": "SIKE",
+    "dashboard": "dashboard",
+    "email": "email",
+    "name": "name"
+  },
   "aboutPage": "aboutPage",
   "action": "action",
   "add": "add",
@@ -31,6 +38,10 @@
   "reload": "reload",
   "rememberMe": "rememberMe",
   "save": "save",
+  "sidebar": {
+    "S": "S",
+    "SIKE": "SIKE"
+  },
   "surname": "surname",
   "test": "test",
   "through_error": "through_error",

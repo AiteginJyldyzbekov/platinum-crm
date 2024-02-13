@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { type RouteConfigType } from 'shared/config/routeConfig/types'
+import { Navbar } from 'widgets/Navbar'
 import { PageLoader } from 'widgets/PageLoader/ui/PageLoader'
 import { Sidebar } from 'widgets/Sidebar'
 
@@ -26,6 +27,7 @@ const Page: React.FC<PageProps> = ({ routes }) => {
                         key={path}
                         element={(
                             <div className="page-wrapper">
+                                {isAuth && <Navbar />}
                                 {element}
                             </div>
                         )}

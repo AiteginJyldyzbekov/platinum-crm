@@ -1,0 +1,59 @@
+.card__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .left__content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .card__title {
+        font-family: 'Roboto Flex', sans-serif;
+        color: rgba(145, 151, 179, 1);
+        font-size: 18px;
+    }
+
+    .card__title_hide {
+        display: none;
+    }
+
+    .card {
+        text-decoration: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card_active {
+        background-color: rgba(89, 50, 234, 1);
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .card__title {
+            color: white;
+        }
+
+        svg {
+            fill: white;
+        }
+    }
+
+    .card__arrow_hide {
+        display: none;
+    }
+}

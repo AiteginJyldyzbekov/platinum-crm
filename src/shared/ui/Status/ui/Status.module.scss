@@ -1,0 +1,36 @@
+.status {
+    border-radius: 50px;
+    width: 90px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 18px;
+    }
+}
+
+.free {
+    background-color: rgb(234, 253, 238);
+
+    p {
+        color: rgb(60, 139, 78);
+    }
+}
+
+.atWork {
+    background-color: rgb(223, 228, 241);
+
+    p {
+        color: rgb(89, 50, 234);
+    }
+}
+
+.atRepair {
+    background-color: rgb(239, 223, 228);
+
+    p {
+        color: rgb(186, 60, 105);
+    }
+}

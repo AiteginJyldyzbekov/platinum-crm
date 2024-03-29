@@ -7,13 +7,7 @@ import { useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getCarById, getCarState, updateCar } from 'entities/Car'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
-
-interface CarDetailPageProps {
-  car: string
-  model: string
-  color: string
-  numberPlate: string
-}
+import { type Car } from 'entities/Car/model/types/CarSchema'
 
 const CarDetailPage: React.FC = () => {
   const { t } = useTranslation()
@@ -27,16 +21,43 @@ const CarDetailPage: React.FC = () => {
     handleSubmit,
     formState: { errors },
     setValue
-  } = useForm<CarDetailPageProps>()
+  } = useForm<Car>()
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
-  const onSubmit: SubmitHandler<CarDetailPageProps> = useCallback(async (data) => {
-    const updatedCarData = {
-      tid: id,
-      car: data.car,
-      model: data.model,
-      color: data.color,
-      numberPlate: data.numberPlate
+  const onSubmit: SubmitHandler<Car> = useCallback(async (data) => {
+    const updatedCarData: Car = {
+      tid: '',
+      brand: '',
+      model: '',
+      color: '',
+      numberPlate: '',
+      year: '',
+      status: '',
+      id: '',
+      images: [
+        {
+          file: null,
+          url: '',
+          isLoading: false,
+          name: ''
+        }
+      ],
+      techPassport: {
+        file: null,
+        url: '',
+        isLoading: false,
+        name: ''
+      },
+      expenseHistory: [
+        {
+          date: '',
+          expenseType: '',
+          amount: '',
+          description: ''
+        }
+      ],
+      lastOilChangeDate: '',
+      lastGearChangeDate: ''
     }
 
     dispatch(updateCar(updatedCarData)).then(() => {
@@ -46,8 +67,8 @@ const CarDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && result) {
-      const { car, model, color, numberPlate } = result
-      setValue('car', car)
+      const { brand, model, color, numberPlate } = result
+      setValue('brand', brand)
       setValue('model', model)
       setValue('color', color)
       setValue('numberPlate', numberPlate)
@@ -59,45 +80,45 @@ const CarDetailPage: React.FC = () => {
   }, [id])
 
   return (
-        <div className={styles.wrapper}>
-            <p>{t('createCar')}</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    type="text"
-                    placeholder="Car"
-                    label="car"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Model"
-                    label="model"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Color"
-                    label="color"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Number plate"
-                    label="numberPlate"
-                    register={register}
-                    required
-                />
-                <Button
-                    theme={ThemeButton.OUTLINE}
-                    type='submit'
-                >
-                    {t('save')}
-                </Button>
-            </form>
-        </div>
+    <div className={styles.wrapper}>
+      <p>{t('createCar')}</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          type="text"
+          placeholder="Car"
+          label="car"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Model"
+          label="model"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Color"
+          label="color"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Number plate"
+          label="numberPlate"
+          register={register}
+          required
+        />
+        <Button
+          theme={ThemeButton.OUTLINE}
+          type='submit'
+        >
+          {t('save')}
+        </Button>
+      </form>
+    </div>
   )
 }
 

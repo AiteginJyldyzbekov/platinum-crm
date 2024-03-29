@@ -3,22 +3,23 @@ import { type Car } from '../../types/CarSchema'
 import { carsRef } from 'shared/config/firebase/firebase'
 import { addDoc } from 'firebase/firestore'
 
-interface CreateCarProps {
-  car: string
-  model: string
-  color: string
-  numberPlate: string
-}
-
-export const createCar = createAsyncThunk<Car, CreateCarProps, { rejectValue: string }>(
+export const createCar = createAsyncThunk<Car, Car, { rejectValue: string }>(
   'create/car',
   async (data, thunkApi) => {
     try {
       const newCar = {
-        car: data.car,
+        brand: data.brand,
         model: data.model,
         color: data.color,
-        numberPlate: data.numberPlate
+        numberPlate: data.numberPlate,
+        year: data.year,
+        lastOilChangeDate: data.lastOilChangeDate,
+        lastGearChangeDate: data.lastGearChangeDate,
+        images: data.images,
+        techPassport: data.techPassport,
+        expenseHistory: data.expenseHistory,
+        status: 'free',
+        id: data.id
       }
 
       await addDoc(carsRef, newCar)

@@ -1,16 +1,14 @@
 .Input {
     input {
         width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
+        padding: 15px;
+        border: 1px solid rgb(89, 50, 234);
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     input:focus {
         outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
 
     input::placeholder {

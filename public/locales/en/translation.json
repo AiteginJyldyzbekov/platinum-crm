@@ -1,37 +1,63 @@
 {
-    "test": "Test example",
-    "translate": "translate",
-    "language": "English",
-    "notFound": "Not found page",
-    "toggle": "switch mode",
-    "aboutPage": "About Page",
-    "error": "Something went wrong",
-    "reload": "Reload this page",
-    "through_error": "Through error",
-    "Navbar": "Navbar",
-    "decrement": "decrement",
-    "increment": "increment",
-    "login": "login",
-    "logout": "logout",
-    "rememberMe": "Remember me",
-    "drivers": "drivers",
-    "cars": "Cars",
-    "profile": "Profile",
-    "createDriver": "createDriver",
-    "create": "Create",
-    "name": "Name",
-    "lastname": "Lastname",
-    "surname": "Surname",
-    "phoneNumber": "Phone number",
-    "action": "Action",
-    "delete": "Delete",
-    "add": "Add",
-    "isDeleteText": "Are you sure you want to delete",
-    "save": "Save",
-    "createCar": "Create car",
-    "car": "Car",
-    "model": "Model",
-    "color": "Color",
-    "numberPlate": "Plate number",
-    "balance": "Balance"
+    "Sidebar": {
+        "dashboard": "Dashboard",
+        "cars": "Cars",
+        "drivers": "Drivers",
+        "diagnostics": "Diagnostics",
+        "profile": "Profile",
+        "admins": "Administrators",
+        "name": "Aitegin",
+        "email": "aitegin@gmail.com"
+    },
+    "LangSwitcher": {
+        "en": "EN",
+        "ru": "RU"
+    },
+    "logout": "Logout",
+    "CarsTable": {
+        "carbrand": "Car brand",
+        "status": "Status",
+        "description": "Description",
+        "driver": "Driver",
+        "dateRent": "Rental date",
+        "edit": "Edit",
+        "id": "id",
+        "otherOptions": "Other options",
+        "image": "Image",
+        "oilDate": "Oil change date",
+        "phoneNumber": "Phone number",
+        "noDriver": "Doesn't have a driver"
+    },
+    "Status": {
+        "free": "Free",
+        "atWork": "At work",
+        "atRepair": "At repair"
+    },
+    "search": "Search...",
+    "CreateCar": {
+        "brand": "Brand",
+        "model": "Model",
+        "color": "Color",
+        "numberPlate": "Number plate",
+        "year": "Year",
+        "driver": "Driver",
+        "oilDate": "Last oil change date",
+        "gearDate": "Last gear repair date",
+        "sureConfirm": "Are you sure delete this image ?"
+    },
+    "CreateDrivers": {
+        "name": "Name",
+        "lastName": "Last name",
+        "phoneNumber": "Phone number",
+        "car": "Car",
+        "docImage": "Document image",
+        "driverImage": "Drivers photo",
+        "email": "Email",
+        "password": "Password",
+        "startRentDate": "Start rent date",
+        "weekends": "Weekends"
+    },
+    "DriversTable": {
+        "noCar": "Doesn't have a car"
+    }
 }

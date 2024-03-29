@@ -11,15 +11,7 @@ import {
   BalanceType,
   changeBalance
 } from 'entities/Driver/model/services/changeBalance/changeBalance'
-
-interface DriverDetailPageProps {
-  email: string
-  password: string
-  name: string
-  lastname: string
-  surname: string
-  balance: number
-}
+import { type Driver } from 'entities/Driver/model/types/driverSchema'
 
 const DriverDetailPage: React.FC = () => {
   const { t } = useTranslation()
@@ -33,17 +25,34 @@ const DriverDetailPage: React.FC = () => {
     handleSubmit,
     formState: { errors },
     setValue
-  } = useForm<DriverDetailPageProps>()
+  } = useForm<Driver>()
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
-  const onSubmit: SubmitHandler<DriverDetailPageProps> = useCallback(async (data) => {
+  const onSubmit: SubmitHandler<Driver> = useCallback(async (data) => {
     const updatedUserData = {
-      tid: id,
-      email: data.email,
-      password: data.password,
-      name: data.name,
-      surname: data.surname,
-      lastname: data.lastname
+      tid: '',
+      id: '',
+      email: '',
+      password: '',
+      name: '',
+      lastName: '',
+      phoneNumber: '',
+      images: [{ url: '', isLoading: false, name: '' }],
+      balance: 1,
+      transactionHistory: [
+        {
+          amount: '',
+          date: '',
+          amountType: ''
+        }
+      ],
+      startRentDate: '',
+      weekendDates: [
+        {
+          weekends: ['', ''],
+          month: ''
+        }
+      ]
     }
 
     dispatch(updateDriver(updatedUserData)).then(() => {
@@ -53,12 +62,12 @@ const DriverDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && result) {
-      const { email, password, name, lastname, surname } = result
-      setValue('email', email)
-      setValue('password', password)
-      setValue('name', name)
-      setValue('lastname', lastname)
-      setValue('surname', surname)
+      // const { email, password, name, lastname, surname } = result
+      // setValue('email', email)
+      // setValue('password', password)
+      // setValue('name', name)
+      // setValue('lastname', lastname)
+      // setValue('surname', surname)
     }
   }, [isLoading, result, setValue])
 

@@ -1,0 +1,15 @@
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+
+    svg {
+        fill: #5932EA;
+    }
+
+    p {
+        font-family: "Questrial", sans-serif;
+        color: #5932EA;
+    }
+}

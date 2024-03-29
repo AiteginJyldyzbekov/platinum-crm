@@ -2,6 +2,7 @@ import { classNames } from 'shared/lib/classNames/classNames'
 import styles from './Input.module.scss'
 import { type InputHTMLAttributes, memo } from 'react'
 import { type UseFormRegister } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
 
@@ -24,6 +25,8 @@ export const Input = memo((props: InputProps) => {
     required,
     ...otherProps
   } = props
+
+  const { t } = useTranslation()
 
   const onChageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value)

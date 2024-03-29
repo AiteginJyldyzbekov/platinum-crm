@@ -1,5 +1,20 @@
-.wrapper{
-    background-color: red;
-    height: 20px;
+.wrapper {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+
+    .title {
+        font-family: "Questrial", sans-serif;
+        font-size: 24px;
+        color: rgba(29, 29, 40, 1);
+        line-height: 28px;
+    }
+
+    .switchers__container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 }

@@ -1,37 +1,63 @@
 {
-    "test": "Тестовый пример",
-    "translate": "Перевести",
-    "language": "Русский",
-    "notFound": "Страница не найдена",
-    "toggle": "Переключить тему",
-    "aboutPage": "Страница Эбаут",
-    "error": "Произошла ошибка",
-    "reload": "Перезагрузить страницу",
-    "through_error": "Получить ошибку",
-    "Navbar": "Навбар",
-    "decrement": "Декремент",
-    "increment": "Инкремент",
-    "login": "Логин",
+    "Sidebar": {
+        "dashboard": "Дашборд",
+        "cars": "Автомобили",
+        "drivers": "Врдители",
+        "diagnostics": "Сводка",
+        "profile": "Профиль",
+        "admins": "Администраторы",
+        "name": "Aitegin",
+        "email": "aitegin@gmail.com"
+    },
+    "LangSwitcher": {
+        "en": "EN",
+        "ru": "RU"
+    },
     "logout": "Выйти",
-    "rememberMe": "Запомнить меня",
-    "drivers": "Водители",
-    "cars": "Машины",
-    "profile": "Профиль",
-    "createDriver": "Создание водителя",
-    "create": "Создать",
-    "name": "Имя",
-    "lastname": "Фамилие",
-    "surname": "Отчество",
-    "phoneNumber": "Номер телефона",
-    "action": "Действие",
-    "delete": "удалить",
-    "add": "Добавить",
-    "isDeleteText": "Вы действительно хотите удалить",
-    "save": "Сохранить",
-    "createCar": "Создание машины",
-    "car": "Car",
-    "model": "Модель",
-    "color": "Цвет",
-    "numberPlate": "Номер машины",
-    "balance": "Баланс"
+    "CarsTable": {
+        "carbrand": "Марка авто",
+        "status": "Статус",
+        "description": "Параметры",
+        "driver": "Водитель",
+        "dateRent": "Дата аренды",
+        "edit": "Редактировать",
+        "id": "id",
+        "otherOptions": "Другие параметры",
+        "image": "Фотография",
+        "oilDate": "Дата замены масла",
+        "phoneNumber": "Номер телефона",
+        "noDriver": "Нету водителя"
+    },
+    "Status": {
+        "free": "Свободна",
+        "atWork": "В работе",
+        "atRepair": "На ремонте"
+    },
+    "search": "Найти...",
+    "CreateCar": {
+        "brand": "Марка",
+        "model": "Модель",
+        "color": "Цвет",
+        "numberPlate": "Гос. номер",
+        "year": "Год",
+        "driver": "Водитель",
+        "oilDate": "Дата последней замены масла",
+        "gearDate": "Дата последнего ремонта ходовой",
+        "sureConfirm": "Вы действительно хотите удалить эту картинку ?"
+    },
+    "CreateDrivers": {
+        "name": "Имя",
+        "lastName": "Фамилие",
+        "phoneNumber": "Номер телефона",
+        "car": "Автомобиль",
+        "docImage": "Фотография документа",
+        "driverImage": "Фотография водителя",
+        "email": "Почта",
+        "password": "Пароль",
+        "startRentDate": "Дата началы аренды",
+        "weekends": "Выходные"
+    },
+    "DriversTable": {
+        "noCar": "Нету машины"
+    }
 }

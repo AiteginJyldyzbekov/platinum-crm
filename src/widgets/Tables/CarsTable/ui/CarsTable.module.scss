@@ -1,0 +1,66 @@
+.wrapper {
+  height: 70vh;
+  background-color: #fff5;
+  backdrop-filter: blur(7px);
+  box-shadow: 0 .4rem .8rem #0005;
+  border-radius: .8rem;
+  font-family: "Questrial", sans-serif;
+
+  .table__options {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .options__btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  padding: 15px;
+}
+
+.table__header {
+  tr {
+    .id {
+      width: 50px;
+      text-align: center;
+    }
+
+    .description {
+      width: 25%;
+      text-align: left;
+    }
+
+    .driver {
+      width: 20%;
+      text-align: center;
+    }
+  }
+}

@@ -2,8 +2,8 @@ import { Link, useLocation } from 'react-router-dom'
 import styles from './SidebarCards.module.scss'
 import { type SideBarLink } from 'widgets/Sidebar/constants'
 import { useTranslation } from 'react-i18next'
-import Arrow from '../../images/arrow.svg'
-import ActiveArrow from '../../images/arrow_active.svg'
+import Arrow from 'shared/assets/icons/Sidebar/arrow.svg'
+import ActiveArrow from 'shared/assets/icons/Sidebar/arrow_active.svg'
 
 interface SidebarCardProps {
   roleData: SideBarLink[]

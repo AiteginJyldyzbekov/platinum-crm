@@ -1,0 +1,23 @@
+.customDatepicker {
+    p {
+        line-height: 1px;
+    }
+
+    .datepickerInput {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        background-color: #ffffff;
+        width: 100%;
+        outline: none;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-calendar-picker-indicator {
+            // display: none;
+            // -webkit-appearance: none;
+        }
+    }
+}

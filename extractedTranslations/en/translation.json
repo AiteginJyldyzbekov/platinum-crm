@@ -1,7 +1,60 @@
 {
   "": "",
+  "Add": "Add",
   "CarsPage": "CarsPage",
+  "CarsTable": {
+    "": "",
+    "carbrand": "carbrand",
+    "dateRent": "dateRent",
+    "delete": "delete",
+    "description": "description",
+    "driver": "driver",
+    "edit": "edit",
+    "id": "id",
+    "image": "image",
+    "noDriver": "noDriver",
+    "oilDate": "oilDate",
+    "other": "other",
+    "otherOptions": "otherOptions",
+    "phoneNumber": "phoneNumber",
+    "status": "status"
+  },
+  "Create": "Create",
+  "CreateCar": {
+    "": "",
+    "brand": "brand",
+    "color": "color",
+    "driver": "driver",
+    "gearDate": "gearDate",
+    "lastGearChangeDate": "lastGearChangeDate",
+    "lastOilChangeDate": "lastOilChangeDate",
+    "model": "model",
+    "name": "name",
+    "numberPlate": "numberPlate",
+    "oilDate": "oilDate",
+    "sureConfirm": "sureConfirm",
+    "year": "year"
+  },
+  "CreateD": "CreateD",
+  "CreateDriver": "CreateDriver",
+  "CreateDrivers": {
+    "": "",
+    "car": "car",
+    "email": "email",
+    "lastName": "lastName",
+    "name": "name",
+    "password": "password",
+    "phoneNumber": "phoneNumber",
+    "startRentDate": "startRentDate",
+    "weekends": "weekends"
+  },
+  "Drivers": "Drivers",
   "DriversPage": "DriversPage",
+  "DriversTable": {
+    "noCar": "noCar"
+  },
+  "LangSwit": "LangSwit",
+  "LangSwitcher": "LangSwitcher",
   "Navbar": "",
   "Sidebar": {
     "": "",
@@ -10,11 +63,13 @@
     "email": "email",
     "name": "name"
   },
+  "Status": "Status",
   "aboutPage": "aboutPage",
   "action": "action",
   "add": "add",
   "balance": "balance",
   "car": "car",
+  "carbrand": "carbrand",
   "color": "color",
   "createCar": "createCar",
   "createDriver": "createDriver",
@@ -38,6 +93,7 @@
   "reload": "reload",
   "rememberMe": "rememberMe",
   "save": "save",
+  "search": "search",
   "sidebar": {
     "S": "S",
     "SIKE": "SIKE"

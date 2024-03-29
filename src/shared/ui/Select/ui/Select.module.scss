@@ -1,0 +1,56 @@
+.select__container {
+    position: relative;
+    width: 100%;
+}
+
+.custom__select {
+    height: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 8px 32px 8px 8px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+}
+
+.select__item {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 24px;
+    height: 24px;
+    background-color: #555;
+    border-radius: 50%;
+}
+
+.text__content {
+    margin-left: 12px;
+}
+.select__arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #555 transparent transparent transparent;
+    transition: border-color 0.3s ease;
+}
+
+.custom__select:focus+.select__arrow {
+    border-top-color: #007bff;
+}

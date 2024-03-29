@@ -1,26 +1,28 @@
 import { useTranslation } from 'react-i18next'
 import styles from './LangSwitcher.module.scss'
-import { classNames } from 'shared/lib/classNames/classNames'
-import { Button, ThemeButton } from 'shared/ui/Button/Button'
+import CloudIcon from 'shared/assets/icons/LangSwitcher/cloud_icon.svg'
 
 interface LangSwitcherProps {
   className?: string
 }
 
-const LangSwitcher: React.FC<LangSwitcherProps> = ({ className }) => {
+const LangSwitcher: React.FC<LangSwitcherProps> = () => {
   const { t, i18n } = useTranslation()
+  const langText = i18n.language === 'ru' ? 'en' : 'ru'
 
   const toggle = () => {
     i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
   }
 
   return (
-            <Button
-                className={classNames(styles.LangSwitcher, {}, [className])}
-                theme={ThemeButton.CLEAR}
-                onClick={toggle}>
-                {t('language')}
-            </Button>
+    <div
+      className={styles.LangSwitcher}
+      onClick={toggle}>
+      <CloudIcon />
+      <p className={styles.text}>
+        {t(`LangSwitcher.${langText}`)}
+      </p>
+    </div>
   )
 }
 

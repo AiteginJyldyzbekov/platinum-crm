@@ -8,5 +8,56 @@
         "admins": "Administrators",
         "name": "Aitegin",
         "email": "aitegin@gmail.com"
+    },
+    "LangSwitcher": {
+        "en": "EN",
+        "ru": "RU"
+    },
+    "logout": "Logout",
+    "CarsTable": {
+        "carbrand": "Car brand",
+        "status": "Status",
+        "description": "Description",
+        "driver": "Driver",
+        "dateRent": "Rental date",
+        "edit": "Edit",
+        "id": "id",
+        "otherOptions": "Other options",
+        "image": "Image",
+        "oilDate": "Oil change date",
+        "phoneNumber": "Phone number",
+        "noDriver": "Doesn't have a driver"
+    },
+    "Status": {
+        "free": "Free",
+        "atWork": "At work",
+        "atRepair": "At repair"
+    },
+    "search": "Search...",
+    "CreateCar": {
+        "brand": "Brand",
+        "model": "Model",
+        "color": "Color",
+        "numberPlate": "Number plate",
+        "year": "Year",
+        "driver": "Driver",
+        "oilDate": "Last oil change date",
+        "gearDate": "Last gear repair date",
+        "sureConfirm": "Are you sure delete this image ?"
+    },
+    "CreateDrivers": {
+        "name": "Name",
+        "lastName": "Last name",
+        "phoneNumber": "Phone number",
+        "car": "Car",
+        "docImage": "Document image",
+        "driverImage": "Drivers photo",
+        "email": "Email",
+        "password": "Password",
+        "startRentDate": "Start rent date",
+        "weekends": "Weekends"
+    },
+    "DriversTable": {
+        "noCar": "Doesn't have a car"
     }
 }

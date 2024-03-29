@@ -7,8 +7,8 @@ import { SidebarCards } from '../SidebarCard/SidebarCards'
 import { UserRole } from 'app/providers/router/types'
 import { admin, driver } from 'widgets/Sidebar/constants'
 import { useAppSelector } from 'shared/lib/reduxHooks'
-import Logo from '../../images/logo.svg'
-import ArrowDown from '../../images/arrow_down.svg'
+import Logo from 'shared/assets/icons/Sidebar/logo.svg'
+import ArrowDown from 'shared/assets/icons/Sidebar/arrow_down.svg'
 
 interface SidebarProps {
   className?: string

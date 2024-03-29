@@ -1,10 +1,10 @@
-import driverIcon from '../images/driver__icon.svg'
-import carIcon from '../images/car__icon.svg'
-import diagnosticIcon from '../images/diagnostic__icon.svg'
+import driverIcon from 'shared/assets/icons/Sidebar/driver__icon.svg'
+import carIcon from 'shared/assets/icons/Sidebar/car__icon.svg'
+import diagnosticIcon from 'shared/assets/icons/Sidebar/diagnostic__icon.svg'
 
-import driverActiveIcon from '../images/driver__icon_active.svg'
-import carActiveIcon from '../images/car__icon_active.svg'
-import diagnosticsActiveIcon from '../images/diagnostic__icon_active.svg'
+import driverActiveIcon from 'shared/assets/icons/Sidebar/driver__icon_active.svg'
+import carActiveIcon from 'shared/assets/icons/Sidebar/car__icon_active.svg'
+import diagnosticsActiveIcon from 'shared/assets/icons/Sidebar/diagnostic__icon_active.svg'
 
 export interface SideBarLink {
   title: string

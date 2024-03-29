@@ -1,0 +1,14 @@
+.wrapper {
+    width: 82vw;
+    margin: 0 auto;
+
+    a {
+        display: flex;
+        justify-content: end;
+        text-decoration: none;
+
+        .addButton {
+            margin-bottom: 10px;
+        }
+    }
+}

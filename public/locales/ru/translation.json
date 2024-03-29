@@ -8,5 +8,56 @@
         "admins": "Администраторы",
         "name": "Aitegin",
         "email": "aitegin@gmail.com"
+    },
+    "LangSwitcher": {
+        "en": "EN",
+        "ru": "RU"
+    },
+    "logout": "Выйти",
+    "CarsTable": {
+        "carbrand": "Марка авто",
+        "status": "Статус",
+        "description": "Параметры",
+        "driver": "Водитель",
+        "dateRent": "Дата аренды",
+        "edit": "Редактировать",
+        "id": "id",
+        "otherOptions": "Другие параметры",
+        "image": "Фотография",
+        "oilDate": "Дата замены масла",
+        "phoneNumber": "Номер телефона",
+        "noDriver": "Нету водителя"
+    },
+    "Status": {
+        "free": "Свободна",
+        "atWork": "В работе",
+        "atRepair": "На ремонте"
+    },
+    "search": "Найти...",
+    "CreateCar": {
+        "brand": "Марка",
+        "model": "Модель",
+        "color": "Цвет",
+        "numberPlate": "Гос. номер",
+        "year": "Год",
+        "driver": "Водитель",
+        "oilDate": "Дата последней замены масла",
+        "gearDate": "Дата последнего ремонта ходовой",
+        "sureConfirm": "Вы действительно хотите удалить эту картинку ?"
+    },
+    "CreateDrivers": {
+        "name": "Имя",
+        "lastName": "Фамилие",
+        "phoneNumber": "Номер телефона",
+        "car": "Автомобиль",
+        "docImage": "Фотография документа",
+        "driverImage": "Фотография водителя",
+        "email": "Почта",
+        "password": "Пароль",
+        "startRentDate": "Дата началы аренды",
+        "weekends": "Выходные"
+    },
+    "DriversTable": {
+        "noCar": "Нету машины"
     }
 }

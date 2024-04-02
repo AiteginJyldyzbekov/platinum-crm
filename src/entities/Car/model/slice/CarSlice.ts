@@ -28,7 +28,7 @@ export const carSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    // Create car
+      // Create car
       .addCase(createCar.pending, (state) => {
         state.createCar.error = undefined
         state.createCar.isLoading = true
@@ -43,7 +43,7 @@ export const carSlice = createSlice({
         state.createCar.isLoading = false
         state.createCar.error = action.payload
       })
-    // Get cars
+      // Get cars
       .addCase(getCars.pending, (state) => {
         state.cars.error = undefined
         state.cars.isLoading = true
@@ -52,6 +52,7 @@ export const carSlice = createSlice({
       .addCase(getCars.fulfilled, (state, action) => {
         console.log('fulfilled')
         state.cars.result = action.payload
+        console.log(action.payload)
         state.cars.isLoading = false
       })
       .addCase(getCars.rejected, (state, action) => {
@@ -60,7 +61,7 @@ export const carSlice = createSlice({
         state.cars.error = action.payload
       })
 
-    // Delete car
+      // Delete car
       .addCase(deleteCar.pending, (state) => {
         state.carDetail.error = undefined
         state.carDetail.isLoading = true
@@ -76,7 +77,7 @@ export const carSlice = createSlice({
         state.carDetail.error = action.payload
       })
 
-    // Get car detail
+      // Get car detail
       .addCase(getCarById.pending, (state) => {
         state.carDetail.error = undefined
         state.carDetail.isLoading = true

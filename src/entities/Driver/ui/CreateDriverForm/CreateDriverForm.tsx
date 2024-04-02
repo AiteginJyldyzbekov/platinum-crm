@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { getCreateDriverState } from 'entities/Driver/model/selectors/getCreateDriverState'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
-import { type ImageData } from 'entities/Car/model/types/CarSchema'
+import { type Car, type ImageData } from 'entities/Car/model/types/CarSchema'
 import {
   type StorageReference,
   deleteObject,
@@ -22,7 +22,8 @@ import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
 import UploadIcon from 'shared/assets/icons/ImageCollage/UploadIcon.svg'
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import { Select } from 'shared/ui/Select'
-import { getCarsState } from 'entities/Car'
+import { getCars, getCarsState } from 'entities/Car'
+import DatePicker from 'shared/ui/DatePicker/DatePicker'
 
 export const CreateDriverForm = memo(() => {
   const {
@@ -32,7 +33,7 @@ export const CreateDriverForm = memo(() => {
   } = useForm<Driver>()
 
   const { isLoading } = useAppSelector(getCreateDriverState)
-  const { result } = useAppSelector(getCarsState)
+  const { result, isLoading: carsLoading } = useAppSelector((getCarsState))
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
@@ -41,10 +42,16 @@ export const CreateDriverForm = memo(() => {
   const [imageDataChanged, setImageDataChanged] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
 
+  const [car, setCar] = useState<Car>()
+
   const [imageData, setImageData] = useState<ImageData[]>([
     { name: 'document', file: null, url: null, isLoading: false },
     { name: 'avatar', file: null, url: null, isLoading: false }
   ])
+
+  useEffect(() => {
+    dispatch(getCars())
+  }, [dispatch])
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
   const onSubmit: SubmitHandler<Driver> = useCallback(async (data) => {
@@ -72,7 +79,7 @@ export const CreateDriverForm = memo(() => {
       phoneNumber,
       images: updatedImageData,
       balance: 0,
-      startRentDate: '',
+      startRentDate,
       weekendDates: [{ weekends: ['we'], month: '' }],
       car
     })).then(() => {
@@ -140,7 +147,7 @@ export const CreateDriverForm = memo(() => {
 
   const renderImages = useMemo(() => {
     return imageData.map((item, index) => (
-      <div className={styles.image__container} key={item.url}>
+      <div className={styles.image__container} key={`${item.url}_${index}`}>
         {
           item.isLoading
             ? <Loader />
@@ -172,6 +179,8 @@ export const CreateDriverForm = memo(() => {
     ))
   }, [imageData])
 
+  if (carsLoading) return <Loader />
+
   return (
     <div className={styles.wrapper}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -197,7 +206,7 @@ export const CreateDriverForm = memo(() => {
           register={register}
           required
         />
-        <Select data={result} />
+        <Select data={result} setState={setCar} />
         <Input
           type="text"
           placeholder={t('CreateDrivers.email')}
@@ -212,19 +221,15 @@ export const CreateDriverForm = memo(() => {
           register={register}
           required
         />
-        <Input
-          type="text"
+        <DatePicker
+          register={register}
+          label={'startRentDate'}
           placeholder={t('CreateDrivers.startRentDate')}
-          label="startRentDate"
-          register={register}
-          required
         />
-        <Input
-          type="text"
-          placeholder={t('CreateDrivers.weekends')}
-          label="weekends"
+        <DatePicker
           register={register}
-          required
+          label={'weekendDates'}
+          placeholder={t('CreateDrivers.weekends')}
         />
         <Button
           theme={ThemeButton.OUTLINE}

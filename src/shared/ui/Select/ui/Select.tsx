@@ -4,9 +4,10 @@ import { type Car } from 'entities/Car/model/types/CarSchema'
 
 interface CustomSelectProps {
   data: Car[]
+  setState: (value: Car) => void
 }
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ data }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ data, setState }) => {
   const [selectedValue, setSelectedValue] = useState<string>('')
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {

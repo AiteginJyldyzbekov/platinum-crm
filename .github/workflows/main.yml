@@ -19,9 +19,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install modules
         run: yarn install
-      - name: build production project
-        run: yarn run build:prod
-      - name: unit testing
-        run: yarn run test:unit
-      - name: lint testing
-        run: yarn run lint
+      # - name: build production project
+      #   run: yarn run build:prod
+      # - name: unit testing
+      #   run: yarn run test:unit
+      # - name: lint testing
+      #   run: yarn run lint

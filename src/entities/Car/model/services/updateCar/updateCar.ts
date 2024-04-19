@@ -9,6 +9,7 @@ export const updateCar = createAsyncThunk<User, Car, { rejectValue: string }>(
   async (data, thunkApi) => {
     const { tid, ...authData } = data
     try {
+      console.log(tid, authData)
       const ref = doc(db, 'cars', tid)
       await updateDoc(ref, authData)
     } catch (e) {

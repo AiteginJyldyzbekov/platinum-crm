@@ -12,7 +12,8 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
 import { Loader } from 'shared/ui/Loader/Loader'
-import { type ImageData } from 'entities/Car/model/types/CarSchema'
+import { Car, type ImageData } from 'entities/Car/model/types/CarSchema'
+import { Driver } from 'entities/Driver/model/types/driverSchema'
 
 interface ImageCollageProps {
   imageData: ImageData[]
@@ -26,14 +27,17 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
   const [currentIndex, setCurrentIndex] = useState<number>()
 
   const handleImageChange = (index: number, target: HTMLInputElement) => {
-    const newImageData = [...imageData]
-    const file = target.files?.[0]
+    const newImageData = [...imageData];
+    const file = target.files?.[0];
     if (file) {
-      newImageData[index].file = file
-      setImageData(newImageData)
-      setImageDataChanged(true)
-      setCurrentIndex(index)
+      const newDataItem = { ...newImageData[index] }; // Создаем глубокую копию объекта
+      newDataItem.file = file;
+      newImageData[index] = newDataItem; // Заменяем элемент в массиве новым объектом
+      setImageData(newImageData);
+      setImageDataChanged(true);
+      setCurrentIndex(index);
     }
+    console.log(imageData);
   }
 
   const handleDeleteImage = async (index: number) => {
@@ -57,29 +61,30 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
 
   useEffect(() => {
     if (imageDataChanged) {
-      imageData.forEach((item, index) => {
+      for (let index = 0; index < imageData.length; index++) {
+        const item = imageData[index];
         if (item.file && !item.isLoading) {
-          const imageRef = ref(storage, item.file.name)
-          const newImageData = [...imageData]
-          newImageData[currentIndex].isLoading = true
-          setImageData(newImageData)
+          const imageRef = ref(storage, item.file.name);
+          const newImageData = [...imageData];
+          newImageData[index].isLoading = true;
+          setImageData(newImageData);
 
           uploadBytes(imageRef, item.file)
             .then(async () => await getDownloadURL(imageRef))
             .then((url) => {
-              const updatedImageData = [...imageData]
-              updatedImageData[currentIndex].url = url
-              updatedImageData[currentIndex].isLoading = false
-              setImageData(updatedImageData)
+              const updatedImageData = [...imageData];
+              updatedImageData[index].url = url;
+              updatedImageData[index].isLoading = false;
+              setImageData(updatedImageData);
             })
             .catch((error) => {
-              console.log(error.message, 'error')
-            })
+              console.log(error.message, 'error');
+            });
         }
-      })
-      setImageDataChanged(false)
+      }
+      setImageDataChanged(false);
     }
-  }, [imageDataChanged, imageData])
+  }, [imageDataChanged, imageData]);
 
   return (
     <div className={styles.collage}>
@@ -98,7 +103,7 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
                           onClick={() => {
                             handleDeleteImage(index)
                           }} />
-                        )
+                      )
                       : <UploadIcon />
                   }
                   <input
@@ -111,7 +116,7 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
                     item?.url && <img src={item.url} />
                   }
                 </>
-                )}
+              )}
           </div>
         </>
       ))}

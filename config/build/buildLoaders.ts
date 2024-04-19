@@ -1,8 +1,9 @@
 import { type BuildOptions } from './types/config'
 import type webpack from 'webpack'
 import { buildCssLoader } from './loaders/buildCssLoader'
+import { buildPhotoViewCssLoader } from './loaders/buildPhotoViewLoader'
 
-export function buildLoaders ({ isDev }: BuildOptions): webpack.RuleSetRule[] {
+export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
   const svgLoader = {
     test: /\.svg$/,
     use: ['@svgr/webpack']
@@ -38,6 +39,7 @@ export function buildLoaders ({ isDev }: BuildOptions): webpack.RuleSetRule[] {
   }
 
   const cssLoader = buildCssLoader(isDev)
+  const photoViewLoader = buildPhotoViewCssLoader(isDev)
 
   const typescriptLoader = {
     test: /\.tsx?$/,
@@ -50,6 +52,7 @@ export function buildLoaders ({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     svgLoader,
     babelLoader,
     typescriptLoader,
-    cssLoader
+    cssLoader,
+    photoViewLoader
   ]
 }

@@ -4,25 +4,51 @@ import { useTranslation } from 'react-i18next'
 import { Status } from 'shared/ui/Status'
 import DeleteIcon from 'shared/assets/icons/TableCell/delete__icon.svg'
 import EditIcon from 'shared/assets/icons/TableCell/edit__icon.svg'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Driver } from 'entities/Driver/model/types/driverSchema'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from 'shared/config/firebase/firebase'
 
 interface CarsTableCellProps {
-  car: Car
-  onDelete: (tid: string, car: string) => void
+    car: Car
+    onDelete: (tid: string, car: string, driver: string) => void
+    index: number
 }
 
-const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete }) => {
-  const { t } = useTranslation()
+const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete, index }) => {
+    const { t } = useTranslation()
+    const navigate = useNavigate()
 
-  console.log(car)
+    const [driver, setDriver] = useState<Driver>()
 
-  return (
-        <tr className={styles.wrapper}>
+    const getDriver = async () => {
+        const docRef = doc(db, 'users', car.driver)
+        const res = await getDoc(docRef)
+
+        if (res.exists()) {
+            const driverData = res.data() as Driver
+            setDriver(driverData)
+        }
+    }
+
+    useEffect(() => {
+        if (car.driver) {
+            getDriver()
+        }
+    }, [car])
+
+    return (
+        <tr className={styles.wrapper} onClick={() => navigate(`detail/${car.tid}`)}>
             <td>
-                <p className={styles.id}>{car.id}</p>
+                <p className={styles.id}>{index + 1}</p>
             </td>
             <td>
                 <div className={styles.car}>
-                    <div className={styles.car__image} />
+                    {/* <img
+                        className={styles.car__image}
+                        src={car.images[0].url}
+                    /> */}
                     <div className={styles.text__container}>
                         <p className={styles.car__model}>{car.brand} {car.model}</p>
                         <p className={styles.car__number}>{car.numberPlate}</p>
@@ -45,31 +71,37 @@ const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete }) => {
             <td>
                 {
                     car.driver
-                      ? (
+                        ? (
                             <div className={styles.driver}>
-                                <div className={styles.driver__avatar} />
+                                <img className={styles.driver__avatar} src={driver?.images[1].url} />
                                 <div className={styles.driver__description}>
                                     <p className={styles.description__name}>
-                                        {car.driver.name} {car.driver.lastName}
+                                        {driver?.name} {driver?.lastName}
                                     </p>
                                     <p className={styles.description__number}>
-                                        {car.driver.phoneNumber}
+                                        {driver?.phoneNumber}
                                     </p>
                                 </div>
                             </div>
                         )
-                      : <p>{t('CarsTable.noDriver')}</p>
+                        : <p>{t('CarsTable.noDriver')}</p>
                 }
             </td>
             <td>
                 <p>{car.lastOilChangeDate}</p>
             </td>
             <td className={styles.icons__container}>
-                <DeleteIcon onClick={() => { onDelete(car.tid, car.brand) }} />
-                <EditIcon />
+                <DeleteIcon onClick={(e) => {
+                    e.stopPropagation()
+                    onDelete(car.tid, car.brand, car.driver)
+                }} />
+                <EditIcon onClick={(e) => {
+                    e.stopPropagation()
+                    navigate(`edit/${car.tid}`)
+                }} />
             </td>
         </tr>
-  )
+    )
 }
 
 export default CarsTableCell

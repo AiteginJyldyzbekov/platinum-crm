@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from './DatePicker.module.scss'
+import styles from './CustomDatePicker.scss'
 import { type UseFormRegister } from 'react-hook-form'
 
 interface DatePickerProps {
@@ -9,7 +9,7 @@ interface DatePickerProps {
   placeholder: string
 }
 
-const DatePicker: React.FC<DatePickerProps> = (props) => {
+const CustomDatePicker: React.FC<DatePickerProps> = (props) => {
   const {
     register,
     label,
@@ -24,17 +24,17 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
   }
 
   return (
-        <div className={styles.customDatepicker}>
-            <p>{placeholder}</p>
-            <input
-                type="date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                className={styles.datepickerInput}
-                {...register(label, { required })}
-            />
-        </div>
+    <div className={styles.customDatepicker}>
+      <p>{placeholder}</p>
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={handleDateChange}
+        className={styles.datepickerInput}
+        {...register(label, { required })}
+      />
+    </div>
   )
 }
 
-export default DatePicker
+export default CustomDatePicker

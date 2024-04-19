@@ -1,0 +1,32 @@
+.dotted__label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .label {
+        color: var(--text-secondary);
+    }
+
+    .value {
+        color: var(--text-main)
+    }
+
+    .label,
+    .value {
+        white-space: nowrap;
+    }
+
+    .dots {
+        flex-grow: 1;
+        margin: 0 5px 5px 5px;
+
+        &:after {
+            content: '';
+            display: block;
+            width: 100%;
+            border-bottom: 2px dotted var(--text-secondary);
+            position: relative;
+            top: 0.5em;
+        }
+    }
+}

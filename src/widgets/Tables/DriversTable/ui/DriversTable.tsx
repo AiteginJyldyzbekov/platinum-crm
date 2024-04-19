@@ -9,36 +9,44 @@ import { DriversTableCell } from 'widgets/Tables/DriversTableCell'
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import { deleteDriver } from 'entities/Driver'
 import { useAppDispatch } from 'shared/lib/reduxHooks'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from 'shared/config/firebase/firebase'
 
 interface DriversTableProps {
-  data: Driver[]
+    data: Driver[]
 }
 
 const DriversTable: React.FC<DriversTableProps> = memo(({ data }) => {
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
+    const { t } = useTranslation()
+    const dispatch = useAppDispatch()
 
-  const [searchValue, setSearchValue] = useState('')
+    const [searchValue, setSearchValue] = useState('')
 
-  const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
-  }
-
-  const onDelete = (
-    e: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    name: string,
-    tid: string,
-    email: string,
-    password: string
-  ) => {
-    e.stopPropagation()
-    const res = window?.confirm(`Вы действительно хотите удалить водителя ${name}?`)
-    if (res) {
-      dispatch(deleteDriver({ tid, email, password }))
+    const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value)
     }
-  }
 
-  return (
+    const onDelete = (
+        e: React.MouseEvent<SVGSVGElement, MouseEvent>,
+        name: string,
+        tid: string,
+        email: string,
+        password: string,
+        car: string
+    ) => {
+        e.stopPropagation()
+        const res = window?.confirm(`Вы действительно хотите удалить водителя ${name}?`)
+        if (res) {
+            dispatch(deleteDriver({ tid, email, password }))
+
+            if (car) {
+                const carRef = doc(db, "cars", car)
+                updateDoc(carRef, { status: "free", driver: null })
+            }
+        }
+    }
+
+    return (
         <div className={styles.wrapper}>
             <div className={styles.table__options}>
                 <Button
@@ -77,17 +85,18 @@ const DriversTable: React.FC<DriversTableProps> = memo(({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((el: Driver) => (
+                    {data.map((el: Driver, index) => (
                         <DriversTableCell
                             key={`${el.tid}_${el.name}`}
                             driver={el}
+                            index={index}
                             onDelete={onDelete}
                         />
                     ))}
                 </tbody>
             </table>
         </div>
-  )
+    )
 })
 
 export default DriversTable

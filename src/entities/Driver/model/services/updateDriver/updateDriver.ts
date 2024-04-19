@@ -9,6 +9,7 @@ export const updateDriver = createAsyncThunk<User, Driver, { rejectValue: string
   async (data, thunkApi) => {
     const { tid, ...authData } = data
     try {
+      console.log(authData)
       const ref = doc(db, 'users', tid)
       await updateDoc(ref, authData)
     } catch (e) {

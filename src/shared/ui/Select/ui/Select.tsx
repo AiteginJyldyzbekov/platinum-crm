@@ -1,42 +1,62 @@
-import React, { useState, type ChangeEvent, useMemo } from 'react'
-import styles from './Select.module.scss'
-import { type Car } from 'entities/Car/model/types/CarSchema'
+import React, { useState, ChangeEvent, useMemo } from 'react';
+import styles from './Select.module.scss';
+import { Car } from 'entities/Car/model/types/CarSchema';
 
 interface CustomSelectProps {
-  data: Car[]
-  setState: (value: Car) => void
+  data: Car[];
+  setState: (value: string) => void;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({ data, setState }) => {
-  const [selectedValue, setSelectedValue] = useState<string>('')
+  const [selectedValue, setSelectedValue] = useState<string>();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value
-    setSelectedValue(value)
-  }
+    const value = event.target.value;
+    setSelectedValue(value);
+    setState(value);
+  };
+
+  // Добавляем фиктивный элемент в начало массива данных
+  const dataWithDefaultOption = useMemo(() => {
+    return [{ tid: '', brand: '', model: '', numberPlate: 'Выберите машину' }, ...data];
+  }, [data]);
 
   const renderData = useMemo(() => {
-    if (data) {
-      return data.map((el) => (
-        <option className={styles.select__item} value={el.tid} key={el.tid}>
-          <div className={styles.logo}></div>
-          <div className={styles.text__content}>
-            <p>{el.brand} {el.model}</p>
-            <p>{el.numberPlate}</p>
-          </div>
+    if (dataWithDefaultOption) {
+      return dataWithDefaultOption.map((el: Car) => (
+        <option
+          className={styles.select__item}
+          value={el.tid}
+          key={el.tid}
+        >
+          {el.tid ? (
+            <>
+              <div className={styles.logo}></div>
+              <div className={styles.text__content}>
+                <p>{el.brand} {el.model}</p>
+                <p>{el.numberPlate}</p>
+              </div>
+            </>
+          ) : (
+            el.numberPlate // Возвращаем текст "Выберите машину" для фиктивного элемента
+          )}
         </option>
-      ))
+      ));
     }
-  }, [data])
+  }, [dataWithDefaultOption]);
 
   return (
     <div className={styles.select__container}>
-      <select className={styles.custom__select} value={selectedValue} onChange={handleChange}>
+      <select
+        className={styles.custom__select}
+        value={selectedValue}
+        onChange={handleChange}
+      >
         {renderData}
       </select>
       <div className={styles.select__arrow}></div>
     </div>
-  )
-}
+  );
+};
 
-export default CustomSelect
+export default CustomSelect;

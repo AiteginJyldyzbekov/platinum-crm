@@ -1,0 +1,41 @@
+.wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    p {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .balance__block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        p {
+            margin: 0;
+        }
+
+        .balance__minus {
+            font-size: 32px;
+            cursor: pointer;
+        }
+
+        .balance__plus {
+            font-size: 32px;
+            cursor: pointer;
+        }
+    }
+}

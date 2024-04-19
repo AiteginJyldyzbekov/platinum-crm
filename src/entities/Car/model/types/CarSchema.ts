@@ -22,13 +22,12 @@ export interface Car {
   numberPlate: string
   year: string
   status?: string
-  id: string
   images: ImageData[]
   techPassport: ImageData
-  driver?: Driver
+  driver?: string
   expenseHistory: CarExpenseHistory[]
-  lastOilChangeDate: string
-  lastGearChangeDate: string
+  lastOilChangeDate: any
+  lastGearChangeDate: any
 }
 
 export interface CarsSchema {

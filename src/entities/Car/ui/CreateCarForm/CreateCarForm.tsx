@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import styles from './CreateCarForm.module.scss'
 import { Input } from 'shared/ui/Input/Input'
-import { type SubmitHandler, useForm } from 'react-hook-form'
+import { type SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { memo, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
@@ -22,14 +22,13 @@ import {
 } from 'firebase/storage'
 import { storage } from 'shared/config/firebase/firebase'
 import { classNames } from 'shared/lib/classNames/classNames'
-import { getCars } from 'entities/Car/model/services/getCars/getCars'
-import { getCarsState } from 'entities/Car/model/selectors/getCarsState'
-import DatePicker from 'shared/ui/DatePicker/DatePicker'
+import DatePicker from 'react-multi-date-picker'
 
 export const CreateCarForm = memo(() => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors }
   } = useForm<Car>()
 
@@ -38,7 +37,6 @@ export const CreateCarForm = memo(() => {
   const navigate = useNavigate()
 
   const { isLoading } = useAppSelector(getCreateCarState)
-  const { result } = useAppSelector(getCarsState)
 
   const [imageData, setImageData] = useState<ImageData[]>([
     { name: 'front', file: null, url: null, isLoading: false },
@@ -48,10 +46,6 @@ export const CreateCarForm = memo(() => {
     { name: 'frontInside', file: null, url: null, isLoading: false },
     { name: 'backInside', file: null, url: null, isLoading: false }
   ])
-
-  useEffect(() => {
-    dispatch(getCars)
-  }, [dispatch])
 
   const [techPassport, setTechPassport] = useState<ImageData>({
     name: 'techPassport', file: null, url: null, isLoading: false
@@ -134,12 +128,11 @@ export const CreateCarForm = memo(() => {
       color,
       numberPlate,
       year,
-      lastOilChangeDate,
-      lastGearChangeDate,
+      lastOilChangeDate: lastOilChangeDate.format?.("D/MM/YYYY"),
+      lastGearChangeDate: lastGearChangeDate.format?.("D/MM/YYYY"),
       images: updatedImageData,
       techPassport: updatedTechPassport,
       expenseHistory: [],
-      id: String(result.length + 1)
     })).then(() => {
       if (!isLoading) {
         navigate('/cars')
@@ -185,17 +178,49 @@ export const CreateCarForm = memo(() => {
           register={register}
           required
         />
-        <DatePicker
-          label="lastOilChangeDate"
-          register={register}
-          placeholder={t('CreateCar.oilDate')}
-          required
+        <Controller
+          control={control}
+          name="lastOilChangeDate"
+          rules={{ required: true }}
+          render={({
+            field: { onChange, name, value },
+            fieldState: { invalid, isDirty },
+            formState: { errors },
+          }) => (
+            <>
+              <DatePicker
+                format={"D/MM/YYYY"}
+                onChange={(date) => {
+                  onChange(date);
+                }}
+              />
+              {errors && errors[name] && errors[name].type === "required" && (
+                <span>your error message !</span>
+              )}
+            </>
+          )}
         />
-        <DatePicker
-          label="lastGearChangeDate"
-          register={register}
-          placeholder={t('CreateCar.gearDate')}
-          required
+         <Controller
+          control={control}
+          name="lastGearChangeDate"
+          rules={{ required: true }}
+          render={({
+            field: { onChange, name, value },
+            fieldState: { invalid, isDirty },
+            formState: { errors },
+          }) => (
+            <>
+              <DatePicker
+                format={"D/MM/YYYY"}
+                onChange={(date) => {
+                  onChange(date);
+                }}
+              />
+              {errors && errors[name] && errors[name].type === "required" && (
+                <span>your error message !</span>
+              )}
+            </>
+          )}
         />
         <div className={styles.addButton__container}>
           <Button
@@ -221,7 +246,7 @@ export const CreateCarForm = memo(() => {
                 techPassport.url
                   ? (
                     <DeleteIcon className={styles.delete__icon} onClick={handleDeleteImage} />
-                    )
+                  )
                   : <UploadIcon />
               }
               <input
@@ -233,7 +258,7 @@ export const CreateCarForm = memo(() => {
                 techPassport?.url && <img src={techPassport.url} />
               }
             </>
-            )}
+          )}
       </div>
     </div>
   )

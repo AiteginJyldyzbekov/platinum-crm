@@ -6,11 +6,6 @@ export interface DriverTransactionHistory {
   amountType: string
 }
 
-export interface DriverWeekendDates {
-  weekends: string[]
-  month: string
-}
-
 export interface DriverImages {
   file?: File | null
   url: string | null
@@ -21,17 +16,17 @@ export interface DriverImages {
 export interface Driver {
   email: string
   password: string
-  tid: string
-  id: string
+  tid?: string
   name: string
   lastName: string
   phoneNumber: string
   images?: DriverImages[]
   balance: number
   transactionHistory: DriverTransactionHistory[]
-  startRentDate: string
-  weekendDates: DriverWeekendDates[]
-  car?: Car
+  startRentDate: string | any
+  weekendDates: string[] | any
+  car?: string
+  status: string
 }
 
 export interface DriversSchema {

@@ -1,8 +1,13 @@
 .app.dark {
     --bg-color: rgb(135, 135, 206);
 
-    --primary-color: rgb(0, 255, 170);
+    --primary-color: rgba(89, 50, 234, 1);
     --secondary-color: rgb(0, 126, 84);
 
     --sidebar-bg-color: rgb(173, 173, 173);
+
+    --text-main: rgba(33, 34, 39, 1);
+    --text-secondary: rgba(112, 123, 129, 1);
+
+    --button-main: rgb(163, 162, 218);
 }

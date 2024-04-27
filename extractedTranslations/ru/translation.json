@@ -1,6 +1,11 @@
 {
   "": "",
   "Add": "Add",
+  "CarDetail": {
+    "": "",
+    "carInfo": "carInfo",
+    "driver": "driver"
+  },
   "CarsPage": "CarsPage",
   "CarsTable": {
     "": "",
@@ -48,13 +53,41 @@
     "startRentDate": "startRentDate",
     "weekends": "weekends"
   },
+  "DetailPages": {
+    "": "",
+    "car": "car",
+    "carInfo": "carInfo",
+    "drive": "drive",
+    "driver": "driver",
+    "driverInfo": "driverInfo",
+    "more": "more",
+    "moreAbout": "moreAbout",
+    "moreAboutCar": "moreAboutCar",
+    "moreAboutDriver": "moreAboutDriver",
+    "noCar": "noCar",
+    "noDriver": "noDriver"
+  },
+  "DottedLabels": "DottedLabels",
   "Drivers": "Drivers",
   "DriversPage": "DriversPage",
   "DriversTable": {
     "noCar": "noCar"
   },
+  "FinancialHistory": {
+    "add": "add",
+    "amount": "amount",
+    "date": "date",
+    "expenseHistory": "expenseHistory",
+    "expenseType": "expenseType",
+    "fromTo": "fromTo",
+    "som": "som",
+    "total": "total"
+  },
   "LangSwit": "LangSwit",
   "LangSwitcher": "LangSwitcher",
+  "ModalWindow": {
+    "close": "close"
+  },
   "Navbar": "Navbar",
   "Sidebar": {
     "": "",
@@ -84,6 +117,7 @@
   "login": "login",
   "logout": "logout",
   "model": "model",
+  "moreAboutDriver": "moreAboutDriver",
   "name": "name",
   "notFound": "notFound",
   "number": "number",

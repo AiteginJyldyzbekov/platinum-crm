@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { getCreateDriverState } from 'entities/Driver/model/selectors/getCreateDriverState'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
-import { type Car, type ImageData } from 'entities/Car/model/types/CarSchema'
+import { type ImageData } from 'entities/Car/model/types/CarSchema'
 import {
   type StorageReference,
   deleteObject,
@@ -16,15 +16,16 @@ import {
   ref,
   uploadBytes
 } from 'firebase/storage'
-import { db, storage } from 'shared/config/firebase/firebase'
+import { storage } from 'shared/config/firebase/firebase'
 import { Loader } from 'shared/ui/Loader/Loader'
 import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
 import UploadIcon from 'shared/assets/icons/ImageCollage/UploadIcon.svg'
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import { Select } from 'shared/ui/Select'
 import { getCars, getCarsState } from 'entities/Car'
-import DatePicker from "react-multi-date-picker"
-import DatePanel from "react-multi-date-picker/plugins/date_panel"
+import DatePicker from 'react-multi-date-picker'
+import DatePanel from 'react-multi-date-picker/plugins/date_panel'
+import CustomDatePicker from 'shared/ui/CustomDatePicker/CustomDatePicker'
 
 export const CreateDriverForm = memo(() => {
   const {
@@ -67,12 +68,11 @@ export const CreateDriverForm = memo(() => {
       startRentDate
     } = data
 
-    const formattedWeekendDates = weekendDates.map((date: any) => date?.format?.("D/MM/YYYY"));
+    const formattedWeekendDates = weekendDates.map((date: any) => date?.format?.('D/MM/YYYY'))
     const updatedImageData = imageData.map(item => {
       const { file, ...rest } = item
       return rest
     })
-
 
     dispatch(createDriver({
       email,
@@ -82,12 +82,13 @@ export const CreateDriverForm = memo(() => {
       phoneNumber,
       images: updatedImageData,
       balance: 0,
-      startRentDate: startRentDate?.format?.("D/MM/YYYY"),
+      startRentDate,
       weekendDates: formattedWeekendDates,
       car,
+      transactionHistory: []
     })).then(() => {
       if (!isLoading) {
-        navigate('/drivers');
+        navigate('/drivers')
       }
     })
   }, [dispatch, car])
@@ -100,6 +101,7 @@ export const CreateDriverForm = memo(() => {
       setImageData(newImageData)
       setImageDataChanged(true)
       setCurrentIndex(index)
+      uploadImages(index)
     }
   }
 
@@ -122,32 +124,37 @@ export const CreateDriverForm = memo(() => {
     }
   }
 
-  useEffect(() => {
-    if (imageDataChanged) {
-      for (let index = 0; index < imageData.length; index++) {
-        const item = imageData[index];
-        if (item.file && !item.isLoading) {
-          const imageRef = ref(storage, item.file.name);
-          const newImageData = [...imageData];
-          newImageData[index].isLoading = true;
-          setImageData(newImageData);
-  
-          uploadBytes(imageRef, item.file)
-            .then(async () => await getDownloadURL(imageRef))
-            .then((url) => {
-              const updatedImageData = [...imageData];
-              updatedImageData[index].url = url;
-              updatedImageData[index].isLoading = false;
-              setImageData(updatedImageData);
-            })
-            .catch((error) => {
-              console.log(error.message, 'error');
-            });
-        }
+  const uploadImages = async (index: number) => {
+    const item = imageData[index]
+    if (item.file && !item.isLoading) {
+      const timestamp = new Date().getTime()
+      const randomNumber = Math.floor(Math.random() * 10000)
+      const fileName = `${timestamp}_${randomNumber}_${item.file.name}`
+      const imageRef = ref(storage, fileName)
+
+      try {
+        const newImageData = [...imageData]
+        newImageData[index].isLoading = true
+        setImageData(newImageData)
+
+        await uploadBytes(imageRef, item.file)
+        const url = await getDownloadURL(imageRef)
+
+        setImageData((prevImageData) => {
+          const updatedImageData = [...prevImageData]
+          updatedImageData[index].url = url
+          updatedImageData[index].isLoading = false
+          return updatedImageData
+        })
+      } catch (error) {
+        console.log(error.message, 'error')
+        const newImageData = [...imageData]
+        newImageData[index].isLoading = false
+        setImageData(newImageData)
       }
-      setImageDataChanged(false);
     }
-  }, [imageDataChanged, imageData]);
+    setImageDataChanged(false)
+  }
 
   const renderImages = useMemo(() => {
     return imageData.map((item, index) => (
@@ -165,7 +172,7 @@ export const CreateDriverForm = memo(() => {
                         onClick={async () => {
                           await handleDeleteImage(index)
                         }} />
-                    )
+                      )
                     : <UploadIcon />
                 }
                 <input
@@ -177,7 +184,7 @@ export const CreateDriverForm = memo(() => {
                   item?.url && <img src={item.url} />
                 }
               </>
-            )
+              )
         }
       </div>
     ))
@@ -230,48 +237,23 @@ export const CreateDriverForm = memo(() => {
           name="weekendDates"
           rules={{ required: true }}
           render={({
-            field: { onChange, name, value },
-            fieldState: { invalid, isDirty },
-            formState: { errors },
+            field: { onChange }
           }) => (
-            <>
               <DatePicker
                 multiple
-                format={"MM/DD/YYYY"}
+                format={'MM/DD/YYYY'}
                 onChange={(date) => {
-                  onChange(date);
+                  onChange(date)
                 }}
                 plugins={[
-                  <DatePanel />
+                  <DatePanel key={1} />
                 ]}
               />
-              {errors && errors[name] && errors[name].type === "required" && (
-                <span>your error message !</span>
-              )}
-            </>
           )}
         />
-        <Controller
+        <CustomDatePicker
           control={control}
-          name="startRentDate"
-          rules={{ required: true }}
-          render={({
-            field: { onChange, name, value },
-            fieldState: { invalid, isDirty },
-            formState: { errors },
-          }) => (
-            <>
-              <DatePicker
-                format={"D/MM/YYYY"}
-                onChange={(date) => {
-                  onChange(date);
-                }}
-              />
-              {errors && errors[name] && errors[name].type === "required" && (
-                <span>your error message !</span>
-              )}
-            </>
-          )}
+          name='startRentDate'
         />
         <Button
           theme={ThemeButton.OUTLINE}

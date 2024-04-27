@@ -57,7 +57,36 @@
         "startRentDate": "Дата началы аренды",
         "weekends": "Выходные"
     },
-    "DriversTable": {
-        "noCar": "Нету машины"
+    "FinancialHistory": {
+        "date": "Дата",
+        "expenseHistory": "История Расходов",
+        "expenseType": "Тип расхода",
+        "amount": "Сумма",
+        "fromTo": "В период с / по",
+        "add": "Добавить",
+        "total": "Итог",
+        "som": "Сом"
+    },
+    "DetailPages": {
+        "carInfo": "Данные Автомобиля",
+        "driverInfo": "Данные водителя",
+        "driver": "Водитель",
+        "car": "Автомобиль",
+        "moreAboutDriver": "Подробнее о водителе",
+        "moreAboutCar": "Подробнее об автомобиле",
+        "noCar": "Нету автомобиля",
+        "noDriver": "Нету водителя"
+    },
+    "DottedLabels": {
+        "name": "Имя",
+        "lastName": "Фамилие",
+        "phoneNumber": "Номер телефона",
+        "numberPlate": "Гос номер",
+        "brand": "Марка",
+        "model": "Модель",
+        "createdYear": "Год выпуска"
+    },
+    "ModalWindow": {
+        "close": "Закрыть"
     }
 }

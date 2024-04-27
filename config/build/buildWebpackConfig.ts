@@ -1,3 +1,4 @@
+import path from 'path'
 import { buildDevServer } from './buildDevServer'
 import { buildLoaders } from './buildLoaders'
 import { buildPlugins } from './buildPlugins'
@@ -14,9 +15,9 @@ export function buildWebpackConfig (
     mode,
     entry: paths.entry,
     output: {
-      filename: '[name].[contenthash].js',
-      path: paths.build,
-      clean: true
+      path: path.join(__dirname, 'public'),
+      filename: 'bundle.js',
+      publicPath: '/'
     },
     plugins: buildPlugins(options),
     module: {

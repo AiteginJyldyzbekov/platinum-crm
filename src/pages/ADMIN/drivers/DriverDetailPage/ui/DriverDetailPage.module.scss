@@ -1,41 +1,108 @@
 .wrapper {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 80vh;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 30px 0 30px;
 
-    p {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
-    form {
+    .top__content {
+        width: 100%;
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .balance__block {
-        display: flex;
-        justify-content: center;
         align-items: center;
         gap: 15px;
 
-        p {
-            margin: 0;
+        .car__title {
+            color: var(--text-main);
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 33.6px;
+            letter-spacing: -0.01em;
+            text-align: left;
+
+        }
+    }
+
+    .bottom__content {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+        .title {
+            color: var(--text-main);
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: -0.01em;
+            text-align: left;
+
+        }
+    }
+
+    .main__content {
+        width: 65%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 44px;
+
+        .car {
+            width: 45%;
+            height: 50%;
         }
 
-        .balance__minus {
-            font-size: 32px;
-            cursor: pointer;
+        .driver {
+            width: 45%;
+            height: 50%;
+
+            .dotted__labels {
+                width: 85%;
+            }
+
+            .more__button {
+                margin-top: 42px;
+            }
         }
 
-        .balance__plus {
-            font-size: 32px;
-            cursor: pointer;
+        .dotted__labels {
+            width: 60%;
+            margin-top: 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
+
+        .car__images {
+            width: 50%;
+            height: 30%;
+        }
+
+        .car__techPassport {
+            width: 50%;
+            height: 30%;
+        }
+    }
+
+    .transaction__history {
+        width: 35%;
+    }
+}
+
+.balance__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    p {
+        margin: 0;
+    }
+
+    .balance__minus {
+        font-size: 32px;
+        cursor: pointer;
+    }
+
+    .balance__plus {
+        font-size: 32px;
+        cursor: pointer;
     }
 }

@@ -1,39 +1,39 @@
-import { useState } from 'react'
-import styles from './CustomDatePicker.scss'
-import { type UseFormRegister } from 'react-hook-form'
+import { Controller, type UseFormRegister } from 'react-hook-form'
+import DatePicker from 'react-multi-date-picker'
 
 interface DatePickerProps {
   register?: UseFormRegister<any>
-  label: string
+  name: string
   required?: boolean
-  placeholder: string
+  control: any
+  value?: string
 }
 
 const CustomDatePicker: React.FC<DatePickerProps> = (props) => {
   const {
-    register,
-    label,
+    name,
     required,
-    placeholder
+    control,
+    value
   } = props
 
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
-
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedDate(e.target.value)
-  }
-
   return (
-    <div className={styles.customDatepicker}>
-      <p>{placeholder}</p>
-      <input
-        type="date"
-        value={selectedDate}
-        onChange={handleDateChange}
-        className={styles.datepickerInput}
-        {...register(label, { required })}
-      />
-    </div>
+    <Controller
+      control={control}
+      name={name}
+      rules={{ required }}
+      render={({
+        field: { onChange, name }
+      }) => (
+        <DatePicker
+          format={'D/MM/YYYY'}
+          value={value && value}
+          onChange={(date: any) => {
+            onChange(date.format?.('D/MM/YYYY'))
+          }}
+        />
+      )}
+    />
   )
 }
 

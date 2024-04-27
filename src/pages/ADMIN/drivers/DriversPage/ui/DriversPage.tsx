@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { memo, useEffect } from 'react'
-import { getDrivers, getDriversState, deleteDriver } from 'entities/Driver'
+import { getDrivers, getDriversState } from 'entities/Driver'
 import { Loader } from 'shared/ui/Loader/Loader'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 import { PageContainer } from 'widgets/PageContainer'
@@ -14,20 +14,6 @@ const DriversPage = memo(() => {
   useEffect(() => {
     dispatch(getDrivers())
   }, [])
-
-  const onDelete = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    nameToDelete: string,
-    tid: string,
-    email: string,
-    password: string
-  ) => {
-    e.stopPropagation()
-    const res = window?.confirm(`Вы действительно хотите удалить водителя ${nameToDelete}?`)
-    if (res) {
-      dispatch(deleteDriver({ tid, email, password }))
-    }
-  }
 
   if (isLoading) return <Loader />
 

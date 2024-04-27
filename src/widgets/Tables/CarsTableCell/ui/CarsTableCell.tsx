@@ -6,40 +6,40 @@ import DeleteIcon from 'shared/assets/icons/TableCell/delete__icon.svg'
 import EditIcon from 'shared/assets/icons/TableCell/edit__icon.svg'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Driver } from 'entities/Driver/model/types/driverSchema'
+import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from 'shared/config/firebase/firebase'
 
 interface CarsTableCellProps {
-    car: Car
-    onDelete: (tid: string, car: string, driver: string) => void
-    index: number
+  car: Car
+  onDelete: (car: Car) => void
+  index: number
 }
 
 const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete, index }) => {
-    const { t } = useTranslation()
-    const navigate = useNavigate()
+  const { t } = useTranslation()
+  const navigate = useNavigate()
 
-    const [driver, setDriver] = useState<Driver>()
+  const [driver, setDriver] = useState<Driver>()
 
-    const getDriver = async () => {
-        const docRef = doc(db, 'users', car.driver)
-        const res = await getDoc(docRef)
+  const getDriver = async () => {
+    const docRef = doc(db, 'users', car.driver)
+    const res = await getDoc(docRef)
 
-        if (res.exists()) {
-            const driverData = res.data() as Driver
-            setDriver(driverData)
-        }
+    if (res.exists()) {
+      const driverData = res.data() as Driver
+      setDriver(driverData)
     }
+  }
 
-    useEffect(() => {
-        if (car.driver) {
-            getDriver()
-        }
-    }, [car])
+  useEffect(() => {
+    if (car.driver) {
+      getDriver()
+    }
+  }, [car])
 
-    return (
-        <tr className={styles.wrapper} onClick={() => navigate(`detail/${car.tid}`)}>
+  return (
+        <tr className={styles.wrapper} onClick={() => { navigate(`detail/${car.tid}`) }}>
             <td>
                 <p className={styles.id}>{index + 1}</p>
             </td>
@@ -71,9 +71,12 @@ const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete, index }) =
             <td>
                 {
                     car.driver
-                        ? (
+                      ? (
                             <div className={styles.driver}>
-                                <img className={styles.driver__avatar} src={driver?.images[1].url} />
+                                <img
+                                    className={styles.driver__avatar}
+                                    src={driver?.images[1].url}
+                                />
                                 <div className={styles.driver__description}>
                                     <p className={styles.description__name}>
                                         {driver?.name} {driver?.lastName}
@@ -84,7 +87,7 @@ const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete, index }) =
                                 </div>
                             </div>
                         )
-                        : <p>{t('CarsTable.noDriver')}</p>
+                      : <p>{t('CarsTable.noDriver')}</p>
                 }
             </td>
             <td>
@@ -92,16 +95,16 @@ const CarsTableCell: React.FC<CarsTableCellProps> = ({ car, onDelete, index }) =
             </td>
             <td className={styles.icons__container}>
                 <DeleteIcon onClick={(e) => {
-                    e.stopPropagation()
-                    onDelete(car.tid, car.brand, car.driver)
+                  e.stopPropagation()
+                  onDelete(car)
                 }} />
                 <EditIcon onClick={(e) => {
-                    e.stopPropagation()
-                    navigate(`edit/${car.tid}`)
+                  e.stopPropagation()
+                  navigate(`edit/${car.tid}`)
                 }} />
             </td>
         </tr>
-    )
+  )
 }
 
 export default CarsTableCell

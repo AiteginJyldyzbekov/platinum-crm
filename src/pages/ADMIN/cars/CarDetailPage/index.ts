@@ -1,2 +1,2 @@
-import CarDetailPage from "./ui/CarDetailPage";
+import CarDetailPage from './ui/CarDetailPage'
 export { CarDetailPage }

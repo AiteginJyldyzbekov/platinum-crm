@@ -8,12 +8,11 @@ import {
   deleteObject
 } from 'firebase/storage'
 import { storage } from 'shared/config/firebase/firebase'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
 import { Loader } from 'shared/ui/Loader/Loader'
-import { Car, type ImageData } from 'entities/Car/model/types/CarSchema'
-import { Driver } from 'entities/Driver/model/types/driverSchema'
+import { type ImageData } from 'entities/Car/model/types/CarSchema'
 
 interface ImageCollageProps {
   imageData: ImageData[]
@@ -26,18 +25,57 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
   const [imageDataChanged, setImageDataChanged] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
 
-  const handleImageChange = (index: number, target: HTMLInputElement) => {
-    const newImageData = [...imageData];
-    const file = target.files?.[0];
-    if (file) {
-      const newDataItem = { ...newImageData[index] }; // Создаем глубокую копию объекта
-      newDataItem.file = file;
-      newImageData[index] = newDataItem; // Заменяем элемент в массиве новым объектом
-      setImageData(newImageData);
-      setImageDataChanged(true);
-      setCurrentIndex(index);
+  // const handleImageChange = (index: number, target: HTMLInputElement) => {
+  //   const newImageData = [...imageData];
+  //   const file = target.files?.[0];
+  //   if (file) {
+  //     const newDataItem = { ...newImageData[index] }; // Создаем глубокую копию объекта
+  //     newDataItem.file = file;
+  //     newImageData[index] = newDataItem; // Заменяем элемент в массиве новым объектом
+  //     setImageData(newImageData);
+  //     setImageDataChanged(true);
+  //     setCurrentIndex(index);
+  //   }
+  //   console.log(imageData);
+  // }
+  const handleImageChange = (index: number, file: File) => {
+    const newImageData = [...imageData]
+    newImageData[index].file = file
+    setImageData(newImageData)
+    setImageDataChanged(true)
+    uploadImages(index)
+  }
+
+  const uploadImages = async (index: number) => {
+    const item = imageData[index]
+    if (item.file && !item.isLoading) {
+      const timestamp = new Date().getTime()
+      const randomNumber = Math.floor(Math.random() * 10000)
+      const fileName = `${timestamp}_${randomNumber}_${item.file.name}`
+      const imageRef = ref(storage, fileName)
+
+      try {
+        const newImageData = [...imageData]
+        newImageData[index].isLoading = true
+        setImageData(newImageData)
+
+        await uploadBytes(imageRef, item.file)
+        const url = await getDownloadURL(imageRef)
+
+        setImageData((prevImageData) => {
+          const updatedImageData = [...prevImageData]
+          updatedImageData[index].url = url
+          updatedImageData[index].isLoading = false
+          return updatedImageData
+        })
+      } catch (error) {
+        console.log(error.message, 'error')
+        const newImageData = [...imageData]
+        newImageData[index].isLoading = false
+        setImageData(newImageData)
+      }
     }
-    console.log(imageData);
+    setImageDataChanged(false)
   }
 
   const handleDeleteImage = async (index: number) => {
@@ -59,33 +97,6 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
     }
   }
 
-  useEffect(() => {
-    if (imageDataChanged) {
-      for (let index = 0; index < imageData.length; index++) {
-        const item = imageData[index];
-        if (item.file && !item.isLoading) {
-          const imageRef = ref(storage, item.file.name);
-          const newImageData = [...imageData];
-          newImageData[index].isLoading = true;
-          setImageData(newImageData);
-
-          uploadBytes(imageRef, item.file)
-            .then(async () => await getDownloadURL(imageRef))
-            .then((url) => {
-              const updatedImageData = [...imageData];
-              updatedImageData[index].url = url;
-              updatedImageData[index].isLoading = false;
-              setImageData(updatedImageData);
-            })
-            .catch((error) => {
-              console.log(error.message, 'error');
-            });
-        }
-      }
-      setImageDataChanged(false);
-    }
-  }, [imageDataChanged, imageData]);
-
   return (
     <div className={styles.collage}>
       {imageData.map((item, index) => (
@@ -103,20 +114,20 @@ const ImageCollage: React.FC<ImageCollageProps> = ({ imageData, setImageData }) 
                           onClick={() => {
                             handleDeleteImage(index)
                           }} />
-                      )
+                        )
                       : <UploadIcon />
                   }
                   <input
                     className={styles.inputFile}
                     key={index}
                     type="file"
-                    onChange={(e) => { handleImageChange(index, e.target) }}
+                    onChange={(e) => { handleImageChange(index, e.target.files?.[0]) }}
                   />
                   {
                     item?.url && <img src={item.url} />
                   }
                 </>
-              )}
+                )}
           </div>
         </>
       ))}

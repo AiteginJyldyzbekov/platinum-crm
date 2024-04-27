@@ -18,7 +18,7 @@ export const createCar = createAsyncThunk<Car, Car, { rejectValue: string }>(
         images: data.images,
         techPassport: data.techPassport,
         expenseHistory: data.expenseHistory,
-        status: 'free',
+        status: 'free'
       }
 
       await addDoc(carsRef, newCar)

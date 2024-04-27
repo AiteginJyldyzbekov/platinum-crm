@@ -1,5 +1,3 @@
-import { type Driver } from 'entities/Driver/model/types/driverSchema'
-
 export interface ImageData {
   file?: File | null
   url: string | null

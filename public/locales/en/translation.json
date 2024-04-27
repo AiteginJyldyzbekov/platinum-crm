@@ -57,7 +57,36 @@
         "startRentDate": "Start rent date",
         "weekends": "Weekends"
     },
-    "DriversTable": {
-        "noCar": "Doesn't have a car"
+    "FinancialHistory": {
+        "expenseHistory": "Expense History",
+        "date": "Date",
+        "expenseType": "Expense type",
+        "amount": "Amount",
+        "fromTo": "From / to",
+        "add": "Add",
+        "total": "Total",
+        "som": "Сом"
+    },
+    "DetailPages": {
+        "carInfo": "Car Info",
+        "driverInfo": "Driver Info",
+        "driver": "Driver",
+        "car": "Car",
+        "moreAboutDriver": "More about driver",
+        "moreAboutCar": "More about car",
+        "noCar": "Doesn't have a car",
+        "noDriver": "Doesn't have a driver"
+    },
+    "DottedLabels": {
+        "name": "Name",
+        "lastName": "Last name",
+        "phoneNumber": "Phone number",
+        "numberPlate": "Number plate",
+        "brand": "Brand",
+        "model": "Model",
+        "createdYear": "Created year"
+    },
+    "ModalWindow": {
+        "close": "Close"
     }
 }

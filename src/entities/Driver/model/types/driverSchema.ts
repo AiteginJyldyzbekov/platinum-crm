@@ -1,9 +1,7 @@
-import { type Car } from 'entities/Car/model/types/CarSchema'
-
 export interface DriverTransactionHistory {
   amount: string
   date: string
-  amountType: string
+  expenseType: string
 }
 
 export interface DriverImages {

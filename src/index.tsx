@@ -7,7 +7,7 @@ import { StoreProvider } from 'app/providers/StoreProvider'
 import './shared/config/firebase/firebase'
 import './shared/config/i18n/i18n'
 import 'app/styles/index.scss'
-import 'react-photo-view/dist/react-photo-view.css';
+import 'react-photo-view/dist/react-photo-view.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root')

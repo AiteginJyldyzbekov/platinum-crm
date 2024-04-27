@@ -2,20 +2,26 @@ import { useTranslation } from 'react-i18next'
 import styles from './CarEditPage.module.scss'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { Input } from 'shared/ui/Input/Input'
-import { type SubmitHandler, useForm, Controller } from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getCarById, getCarState, updateCar } from 'entities/Car'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
-import { type Car } from 'entities/Car/model/types/CarSchema'
-import DatePicker from 'react-multi-date-picker'
+import { type Car, type ImageData } from 'entities/Car/model/types/CarSchema'
 import { ImageCollage } from 'shared/ui/ImageCollage'
-import { ImageData } from 'entities/Car/model/types/CarSchema'
+
 import { Loader } from 'shared/ui/Loader/Loader'
 import UploadIcon from 'shared/assets/icons/ImageCollage/UploadIcon.svg'
 import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
-import { StorageReference, deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import {
+  type StorageReference,
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes
+} from 'firebase/storage'
 import { storage } from 'shared/config/firebase/firebase'
+import CustomDatePicker from 'shared/ui/CustomDatePicker/CustomDatePicker'
 
 const CarEditPage: React.FC = () => {
   const { t } = useTranslation()
@@ -116,7 +122,10 @@ const CarEditPage: React.FC = () => {
   const handleImageChange = (target: HTMLInputElement) => {
     const file = target.files?.[0]
     if (file) {
-      const imageRef = ref(storage, file.name)
+      const timestamp = new Date().getTime()
+      const randomNumber = Math.floor(Math.random() * 10000)
+      const fileName = `${timestamp}_${randomNumber}_${file.name}`
+      const imageRef = ref(storage, fileName)
 
       setTechPassport(prevState => ({
         ...prevState,
@@ -183,51 +192,15 @@ const CarEditPage: React.FC = () => {
           register={register}
           required
         />
-        <Controller
+        <CustomDatePicker
           control={control}
-          name="lastOilChangeDate"
-          rules={{ required: true }}
-          render={({
-            field: { onChange, name, value },
-            fieldState: { invalid, isDirty },
-            formState: { errors },
-          }) => (
-            <>
-              <DatePicker
-                format={"D/MM/YYYY"}
-                value={result?.lastOilChangeDate}
-                onChange={(date: any) => {
-                  onChange(date.format?.("D/MM/YYYY"));
-                }}
-              />
-              {errors && errors[name] && errors[name].type === "required" && (
-                <span>your error message !</span>
-              )}
-            </>
-          )}
+          name='lastOilChangeDate'
+          value={result?.lastOilChangeDate}
         />
-        <Controller
+        <CustomDatePicker
           control={control}
-          name="lastGearChangeDate"
-          rules={{ required: true }}
-          render={({
-            field: { onChange, name, value },
-            fieldState: { invalid, isDirty },
-            formState: { errors },
-          }) => (
-            <>
-              <DatePicker
-                format={"D/MM/YYYY"}
-                value={result?.lastGearChangeDate}
-                onChange={(date: any) => {
-                  onChange(date.format?.("D/MM/YYYY"));
-                }}
-              />
-              {errors && errors[name] && errors[name].type === "required" && (
-                <span>your error message !</span>
-              )}
-            </>
-          )}
+          name='lastGearChangeDate'
+          value={result?.lastGearChangeDate}
         />
         <Button
           theme={ThemeButton.OUTLINE}
@@ -253,7 +226,7 @@ const CarEditPage: React.FC = () => {
                 techPassport.url
                   ? (
                     <DeleteIcon className={styles.delete__icon} onClick={handleDeleteImage} />
-                  )
+                    )
                   : <UploadIcon />
               }
               <input
@@ -265,7 +238,7 @@ const CarEditPage: React.FC = () => {
                 techPassport?.url && <img src={techPassport.url} />
               }
             </>
-          )}
+            )}
       </div>
     </div>
   )

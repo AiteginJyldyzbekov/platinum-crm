@@ -3,7 +3,7 @@ import type webpack from 'webpack'
 import { buildCssLoader } from './loaders/buildCssLoader'
 import { buildPhotoViewCssLoader } from './loaders/buildPhotoViewLoader'
 
-export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
+export function buildLoaders ({ isDev }: BuildOptions): webpack.RuleSetRule[] {
   const svgLoader = {
     test: /\.svg$/,
     use: ['@svgr/webpack']

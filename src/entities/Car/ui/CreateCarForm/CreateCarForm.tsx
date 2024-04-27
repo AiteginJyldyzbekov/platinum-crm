@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import styles from './CreateCarForm.module.scss'
 import { Input } from 'shared/ui/Input/Input'
-import { type SubmitHandler, useForm, Controller } from 'react-hook-form'
-import { memo, useCallback, useEffect, useState } from 'react'
+import { type SubmitHandler, useForm } from 'react-hook-form'
+import { memo, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { createCar } from 'entities/Car/model/services/createCar/createCar'
@@ -22,7 +22,7 @@ import {
 } from 'firebase/storage'
 import { storage } from 'shared/config/firebase/firebase'
 import { classNames } from 'shared/lib/classNames/classNames'
-import DatePicker from 'react-multi-date-picker'
+import CustomDatePicker from 'shared/ui/CustomDatePicker/CustomDatePicker'
 
 export const CreateCarForm = memo(() => {
   const {
@@ -53,8 +53,13 @@ export const CreateCarForm = memo(() => {
 
   const handleImageChange = (target: HTMLInputElement) => {
     const file = target.files?.[0]
+    console.log(file)
     if (file) {
-      const imageRef = ref(storage, file.name)
+      const timestamp = new Date().getTime()
+      const randomNumber = Math.floor(Math.random() * 10000)
+      const fileName = `${timestamp}_${randomNumber}_${file.name}`
+
+      const imageRef = ref(storage, fileName)
 
       setTechPassport(prevState => ({
         ...prevState,
@@ -128,16 +133,17 @@ export const CreateCarForm = memo(() => {
       color,
       numberPlate,
       year,
-      lastOilChangeDate: lastOilChangeDate.format?.("D/MM/YYYY"),
-      lastGearChangeDate: lastGearChangeDate.format?.("D/MM/YYYY"),
+      lastOilChangeDate,
+      lastGearChangeDate,
       images: updatedImageData,
       techPassport: updatedTechPassport,
-      expenseHistory: [],
+      expenseHistory: []
     })).then(() => {
       if (!isLoading) {
         navigate('/cars')
       }
     })
+    console.log(data)
   }, [dispatch, techPassport])
 
   return (
@@ -178,7 +184,7 @@ export const CreateCarForm = memo(() => {
           register={register}
           required
         />
-        <Controller
+        {/* <Controller
           control={control}
           name="lastOilChangeDate"
           rules={{ required: true }}
@@ -199,8 +205,16 @@ export const CreateCarForm = memo(() => {
               )}
             </>
           )}
+        /> */}
+        <CustomDatePicker
+          control={control}
+          name='lastOilChangeDate'
         />
-         <Controller
+        <CustomDatePicker
+          control={control}
+          name='lastGearChangeDate'
+        />
+        {/* <Controller
           control={control}
           name="lastGearChangeDate"
           rules={{ required: true }}
@@ -221,7 +235,7 @@ export const CreateCarForm = memo(() => {
               )}
             </>
           )}
-        />
+        /> */}
         <div className={styles.addButton__container}>
           <Button
             theme={ThemeButton.OUTLINE}
@@ -246,7 +260,7 @@ export const CreateCarForm = memo(() => {
                 techPassport.url
                   ? (
                     <DeleteIcon className={styles.delete__icon} onClick={handleDeleteImage} />
-                  )
+                    )
                   : <UploadIcon />
               }
               <input
@@ -258,7 +272,7 @@ export const CreateCarForm = memo(() => {
                 techPassport?.url && <img src={techPassport.url} />
               }
             </>
-          )}
+            )}
       </div>
     </div>
   )

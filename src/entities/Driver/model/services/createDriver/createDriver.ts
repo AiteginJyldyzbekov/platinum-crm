@@ -3,8 +3,7 @@ import { type User } from 'entities/User'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db, usersRef } from 'shared/config/firebase/firebase'
 import { addDoc, doc, updateDoc } from 'firebase/firestore'
-import { type DriverImages } from '../../types/driverSchema'
-import { Car } from 'entities/Car/model/types/CarSchema'
+import { type DriverTransactionHistory, type DriverImages } from '../../types/driverSchema'
 
 export interface DriverCreateProps {
   email: string
@@ -17,6 +16,7 @@ export interface DriverCreateProps {
   startRentDate: string
   weekendDates: string[]
   car: string
+  transactionHistory: DriverTransactionHistory[]
 }
 
 export const createDriver =
@@ -27,7 +27,7 @@ export const createDriver =
         createUserWithEmailAndPassword(auth, data.email, data.password)
           .then(async (userCredential) => {
             const user = userCredential.user
-            const carRef = doc(db, "cars", data.car)
+            const carRef = doc(db, 'cars', data.car)
 
             const newDriver = {
               uid: user.uid,
@@ -40,15 +40,14 @@ export const createDriver =
               images: data.images,
               balance: 0,
               role: 'driver',
-              status: "atWork",
+              status: 'atWork',
               startRentDate: data.startRentDate,
-              weekendDates: data.weekendDates
+              weekendDates: data.weekendDates,
+              transactionHistory: data.transactionHistory
             }
 
-            await addDoc(usersRef, newDriver)
-              .then((data) => {
-                updateDoc(carRef, { status: "atWork", driver: data.id })
-              })
+            const userDocRef = await addDoc(usersRef, newDriver)
+            await updateDoc(carRef, { status: 'atWork', driver: userDocRef.id })
           })
       } catch (e) {
         console.log(e)

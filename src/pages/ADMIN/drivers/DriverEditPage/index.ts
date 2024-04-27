@@ -1,3 +1,3 @@
-import DriverEditPage from "./ui/DriverEditPage";
+import DriverEditPage from './ui/DriverEditPage'
 
 export { DriverEditPage }

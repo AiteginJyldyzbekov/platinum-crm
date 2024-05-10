@@ -66,7 +66,7 @@ const CarEditPage: React.FC = () => {
       expenseHistory: result.expenseHistory,
       lastOilChangeDate: data.lastOilChangeDate,
       lastGearChangeDate: data.lastGearChangeDate,
-      payment: data.payment,
+      payment: data.payment
     }
 
     dispatch(updateCar(updatedCarData))

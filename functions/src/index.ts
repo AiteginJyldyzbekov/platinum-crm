@@ -33,7 +33,7 @@ export interface Driver {
 }
 
 exports.dailyBalanceUpdate = functions.pubsub.schedule("0 0 * * *")
-  .timeZone("Europe/Moscow")
+  .timeZone("Asia/Bishkek")
   .onRun(async () => {
     try {
       const db = admin.firestore();

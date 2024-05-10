@@ -66,11 +66,19 @@ exports.dailyBalanceUpdate = functions.pubsub.schedule("0 0 * * *")
         const dd = String(today.getDate()).padStart(2, "0");
         const mm = String(today.getMonth() + 1).padStart(2, "0");
         const yyyy = today.getFullYear();
-        const todayFormatted = `${dd}/${mm}/${yyyy}`;
+        const todayFormatted = `${yyyy}-${mm}-${dd}`;
 
-        if (driver.weekendDates.includes(todayFormatted)) {
+        const [day, month, year] = driver.startRentDate.split("/");
+        const startRentDate = new Date(`${year}-${month}-${day}`);
+
+        if (
+          driver.weekendDates.includes(todayFormatted) ||
+                    today < startRentDate
+        ) {
           console.log(`
-                    Today (${todayFormatted}) is a weekend day for the driver
+                    Today (${todayFormatted
+}
+                ) is a weekend day for the driver or rental has not yet started
                     `);
         } else {
           const newBalance = driver.balance - carData.payment;

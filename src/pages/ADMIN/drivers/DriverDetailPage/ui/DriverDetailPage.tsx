@@ -57,9 +57,31 @@ const DriverDetailPage: React.FC = () => {
     await updateDoc(ref, { transactionHistory: data })
   }
 
+  const today = new Date()
+  const dd = String(today.getDate()).padStart(2, '0')
+  const mm = String(today.getMonth() + 1).padStart(2, '0')
+  const yyyy = today.getFullYear()
+  const todayFormatted = `${dd}/${mm}/${yyyy}`
+
+  if (result) {
+    const [day, month, year] = result?.startRentDate.split('/')
+    const startRentDate = new Date(`${year}-${month}-${day}`)
+    console.log(startRentDate)
+  }
+  // const set = () => {
+  //   if (
+  //     today < result?.startRentDate.toDate()
+  //   ) {
+  //     console.log("дата езе не пришла")
+  //   } else {
+  //     console.log("пришла")
+  //   }
+  // }
+
   if (isLoading && isCarLoading) return <Loader />
   return (
     <div className={styles.wrapper}>
+      {/* <button onClick={set}>TEST</button> */}
       <div className={styles.balance__block}>
         <div
           className={styles.balance__minus}

@@ -88,5 +88,11 @@
     },
     "ModalWindow": {
         "close": "Закрыть"
+    },
+    "pageOf": "из",
+    "prev": "Предыдущий",
+    "next": "Следующий",
+    "FilterSelect": {
+        "reset": "Сбросить фильтр"
     }
 }

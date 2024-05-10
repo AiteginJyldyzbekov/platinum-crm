@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react'
 import { type Car } from 'entities/Car/model/types/CarSchema'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from 'shared/config/firebase/firebase'
+import { useAppSelector } from 'shared/lib/reduxHooks'
+import { getPaginationState } from 'entities/Pagination/model/selectors/getPaginationState'
 
 type onDeleteType = (
   e: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -24,6 +26,7 @@ interface CarsTableCellProps {
 const DriversTableCell: React.FC<CarsTableCellProps> = ({ driver, onDelete, index }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { page, offset } = useAppSelector(getPaginationState)
 
   const [car, setCar] = useState<Car>()
 
@@ -44,59 +47,59 @@ const DriversTableCell: React.FC<CarsTableCellProps> = ({ driver, onDelete, inde
   }, [driver])
 
   return (
-        <tr className={styles.wrapper} onClick={() => { navigate(`detail/${driver.tid}`) }}>
-            <td>
-                <p className={styles.id}>{index + 1}</p>
-            </td>
-            <td>
-                <div className={styles.driver}>
-                    <img
-                        className={styles.driver__avatar}
-                        src={driver?.images[1].url}
-                    />
-                    <div className={styles.driver__description}>
-                        <p className={styles.description__name}>{driver.lastName} {driver.name}</p>
-                        <p className={styles.description__number}>{driver.phoneNumber}</p>
-                    </div>
-                </div>
-            </td>
-            <td className={styles.status__container}>
-                <Status status={driver.status} />
-            </td>
-            <td>
-                <p>{driver.phoneNumber}</p>
-            </td>
-            <td>
-                {driver.car
-                  ? (
-                        <div className={styles.car}>
-                            <img className={styles.car__image} src={car?.images[0].url} />
-                            <div className={styles.text__container}>
-                                <p className={styles.car__model}>
-                                    {car?.brand} {car?.model}
-                                </p>
-                                <p className={styles.car__number}>{car?.numberPlate}</p>
-                            </div>
-                        </div>
-                    )
-                  : <p>{t('DetailPages.noCar')}</p>}
-            </td>
-            <td>
-                <p>{driver.startRentDate}</p>
-            </td>
-            <td className={styles.icons__container}>
-                <DeleteIcon
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      onDelete(e, driver)
-                    }}
-                />
-                <EditIcon onClick={(e) => {
-                  e.stopPropagation()
-                  navigate(`edit/${driver.tid}`)
-                }} />
-            </td>
-        </tr>
+    <tr className={styles.wrapper} onClick={() => { navigate(`detail/${driver.tid}`) }}>
+      <td>
+        <p className={styles.id}>{page !== 1 ? index + 1 + offset : index + 1}</p>
+      </td>
+      <td>
+        <div className={styles.driver}>
+          <img
+            className={styles.driver__avatar}
+            src={driver?.images[1].url}
+          />
+          <div className={styles.driver__description}>
+            <p className={styles.description__name}>{driver.lastName} {driver.name}</p>
+            <p className={styles.description__number}>{driver.phoneNumber}</p>
+          </div>
+        </div>
+      </td>
+      <td className={styles.status__container}>
+        <Status status={driver.status} />
+      </td>
+      <td>
+        <p>{driver.phoneNumber}</p>
+      </td>
+      <td>
+        {driver.car
+          ? (
+            <div className={styles.car}>
+              <img className={styles.car__image} src={car?.images[0].url} />
+              <div className={styles.text__container}>
+                <p className={styles.car__model}>
+                  {car?.brand} {car?.model}
+                </p>
+                <p className={styles.car__number}>{car?.numberPlate}</p>
+              </div>
+            </div>
+            )
+          : <p>{t('DetailPages.noCar')}</p>}
+      </td>
+      <td>
+        <p>{driver.startRentDate}</p>
+      </td>
+      <td className={styles.icons__container}>
+        <DeleteIcon
+          onClick={(e) => {
+            e.stopPropagation()
+            onDelete(e, driver)
+          }}
+        />
+        <EditIcon onClick={(e) => {
+          e.stopPropagation()
+          navigate(`edit/${driver.tid}`)
+        }} />
+      </td>
+    </tr>
   )
 }
 

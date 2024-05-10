@@ -10,15 +10,15 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = ({ value, changeHandler }) => {
   const { t } = useTranslation()
   return (
-        <div className={styles.search}>
-            <SearchIcon />
-            <input
-                type="text"
-                value={value}
-                onChange={changeHandler}
-                placeholder={t('search')}
-            />
-        </div>
+    <div className={styles.search}>
+      <SearchIcon />
+      <input
+        type="text"
+        value={value}
+        onChange={changeHandler}
+        placeholder={t('search')}
+      />
+    </div>
   )
 }
 

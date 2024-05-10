@@ -9,10 +9,10 @@ export const createCar = createAsyncThunk<Car, Car, { rejectValue: string }>(
   async (data, thunkApi) => {
     try {
       const newCar = {
-        brand: data.brand.toLowerCase(),
-        model: data.model.toLowerCase(),
+        brand: data.brand,
+        model: data.model,
         color: data.color,
-        numberPlate: data.numberPlate.toLowerCase(),
+        numberPlate: data.numberPlate,
         year: data.year,
         lastOilChangeDate: data.lastOilChangeDate,
         lastGearChangeDate: data.lastGearChangeDate,
@@ -21,6 +21,7 @@ export const createCar = createAsyncThunk<Car, Car, { rejectValue: string }>(
         expenseHistory: data.expenseHistory,
         status: 'free',
         createdAt: Timestamp.fromDate(new Date()),
+        payment: data.payment,
         searchWords: [
           ...createPrefixes(data.brand),
           ...createPrefixes(data.model),

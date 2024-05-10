@@ -26,6 +26,7 @@ export interface Car {
   expenseHistory: CarExpenseHistory[]
   lastOilChangeDate: any
   lastGearChangeDate: any
+  payment: number
 }
 
 export interface CarsSchema {

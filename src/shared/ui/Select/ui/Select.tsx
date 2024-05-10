@@ -15,14 +15,13 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ data, setState, edit }) => 
     const value = event.target.value
     setSelectedValue(value)
     setState(value)
-    console.log(value)
   }
 
   // Добавляем фиктивный элемент в начало массива данных
   const dataWithDefaultOption = useMemo(() => {
     return [{ tid: '', brand: '', model: '', numberPlate: 'Выберите машину' }, ...data]
   }, [data])
-  console.log(data)
+
   const renderData = useMemo(() => {
     if (edit && dataWithDefaultOption) {
       return data.map((el: Car) => (

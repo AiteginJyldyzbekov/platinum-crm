@@ -45,6 +45,9 @@ const DriverEditPage: React.FC = () => {
   } = useForm<Driver>()
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
+  // const onSubmit: SubmitHandler<Driver> = async (data) => {
+  // console.log(data)
+  // }
   const onSubmit: SubmitHandler<Driver> = useCallback(async (data) => {
     const updatedImageData = imageData.map(item => {
       const { file, ...rest } = item
@@ -80,14 +83,7 @@ const DriverEditPage: React.FC = () => {
         updateDoc(newCarRef, { status: 'atWork', driver: id })
       }
     })
-    // if (oldCar == newCar) {
-    //   console.log("автомобиль не изменился")
-    // } else if (oldCar != newCar) {
-    //   console.log("автомобиль изменился")
-    // }
-    // console.log("новая машина" + newCar)
-    // console.log("старая машина" + oldCar)
-  }, [result, isLoading, imageData, newCar])
+  }, [result, isLoading, imageData, newCar, handleSubmit])
 
   useEffect(() => {
     if (!isLoading && result) {

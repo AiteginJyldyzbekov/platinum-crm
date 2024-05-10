@@ -65,7 +65,8 @@ const CarEditPage: React.FC = () => {
       techPassport: updatedTechPassport,
       expenseHistory: result.expenseHistory,
       lastOilChangeDate: data.lastOilChangeDate,
-      lastGearChangeDate: data.lastGearChangeDate
+      lastGearChangeDate: data.lastGearChangeDate,
+      payment: data.payment,
     }
 
     dispatch(updateCar(updatedCarData))
@@ -81,7 +82,8 @@ const CarEditPage: React.FC = () => {
         numberPlate,
         year,
         lastOilChangeDate,
-        lastGearChangeDate
+        lastGearChangeDate,
+        payment
       } = result
       setValue('brand', brand)
       setValue('model', model)
@@ -90,6 +92,7 @@ const CarEditPage: React.FC = () => {
       setValue('year', year)
       setValue('lastOilChangeDate', lastOilChangeDate)
       setValue('lastGearChangeDate', lastGearChangeDate)
+      setValue('payment', payment)
       setImageData(result.images)
       setTechPassport(result.techPassport)
     }
@@ -201,6 +204,13 @@ const CarEditPage: React.FC = () => {
           control={control}
           name='lastGearChangeDate'
           value={result?.lastGearChangeDate}
+        />
+        <Input
+          type="number"
+          placeholder={t('CreateCar.payment')}
+          label="payment"
+          register={register}
+          required
         />
         <Button
           theme={ThemeButton.OUTLINE}

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, ThemeButton } from 'shared/ui/Button/Button'
 import { getCreateDriverState } from 'entities/Driver/model/selectors/getCreateDriverState'
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
-import { type ImageData } from 'entities/Car/model/types/CarSchema'
+import { type Car, type ImageData } from 'entities/Car/model/types/CarSchema'
 import {
   type StorageReference,
   deleteObject,
@@ -16,16 +16,17 @@ import {
   ref,
   uploadBytes
 } from 'firebase/storage'
-import { storage } from 'shared/config/firebase/firebase'
+import { db, storage } from 'shared/config/firebase/firebase'
 import { Loader } from 'shared/ui/Loader/Loader'
 import DeleteIcon from 'shared/assets/icons/ImageCollage/DeleteIcon.svg'
 import UploadIcon from 'shared/assets/icons/ImageCollage/UploadIcon.svg'
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import { Select } from 'shared/ui/Select'
-import { getCars, getCarsState } from 'entities/Car'
+import { getCarsState } from 'entities/Car'
 import DatePicker from 'react-multi-date-picker'
 import DatePanel from 'react-multi-date-picker/plugins/date_panel'
 import CustomDatePicker from 'shared/ui/CustomDatePicker/CustomDatePicker'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 
 export const CreateDriverForm = memo(() => {
   const {
@@ -46,6 +47,7 @@ export const CreateDriverForm = memo(() => {
   const [currentIndex, setCurrentIndex] = useState<number>()
 
   const [car, setCar] = useState<string>('')
+  const [cars, setCars] = useState<Car[]>([])
 
   const [imageData, setImageData] = useState<ImageData[]>([
     { name: 'document', file: null, url: null, isLoading: false },
@@ -53,7 +55,21 @@ export const CreateDriverForm = memo(() => {
   ])
 
   useEffect(() => {
-    dispatch(getCars())
+    // dispatch(getCars({
+    //   limitNumber: 100,
+    //   orderByProp: 'name'
+    // }))
+    const getCars = async () => {
+      const q = query(collection(db, 'cars'), where('status', '==', 'free'))
+      const querySnapshot = await getDocs(q)
+      const carsArray: Car[] = []
+      querySnapshot.forEach((doc) => {
+        carsArray.push({ tid: doc.id, ...doc.data() } as Car)
+      })
+      setCars(carsArray)
+    }
+
+    getCars()
   }, [dispatch])
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -217,7 +233,7 @@ export const CreateDriverForm = memo(() => {
           register={register}
           required
         />
-        <Select data={result} setState={setCar} />
+        <Select data={cars} setState={setCar} />
         <Input
           type="text"
           placeholder={t('CreateDrivers.email')}
@@ -239,16 +255,16 @@ export const CreateDriverForm = memo(() => {
           render={({
             field: { onChange }
           }) => (
-              <DatePicker
-                multiple
-                format={'MM/DD/YYYY'}
-                onChange={(date) => {
-                  onChange(date)
-                }}
-                plugins={[
-                  <DatePanel key={1} />
-                ]}
-              />
+            <DatePicker
+              multiple
+              format={'MM/DD/YYYY'}
+              onChange={(date) => {
+                onChange(date)
+              }}
+              plugins={[
+                <DatePanel key={1} />
+              ]}
+            />
           )}
         />
         <CustomDatePicker

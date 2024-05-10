@@ -14,9 +14,12 @@ import {
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
 import DatePicker from 'react-multi-date-picker'
 import DatePanel from 'react-multi-date-picker/plugins/date_panel'
-import { type ImageData } from 'entities/Car/model/types/CarSchema'
+import { type Car, type ImageData } from 'entities/Car/model/types/CarSchema'
 import { ImageCollage } from 'shared/ui/ImageCollage'
 import CustomDatePicker from 'shared/ui/CustomDatePicker/CustomDatePicker'
+import { Select } from 'shared/ui/Select'
+import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import { db } from 'shared/config/firebase/firebase'
 
 const DriverEditPage: React.FC = () => {
   const { t } = useTranslation()
@@ -24,6 +27,9 @@ const DriverEditPage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { isLoading, result } = useAppSelector(getDriverState)
   const navigate = useNavigate()
+  const [cars, setCars] = useState([])
+  const [newCar, setNewCar] = useState<string>()
+  const [oldCar, setOldCar] = useState<string>()
 
   const [imageData, setImageData] = useState<ImageData[]>([
     { name: 'document', file: null, url: null, isLoading: false },
@@ -54,14 +60,34 @@ const DriverEditPage: React.FC = () => {
       phoneNumber: data.phoneNumber,
       images: updatedImageData,
       balance: result?.balance,
-      status: result?.status,
+      status: 'atWork',
+      // status: result?.status,
       transactionHistory: result?.transactionHistory,
       startRentDate: data.startRentDate,
-      weekendDates: data.weekendDates
+      weekendDates: data.weekendDates,
+      car: newCar
     }
 
-    dispatch(updateDriver(updatedUserData))
-  }, [result, isLoading, imageData])
+    dispatch(updateDriver(updatedUserData)).then(() => {
+      if (result?.car && oldCar !== newCar) {
+        const oldCarRef = doc(db, 'cars', oldCar)
+        updateDoc(oldCarRef, { status: 'free', driver: null })
+
+        const newCarRef = doc(db, 'cars', newCar)
+        updateDoc(newCarRef, { status: 'atWork', driver: id })
+      } else if (!result?.car) {
+        const newCarRef = doc(db, 'cars', newCar)
+        updateDoc(newCarRef, { status: 'atWork', driver: id })
+      }
+    })
+    // if (oldCar == newCar) {
+    //   console.log("автомобиль не изменился")
+    // } else if (oldCar != newCar) {
+    //   console.log("автомобиль изменился")
+    // }
+    // console.log("новая машина" + newCar)
+    // console.log("старая машина" + oldCar)
+  }, [result, isLoading, imageData, newCar])
 
   useEffect(() => {
     if (!isLoading && result) {
@@ -74,7 +100,8 @@ const DriverEditPage: React.FC = () => {
         images,
         transactionHistory,
         startRentDate,
-        weekendDates
+        weekendDates,
+        car
       } = result
       setValue('email', email)
       setValue('password', password)
@@ -83,6 +110,8 @@ const DriverEditPage: React.FC = () => {
       setValue('phoneNumber', phoneNumber)
       setValue('startRentDate', startRentDate)
       setValue('weekendDates', weekendDates)
+      setOldCar(car)
+      setNewCar(car)
       setImageData(result.images)
     }
   }, [isLoading, result, setValue])
@@ -90,6 +119,42 @@ const DriverEditPage: React.FC = () => {
   useEffect(() => {
     dispatch(getDriverById({ tid: id }))
   }, [id])
+
+  useEffect(() => {
+    if (result?.car) {
+      const getCars = async () => {
+        const q = query(collection(db, 'cars'), where('status', '==', 'free'))
+        const querySnapshot = await getDocs(q)
+        const carsArray: Car[] = []
+        querySnapshot.forEach((doc) => {
+          carsArray.push({ tid: doc.id, ...doc.data() } as Car)
+        })
+
+        const docRef = doc(db, 'cars', result?.car)
+        const res = await getDoc(docRef)
+
+        if (res.exists()) {
+          const carData = { ...res.data(), tid: res.id } as Car
+          setCars([carData, ...carsArray])
+          console.log([carData, ...carsArray])
+        }
+      }
+
+      getCars()
+    } else {
+      const getCars = async () => {
+        const q = query(collection(db, 'cars'), where('status', '==', 'free'))
+        const querySnapshot = await getDocs(q)
+        const carsArray: Car[] = []
+        querySnapshot.forEach((doc) => {
+          carsArray.push({ tid: doc.id, ...doc.data() } as Car)
+        })
+        setCars(carsArray)
+      }
+
+      getCars()
+    }
+  }, [dispatch, result])
 
   const balanceHandler = (type: BalanceType) => {
     const sum = window?.prompt('Напишите сумму')
@@ -107,89 +172,90 @@ const DriverEditPage: React.FC = () => {
   }
 
   return (
-        <div className={styles.wrapper}>
-            <p>{t('createDriver')}</p>
-            <div className={styles.balance__block}>
-                <div
-                    className={styles.balance__minus}
-                    onClick={() => { balanceHandler(BalanceType.minus) }}
-                >-</div>
-                <p>{`${t('balance')}: ${result?.balance}`}</p>
-                <div
-                    className={styles.balance__plus}
-                    onClick={() => { balanceHandler(BalanceType.plus) }}
-                >+</div>
-            </div>
-            <ImageCollage imageData={imageData} setImageData={setImageData} />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    type="text"
-                    placeholder="Name"
-                    label="name"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Lastname"
-                    label="lastName"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Email"
-                    label="email"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Password"
-                    label="password"
-                    register={register}
-                    required
-                />
-                <Input
-                    type="text"
-                    placeholder="Phone number"
-                    label="phoneNumber"
-                    register={register}
-                    required
-                />
-                <CustomDatePicker
-                    control={control}
-                    name='startRentDate'
-                    value={result?.startRentDate}
-                />
-                <Controller
-                    control={control}
-                    name="weekendDates"
-                    rules={{ required: true }}
-                    render={({
-                      field: { onChange }
-                    }) => (
-                        <DatePicker
-                            multiple
-                            format={'MM/DD/YYYY'}
-                            value={result?.weekendDates}
-                            onChange={(date: any) => {
-                              onChange(date.format?.('D/MM/YYYY'))
-                            }}
-                            plugins={[
-                                <DatePanel key={1} />
-                            ]}
-                        />
-                    )}
-                />
-                <Button
-                    theme={ThemeButton.OUTLINE}
-                    type='submit'
-                >
-                    {t('save')}
-                </Button>
-            </form>
-        </div>
+    <div className={styles.wrapper}>
+      <p>{t('createDriver')}</p>
+      <div className={styles.balance__block}>
+        <div
+          className={styles.balance__minus}
+          onClick={() => { balanceHandler(BalanceType.minus) }}
+        >-</div>
+        <p>{`${t('balance')}: ${result?.balance}`}</p>
+        <div
+          className={styles.balance__plus}
+          onClick={() => { balanceHandler(BalanceType.plus) }}
+        >+</div>
+      </div>
+      <ImageCollage imageData={imageData} setImageData={setImageData} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          type="text"
+          placeholder="Name"
+          label="name"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Lastname"
+          label="lastName"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Email"
+          label="email"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Password"
+          label="password"
+          register={register}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="Phone number"
+          label="phoneNumber"
+          register={register}
+          required
+        />
+        <Select data={cars} setState={setNewCar} edit={!!result?.car} />
+        <CustomDatePicker
+          control={control}
+          name='startRentDate'
+          value={result?.startRentDate}
+        />
+        <Controller
+          control={control}
+          name="weekendDates"
+          rules={{ required: true }}
+          render={({
+            field: { onChange }
+          }) => (
+            <DatePicker
+              multiple
+              format={'MM/DD/YYYY'}
+              value={result?.weekendDates}
+              onChange={(date: any) => {
+                onChange(date.format?.('D/MM/YYYY'))
+              }}
+              plugins={[
+                <DatePanel key={1} />
+              ]}
+            />
+          )}
+        />
+        <Button
+          theme={ThemeButton.OUTLINE}
+          type='submit'
+        >
+          {t('save')}
+        </Button>
+      </form>
+    </div>
   )
 }
 

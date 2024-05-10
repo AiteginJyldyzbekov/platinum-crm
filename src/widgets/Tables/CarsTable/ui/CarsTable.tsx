@@ -1,15 +1,17 @@
 import styles from './CarsTable.module.scss'
 import { type Car } from 'entities/Car/model/types/CarSchema'
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import { db } from 'shared/config/firebase/firebase'
 import { CarsTableCell } from 'widgets/Tables/CarsTableCell'
 import { useTranslation } from 'react-i18next'
-import { Button, ThemeButton } from 'shared/ui/Button/Button'
-import { classNames } from 'shared/lib/classNames/classNames'
-import ParametersIcon from 'shared/assets/icons/Table/parameters__icon.svg'
 import Search from 'shared/ui/Search/ui/Search'
-import { useAppDispatch } from 'shared/lib/reduxHooks'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
 import { deleteCar } from 'entities/Car/model/services/deleteCar/deleteCar'
+import { useSearchParams } from 'react-router-dom'
+import { paginationActions } from 'entities/Pagination/model/slice/PaginationSlice'
+import { getCars } from 'entities/Car'
+import { getPaginationState } from 'entities/Pagination/model/selectors/getPaginationState'
+import FilterSelect from 'shared/ui/FilterSelect/ui/FilterSelect'
 
 interface CarsTableProps {
   data: Car[]
@@ -18,12 +20,45 @@ interface CarsTableProps {
 const CarsTable: React.FC<CarsTableProps> = memo(({ data }) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const { limit } = useAppSelector(getPaginationState)
 
   const [searchValue, setSearchValue] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const currentSearchValue = searchParams.get('search') || ''
+  const filterValue = searchParams.get('filter') || ''
 
   const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
   }
+
+  useMemo(() => {
+    setSearchParams({ search: searchValue })
+  }, [searchValue])
+
+  useMemo(() => {
+    setTimeout(() => {
+      dispatch(getCars({
+        limitNumber: limit,
+        orderByProp: 'brand',
+        searchValue: currentSearchValue
+      }))
+        .then(() => {
+          dispatch(paginationActions.setPage(1))
+        })
+    }, 300)
+  }, [currentSearchValue])
+
+  const handleFilterChange = () => {
+    dispatch(getCars({
+      limitNumber: limit,
+      orderByProp: 'brand',
+      filter: filterValue
+    }))
+  }
+
+  useMemo(() => {
+    handleFilterChange()
+  }, [filterValue])
 
   const onDelete = useCallback((
     car: Car
@@ -38,14 +73,8 @@ const CarsTable: React.FC<CarsTableProps> = memo(({ data }) => {
   return (
         <div className={styles.wrapper}>
             <div className={styles.table__options}>
-                <Button
-                    clasName={classNames(styles.options__btn, {}, [])}
-                    theme={ThemeButton.CLEAR}
-                >
-                    <ParametersIcon />
-                    <p>{t('CarsTable.otherOptions')}</p>
-                </Button>
-                <Search value={searchValue} changeHandler={onChangeSearchValue} />
+                <FilterSelect />
+                <Search value={currentSearchValue} changeHandler={onChangeSearchValue} />
             </div>
             <table>
                 <thead className={styles.table__header}>

@@ -1,14 +1,15 @@
 import styles from './DriversTable.module.scss'
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, ThemeButton } from 'shared/ui/Button/Button'
-import { classNames } from 'shared/lib/classNames/classNames'
-import ParametersIcon from 'shared/assets/icons/Table/parameters__icon.svg'
 import Search from 'shared/ui/Search/ui/Search'
 import { DriversTableCell } from 'widgets/Tables/DriversTableCell'
 import { type Driver } from 'entities/Driver/model/types/driverSchema'
-import { deleteDriver } from 'entities/Driver'
-import { useAppDispatch } from 'shared/lib/reduxHooks'
+import { deleteDriver, getDrivers } from 'entities/Driver'
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks'
+import { getPaginationState } from 'entities/Pagination/model/selectors/getPaginationState'
+import { paginationActions } from 'entities/Pagination/model/slice/PaginationSlice'
+import { useSearchParams } from 'react-router-dom'
+import FilterSelect from 'shared/ui/FilterSelect/ui/FilterSelect'
 
 interface DriversTableProps {
   data: Driver[]
@@ -17,12 +18,42 @@ interface DriversTableProps {
 const DriversTable: React.FC<DriversTableProps> = memo(({ data }) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const { limit } = useAppSelector(getPaginationState)
+  const { lastDoc, firstDoc } = useAppSelector(getPaginationState)
 
   const [searchValue, setSearchValue] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const currentSearchValue = searchParams.get('search') || ''
+  const filterValue = searchParams.get('filter') || ''
 
   const onChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
   }
+
+  useMemo(() => {
+    setSearchParams({ search: searchValue })
+  }, [searchValue])
+
+  useMemo(() => {
+    setTimeout(() => {
+      dispatch(getDrivers({
+        limitNumber: limit,
+        orderByProp: 'name',
+        searchValue: currentSearchValue
+      }))
+        .then(() => {
+          dispatch(paginationActions.setPage(1))
+        })
+    }, 300)
+  }, [currentSearchValue])
+
+  const handleFilterChange = () => {
+    dispatch(getDrivers({ limitNumber: limit, orderByProp: 'name', filter: filterValue }))
+  }
+
+  useMemo(() => {
+    handleFilterChange()
+  }, [filterValue])
 
   const onDelete = (
     e: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -39,14 +70,15 @@ const DriversTable: React.FC<DriversTableProps> = memo(({ data }) => {
   return (
         <div className={styles.wrapper}>
             <div className={styles.table__options}>
-                <Button
+                {/* <Button
                     clasName={classNames(styles.options__btn, {}, [])}
                     theme={ThemeButton.CLEAR}
                 >
                     <ParametersIcon />
                     <p>{t('CarsTable.otherOptions')}</p>
-                </Button>
-                <Search value={searchValue} changeHandler={onChangeSearchValue} />
+                </Button> */}
+                <FilterSelect />
+                <Search value={currentSearchValue} changeHandler={onChangeSearchValue} />
             </div>
             <table>
                 <thead className={styles.table__header}>
@@ -84,6 +116,7 @@ const DriversTable: React.FC<DriversTableProps> = memo(({ data }) => {
                         />
                     ))}
                 </tbody>
+                {/* <Pagination /> */}
             </table>
         </div>
   )

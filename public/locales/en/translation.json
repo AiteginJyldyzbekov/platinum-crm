@@ -88,5 +88,11 @@
     },
     "ModalWindow": {
         "close": "Close"
+    },
+    "pageOf": "of",
+    "prev": "Prev",
+    "next": "Next",
+    "FilterSelect": {
+        "reset": "Reset filter"
     }
 }

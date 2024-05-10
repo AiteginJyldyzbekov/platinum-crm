@@ -2,8 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { type User } from 'entities/User'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db, usersRef } from 'shared/config/firebase/firebase'
-import { addDoc, doc, updateDoc } from 'firebase/firestore'
+import { Timestamp, addDoc, doc, updateDoc } from 'firebase/firestore'
 import { type DriverTransactionHistory, type DriverImages } from '../../types/driverSchema'
+import createPrefixes from 'shared/lib/createPrefix'
 
 export interface DriverCreateProps {
   email: string
@@ -29,6 +30,12 @@ export const createDriver =
             const user = userCredential.user
             const carRef = doc(db, 'cars', data.car)
 
+            const searchWords = [
+              ...createPrefixes(data.name),
+              ...createPrefixes(data.lastName),
+              ...createPrefixes(data.phoneNumber)
+            ]
+
             const newDriver = {
               uid: user.uid,
               email: data.email,
@@ -43,10 +50,13 @@ export const createDriver =
               status: 'atWork',
               startRentDate: data.startRentDate,
               weekendDates: data.weekendDates,
-              transactionHistory: data.transactionHistory
+              transactionHistory: data.transactionHistory,
+              createdAt: Timestamp.fromDate(new Date()),
+              searchWords
             }
 
             const userDocRef = await addDoc(usersRef, newDriver)
+            console.log(carRef)
             await updateDoc(carRef, { status: 'atWork', driver: userDocRef.id })
           })
       } catch (e) {

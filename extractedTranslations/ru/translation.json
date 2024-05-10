@@ -89,6 +89,7 @@
     "close": "close"
   },
   "Navbar": "Navbar",
+  "Pagination": "Pagination",
   "Sidebar": {
     "": "",
     "SIKE": "SIKE",
@@ -119,11 +120,14 @@
   "model": "model",
   "moreAboutDriver": "moreAboutDriver",
   "name": "name",
+  "next": "next",
   "notFound": "notFound",
   "number": "number",
   "numberPlate": "numberPlate",
   "numberlate": "numberlate",
+  "pageOf": "pageOf",
   "phoneNumber": "phoneNumber",
+  "prev": "prev",
   "reload": "reload",
   "rememberMe": "rememberMe",
   "save": "save",

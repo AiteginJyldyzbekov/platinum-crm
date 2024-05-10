@@ -1,0 +1,33 @@
+.filterSelect {
+    position: relative;
+  }
+  
+  .filterSelect__button {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .filterSelect__options {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  
+  .filterSelect__option {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+.active{
+    display: block;
+}

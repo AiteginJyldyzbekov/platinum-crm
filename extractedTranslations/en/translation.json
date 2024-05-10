@@ -37,6 +37,7 @@
     "name": "name",
     "numberPlate": "numberPlate",
     "oilDate": "oilDate",
+    "payment": "payment",
     "sureConfirm": "sureConfirm",
     "year": "year"
   },
@@ -72,6 +73,9 @@
   "DriversPage": "DriversPage",
   "DriversTable": {
     "noCar": "noCar"
+  },
+  "FilterSelect": {
+    "reset": "reset"
   },
   "FinancialHistory": {
     "add": "add",

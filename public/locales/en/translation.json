@@ -43,7 +43,8 @@
         "driver": "Driver",
         "oilDate": "Last oil change date",
         "gearDate": "Last gear repair date",
-        "sureConfirm": "Are you sure delete this image ?"
+        "sureConfirm": "Are you sure delete this image ?",
+        "payment": "Payment"
     },
     "CreateDrivers": {
         "name": "Name",

@@ -116,7 +116,8 @@ export const CreateCarForm = memo(() => {
       numberPlate,
       year,
       lastOilChangeDate,
-      lastGearChangeDate
+      lastGearChangeDate,
+      payment
     } = data
 
     const updatedImageData = imageData.map(item => {
@@ -137,6 +138,7 @@ export const CreateCarForm = memo(() => {
       lastGearChangeDate,
       images: updatedImageData,
       techPassport: updatedTechPassport,
+      payment,
       expenseHistory: []
     })).then(() => {
       if (!isLoading) {
@@ -181,6 +183,13 @@ export const CreateCarForm = memo(() => {
           type="text"
           placeholder={t('CreateCar.year')}
           label="year"
+          register={register}
+          required
+        />
+        <Input
+          type="number"
+          placeholder={t('CreateCar.payment')}
+          label="payment"
           register={register}
           required
         />

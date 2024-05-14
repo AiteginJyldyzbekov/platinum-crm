@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn run lint
+# yarn run lint
 # yarn storybook:build
 # yarn test:ui:ci

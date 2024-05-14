@@ -69,6 +69,11 @@
     "noDriver": "noDriver"
   },
   "DottedLabels": "DottedLabels",
+  "DriverDetailPage": {
+    "start": "start",
+    "startRent": "startRent",
+    "stopRent": "stopRent"
+  },
   "Drivers": "Drivers",
   "DriversPage": "DriversPage",
   "DriversTable": {

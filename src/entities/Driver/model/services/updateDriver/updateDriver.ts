@@ -12,6 +12,7 @@ export const updateDriver = createAsyncThunk<User, Driver, { rejectValue: string
       console.log(authData)
       const ref = doc(db, 'users', tid)
       await updateDoc(ref, authData)
+      // .then(() => window.location.reload())
     } catch (e) {
       console.log(e)
       return thunkApi.rejectWithValue('error')

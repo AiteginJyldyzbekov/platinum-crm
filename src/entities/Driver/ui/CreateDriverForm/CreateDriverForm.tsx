@@ -257,7 +257,7 @@ export const CreateDriverForm = memo(() => {
           }) => (
             <DatePicker
               multiple
-              format={'MM/DD/YYYY'}
+              format={'DD/MM/YYYY'}
               onChange={(date) => {
                 onChange(date)
               }}

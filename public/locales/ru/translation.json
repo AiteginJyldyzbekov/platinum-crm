@@ -78,6 +78,10 @@
         "noCar": "Нету автомобиля",
         "noDriver": "Нету водителя"
     },
+    "DriverDetailPage": {
+        "startRent": "Начать аренду",
+        "stopRent": "Остановить аренду"
+    },
     "DottedLabels": {
         "name": "Имя",
         "lastName": "Фамилие",

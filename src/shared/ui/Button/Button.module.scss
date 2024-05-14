@@ -7,7 +7,7 @@
   border: 1px solid rgba(224, 224, 224, 1);
   border-radius: 8px;
   background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #E0E0E0, #E0E0E0);
-  
+
 }
 
 .default {
@@ -21,6 +21,7 @@
   font-family: "Roboto Flex", sans-serif;
   color: rgba(255, 255, 255, 1);
 }
+
 
 .outline {
   display: inline-block;
@@ -39,4 +40,28 @@
 .outline:hover {
   background-color: #0056b3;
   border-color: #0056b3;
+}
+
+.red {
+  background: rgb(186, 60, 105);
+  outline: none;
+  border: none;
+  padding: 8px 16px 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Roboto Flex", sans-serif;
+  color: rgba(255, 255, 255, 1);
+}
+
+.green {
+  background: rgb(60, 139, 78);
+  outline: none;
+  border: none;
+  padding: 8px 16px 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Roboto Flex", sans-serif;
+  color: rgba(255, 255, 255, 1);
 }

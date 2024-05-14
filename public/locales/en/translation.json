@@ -78,6 +78,10 @@
         "noCar": "Doesn't have a car",
         "noDriver": "Doesn't have a driver"
     },
+    "DriverDetailPage": {
+        "startRent": "Start rent",
+        "stopRent": "Stop rent"
+    },
     "DottedLabels": {
         "name": "Name",
         "lastName": "Last name",

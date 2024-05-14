@@ -45,14 +45,13 @@ const DriverEditPage: React.FC = () => {
   } = useForm<Driver>()
 
   /* eslint-disable @typescript-eslint/no-misused-promises */
-  // const onSubmit: SubmitHandler<Driver> = async (data) => {
-  // console.log(data)
-  // }
   const onSubmit: SubmitHandler<Driver> = useCallback(async (data) => {
     const updatedImageData = imageData.map(item => {
       const { file, ...rest } = item
       return rest
     })
+
+    const formattedWeekendDates = data.weekendDates.map((date: any) => date?.format?.('D/MM/YYYY'))
 
     const updatedUserData = {
       tid: id,
@@ -67,10 +66,11 @@ const DriverEditPage: React.FC = () => {
       // status: result?.status,
       transactionHistory: result?.transactionHistory,
       startRentDate: data.startRentDate,
-      weekendDates: data.weekendDates,
-      car: newCar
+      weekendDates: formattedWeekendDates.includes(undefined)
+        ? data.weekendDates
+        : formattedWeekendDates,
+      car: newCar || null
     }
-
     dispatch(updateDriver(updatedUserData)).then(() => {
       if (result?.car && oldCar !== newCar) {
         const oldCarRef = doc(db, 'cars', oldCar)
@@ -78,7 +78,7 @@ const DriverEditPage: React.FC = () => {
 
         const newCarRef = doc(db, 'cars', newCar)
         updateDoc(newCarRef, { status: 'atWork', driver: id })
-      } else if (!result?.car) {
+      } else if (!result?.car && newCar) {
         const newCarRef = doc(db, 'cars', newCar)
         updateDoc(newCarRef, { status: 'atWork', driver: id })
       }
@@ -233,10 +233,10 @@ const DriverEditPage: React.FC = () => {
           }) => (
             <DatePicker
               multiple
-              format={'MM/DD/YYYY'}
+              format={'DD/MM/YYYY'}
               value={result?.weekendDates}
-              onChange={(date: any) => {
-                onChange(date.format?.('D/MM/YYYY'))
+              onChange={(date) => {
+                onChange(date)
               }}
               plugins={[
                 <DatePanel key={1} />
